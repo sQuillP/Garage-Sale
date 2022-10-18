@@ -1,0 +1,38 @@
+[
+    {
+        "fullName":"user 1",
+        "email":"user1@gmail.com",
+        "password":"abc123",
+        "phone":"6309992939",
+        "profileImg":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        "conversations":[],
+        "_id":null
+    },
+    {
+        "fullName":"user 2",
+        "email":"user2@gmail.com",
+        "password":"abc123",
+        "phone":"6309234239",
+        "profileImg":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        "conversations":[],
+        "_id":null
+    },
+    {
+        "fullName":"user 3",
+        "email":"user3@gmail.com",
+        "password":"abc123",
+        "phone":"6305827890",
+        "profileImg":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        "conversations":[],
+        "_id":null
+    },
+    {
+        "fullName":"user 4",
+        "email":"user4@gmail.com",
+        "password":"abc123",
+        "phone":"6303329876",
+        "profileImg":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        "conversations":[],
+        "_id":null
+    }
+]

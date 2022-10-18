@@ -1,0 +1,20 @@
+[
+    {
+        "senderId": null,
+        "receiverId":null,
+        "content":"Yo how muchj would you offer for the electric guitar",
+        "_id":null
+    },
+    {
+        "senderId": null,
+        "receiverId":null,
+        "content":"How much for the train set",
+        "_id":null
+    },
+    {
+        "senderId": null,
+        "receiverId":null,
+        "content":"How much to buy all your items?",
+        "_id":null
+    }
+]

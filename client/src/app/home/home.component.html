@@ -1,0 +1,95 @@
+<div class="main">
+
+    <div class="section hero flex col center-xy">
+        <p class="nav-title header text">Garage Sale Haven</p>
+        <div class="hero-nav-container flex col center-xy">
+
+            <div class="hero-nav-wrapper flex">
+
+                <div class="hero-nav flex col center-xy">
+                    <div class="icon-wrapper flex center-xy">
+                        <i class="icon fa-solid fa-tag"></i>
+                    </div>
+                    <a href="#" class="nav-text">Find Sales</a>
+                </div>
+
+                <div class="hero-nav flex col center-xy">
+                    <div class="icon-wrapper flex center-xy">
+                        <i class="icon fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <a href="#" class="nav-text">Shop Items</a>
+                </div>
+            </div>
+            <div class="search">
+                <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                <input class="searchLocation" type="text" placeholder="Search any location...">
+            </div>
+        </div>
+    </div>
+
+    <div class="container map-search">
+        <div style="margin-bottom: 10px;" class="intro-wrapper">
+            <p class="text intro">Sales near Lombard, IL</p>
+        </div>
+        <!-- Map goes here -->
+        <google-map
+        class="map"
+        width="100%"
+        height="300px"
+        >
+        
+        </google-map>
+        <div class="filter-options flex sp-between">
+            <div class="filter-container fc-left">
+                <label style="display: inline-block; margin: 0;" for="search_zip" class="filter-label thin">Search by zip code</label>
+                <input id="search_zip" type="text" placeholder="Search Zip Code">
+            </div>
+            <div class="filter-container flex col center-xy fc-right">
+                <label style="display: inline-block; margin: 0;" for="myRange" class="filter-label thin">Search Within 30 Miles</label>
+                <input type="range" min="1" max="100" value="30" class="slider" id="myRange">
+            </div>
+        </div>
+
+    </div>
+    <div class="container items-sale">
+        <div class="intro-wrapper">
+            <p class="text intro">Garage Sales in My Area</p>
+        </div>
+        <!-- <div #scroller class="scroller flex center-x">
+            <app-sale-feature></app-sale-feature>
+            <app-sale-feature></app-sale-feature>
+            <app-sale-feature></app-sale-feature>
+            <app-sale-feature></app-sale-feature>
+            <app-sale-feature></app-sale-feature>
+        </div> -->
+        <!--   (init)="slickInit($event)"
+        (breakpoint)="breakpoint($event)"
+        (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)" -->
+        <ngx-slick-carousel
+        #slickModal="slick-carousel"
+        class="carousel"
+        [config]="slideConfig" 
+        >
+            <app-sale-feature class="slide"  ngxSlickItem></app-sale-feature>
+            <app-sale-feature class="slide"  ngxSlickItem></app-sale-feature>
+            <app-sale-feature class="slide"  ngxSlickItem></app-sale-feature>
+            <app-sale-feature class="slide" ngxSlickItem></app-sale-feature>
+        </ngx-slick-carousel>
+        <span
+        (click)="onHandleSlickCounter(slickModal)"
+        class="slider-left-toggle fa-stack fa-2x">
+            <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
+            <i  class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
+        </span>
+        <span (click)="onHandleSlickCounter(slickModal)" class="slider-right-toggle fa-stack fa-2x">
+            <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
+            <i class="fa-solid fa-angle-right fa-stack-1x fa-inverse"></i>
+        </span>
+    </div>
+    
+    <div class="container popular-garage-sales">
+        <p class="text intro">Popular Sales</p>
+        <!-- Include list of top 5 or so sales i.e sales with the most visits -->
+    </div>
+</div>

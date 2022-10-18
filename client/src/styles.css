@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Lato', sans-serif;
+    background: var(--white-3);
+    scroll-behavior: smooth;
+}
+
+
+/* colors */
+:root{
+    --dark:#2f3130;
+    --dark-2:rgb(31, 31, 31);
+    --light:#f8f1e6;
+    --white-1: #ffffff;
+    --white-2:#f6f6f6;
+    --white-3:#ececec;
+    --white-3:#e1e1e1;
+}
+
+
+/* Text styles */
+.header{font-size: 3.5em;}
+.intro{font-size: 2em;}
+.text{margin: 0px; padding: 0px;}
+.thin{font-weight: 300;}
+.bold{font-weight: 700;}
+.faded{color: gray;}
+.light{color: rgb(99, 99, 99);}
+
+
+/* Flexbox properties */
+.flex{display: flex;}
+.col{flex-direction: column;}
+.sp-between{justify-content: space-between;}
+.sp-around{justify-content: space-around;}
+.center-x{justify-content: center;}
+.center-y{align-items: center;}
+.center-xy{justify-content: center; align-items: center;}
+.wrap{flex-wrap: wrap;}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

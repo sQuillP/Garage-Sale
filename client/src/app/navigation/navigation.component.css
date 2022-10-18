@@ -1,0 +1,33 @@
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+    background: var(--dark-2);
+    ;
+    padding: 15px 0px;
+}
+
+/* .nav-group-left{
+    margin-left: 50px;
+} */
+
+.nav-item{
+    margin: 0px 10px;
+}
+
+.nav-logo{
+    font-size: 2em;
+    color: #5e9544;
+}
+
+.nav-link{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* .nav-group-right{
+    margin-right: 50px;
+} */

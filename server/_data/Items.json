@@ -1,0 +1,105 @@
+[
+    {
+        "name":"electric guitar",
+        "price": 99.23,
+        "gallery":["guitar image"],
+        "saleId":"",
+        "highestBidder":null
+    },
+    {
+        "name":"Teddy Bear",
+        "price": 19.99,
+        "gallery":["teddy bear image"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Shark Fin",
+        "price": 14.99,
+        "gallery":["Shark fin"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Fishing Pole",
+        "price": 99.23,
+        "gallery":["Fishing pole image"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"I heart mom mug",
+        "price": 9.99,
+        "gallery":["I <3 Mom mug"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Juggling balls",
+        "price": 12.99,
+        "gallery":["Juggling balls"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Signed Aaron Rogers Jersy",
+        "price": 449.99,
+        "gallery":["Signed Aaron Rogers Jersy"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Used soccer ball",
+        "price": 19.99,
+        "gallery":["Used soccer ball"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Unicycle",
+        "price": 49.99,
+        "gallery":["unicycle"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Noise cancelling headphones",
+        "price": 29.99,
+        "gallery":["signed jersy.png"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Neck Support Pillow",
+        "price": 39.99,
+        "gallery":["Neck Support Pillow"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Buck Knife",
+        "price": 449.99,
+        "gallery":["Buck Knife.png"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    },
+    {
+        "name":"Train Set",
+        "price": 199.99,
+        "gallery":["Train Set"],
+        "saleId":"",
+        "highestBidder":null,
+        "_id":null
+    }
+]
