@@ -1,16 +1,16 @@
 .main{
     /* width: 100%; */
+    box-sizing: border-box;
 }
 
 .hero{
-    height: 50vh;
+    min-height: 50vh;
     width: 100%;
     position: relative;
     background: rgb(20, 20, 20);
     box-sizing: border-box;
 }
 
-    /* https://images.familyhomeplans.com/plans/60068/60068-b600.jpg */
 
 .hero::before{
     background-image: url(https://mlbostoncommon.com/get/files/image/galleries/interior-deign-spacejoy-unsplash.jpg);
@@ -125,7 +125,7 @@
 
 .filter-options{
     margin-top: 20px;
-    border-top: 2px solid var(--dark);
+    /* border-top: 2px solid var(--dark); */
     padding-top: 20px;
 }
 
@@ -199,4 +199,34 @@
 
     .slider-right-toggle {
         right: -40px;
+    }
+
+    @media screen and (max-width: 580px){
+        /* .container{
+            width: 100%;
+        } */
+        .filter-options{
+            flex-direction: column;
+            justify-content: center;
+        }
+        .filter-container{
+            margin: 0px;
+        }
+        .fc-left{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #search_zip{
+            /* width: 100%; */
+        }
+        .hero, .intro{
+            text-align: center;
+        }
+        .container.map-search{
+            /* width: 100%; */
+            margin-top: 0px;
+        }
+        
     }

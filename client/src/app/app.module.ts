@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { SaleFeatureComponent } from './sale-feature/sale-feature.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SaleListingComponent } from './sale-listing/sale-listing.component';
+import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     HomeComponent,
     NavigationComponent,
     SaleFeatureComponent,
+    SaleListingComponent,
+    SaleDetailComponent,
   ],
   imports: [
     BrowserModule,

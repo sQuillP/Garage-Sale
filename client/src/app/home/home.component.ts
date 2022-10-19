@@ -11,7 +11,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('slickModal')slickModal:ElementRef
 
-  slideCounter:number = 0
+  slideCounter:number = 0;
+  totalSlides:number = 4;
 
   // slideConfig={slidesToShow: 4, slidesToScroll: 1};
   slideConfig = {
@@ -57,8 +58,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   onHandleSlickCounter(modal){
-    modal.slickGoTo(this.slideCounter+1);
-    this.slideCounter = (this.slideCounter+1)%4;
+    modal.slickGoTo((this.slideCounter+1));
+    this.slideCounter = (this.slideCounter+1)%this.totalSlides;
   }
 
 
