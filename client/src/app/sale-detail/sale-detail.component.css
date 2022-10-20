@@ -1,0 +1,221 @@
+.main{
+    max-width: 1350px;
+    margin: 100px auto 0px auto;
+}
+
+
+.section{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    background-color: var(--white-2);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.header-content{margin-bottom: 10px;}
+.header-left, .header-right{width: 50%;}
+li >*{display: inline-block;}
+.meta-list li{margin-bottom: 10px;}
+
+/* Header section */
+
+.header-section{
+    width: 100%;
+    height: 42vh;
+    /* padding: 20px; */
+    box-sizing: border-box;
+}
+
+.img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Typography */
+.title{
+    font-size: 2.3em;
+    letter-spacing: .07em;
+}
+
+.icon{margin-right: 5px;}
+
+#li_location{
+    border-bottom: 1px solid gray;
+    font-size: 1.2em;
+}
+
+.meta-list{
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Calendar styling */
+.calendar{
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    margin: 0px 10px;
+}
+
+.calendar-header{
+    background: #5e9544;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.calendar-body{
+    padding: 10px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.progress-section{
+    margin-top: 10px;
+}
+
+.progress-bar-wrapper{
+    background-color: rgb(187, 187, 187);
+}
+
+.progress{width: 50%; height: 20px;background: #5e9544;}
+
+
+/* #####################END HEADER SECTION########################## */
+
+
+
+/* ###Contact Section### */
+.contact-section{
+    margin-top: 20px;
+}
+
+.contact{
+    /* padding: 20px; */
+}
+.profile-img{
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.contact-details{
+    padding: 0px 30px;
+    font-size: 1.3em;
+}
+
+.contact-detail > *{
+    margin-bottom: 10px;
+}
+
+.contact-detail .icon{
+    font-size: 1.5em;
+}
+
+.contact-header{
+    border-bottom: 1px solid gray;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* #############END CONTACT SECTION################## */
+
+
+/* Direct Message Section */
+
+.direct-messaging{
+    /* padding: 20px; */
+    text-align: center;
+    width: 50%;
+}
+
+.dm-detail{
+    margin-bottom: 20px;
+}
+
+.dm-detail:nth-child(2) p{
+    font-size: 1.3em;
+}
+
+#my_btn{
+    background: #5e9544;;
+    padding: 5px 30px;
+}
+
+/* ########################END DIRECT MESSAGE##################### */
+/* Terms and conditions */
+.terms-detail{
+    margin-bottom: 10px;
+}
+
+.terms-detail i, .description-detail i{font-size: 1.8em; margin-right: 5px;}
+
+/* ##############END TERMS AND CONDITIONS */
+/* Description section */
+.description-detail:nth-child(1){
+    margin-bottom: 10px;
+}
+
+/* ######################END DESCRIPTION SECTION##################### */
+.gallery-section{
+    padding: 0px;
+}
+
+.gallery-section >*{
+    padding: 20px;
+}
+
+.gallery-header{
+    background: #5e9544;
+    color: white;
+}
+
+
+@media screen and (max-width: 1150px){
+    .contact-section{
+        flex-direction: column;
+    }
+    .direct-messaging{width: 100%;}
+
+    .contact-section >*{
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Smaller screen */
+@media screen and (max-width: 970px){
+    .main{margin: 0px;}
+    .header-section{
+        flex-direction: column-reverse;
+        height: unset;
+        padding: 0px;
+    }
+    .meta-list{
+        text-align: left;
+    }
+   
+    .header-right{
+        height: 40vh;
+        width: 100%;
+    }
+    .calendar-container.flex.center-y{
+        justify-content: center;
+    }
+    .header-intro{
+        text-align: center;
+        border-bottom: 3px solid #c5c5c5;
+        padding: 10px 0px;
+        letter-spacing: normal;
+    }
+    .header-content{
+        justify-content: space-around;
+        text-align: center;
+    }
+    .header-left{
+        width: 100%;
+        height: 50%;
+    }
+}
+
+/* mobile screen */

@@ -41,6 +41,7 @@ html, body {
 .center-x{justify-content: center;}
 .center-y{align-items: center;}
 .center-xy{justify-content: center; align-items: center;}
+.stretch-y{align-items: st;}
 .wrap{flex-wrap: wrap;}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

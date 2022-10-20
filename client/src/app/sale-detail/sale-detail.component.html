@@ -1,3 +1,145 @@
 <div class="main">
-    
+
+    <div class="header-section section flex">
+        <div class="header-left">
+            <div class="header-content header-intro">
+                <p class="text title ">My amazing garage sale</p>
+            </div>
+            <div class="header-content header-details flex">
+                <ul style="padding: 0px" class="meta-list">
+                    <li id="li_location">
+                        <p class="text">Location</p>
+                    </li>
+                    <li>
+                        <i class="icon fa-solid fa-map-location-dot"></i>
+                        <p class="text thin">117 West windsor Ave</p>
+                    </li>
+                </ul>
+                <ul class="meta-list">
+                    <li>
+                        <i class="icon fa-solid fa-boxes-stacked"></i>
+                        <p class="text thin small">More than 40 items listed</p>
+                    </li>
+                    <li>
+                        <i class="icon  fa-regular fa-pen-to-square"></i>
+                        <p class="text thin small">Last updated 4 days ago</p>
+                    </li>
+                    <li>
+                        <i class="icon fa-regular fa-eye"></i>
+                        <p class="text thin small">Total Views: 34121</p>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="header-content">
+                <p style="margin-bottom: 10px;" class="text title thin">Dates</p>
+                <div class="calendar-container flex center-y">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <p class="text">Thursday</p>
+                        </div>
+                        <div class="calendar-body">
+                            <p class="text">Nov 17 <sup>th</sup></p>
+                        </div>
+                    </div>
+                    <p class="text intro bold">-</p>
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <p class="text">Monday</p>
+                        </div>
+                        <div class="calendar-body">
+                            <p class="text">Oct 17 <sup>th</sup></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Yard_Sale_Northern_CA_2005.JPG/1200px-Yard_Sale_Northern_CA_2005.JPG" alt="">
+        </div>
+    </div>
+
+    <div class="progress-section">
+        <p class="text thin">Sale ends in: 13 hrs 24 min 12 seconds</p>
+        <div class="progress-bar-wrapper">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <div class="contact-section flex sp-between ">
+        <div class="contact section flex center-y">
+            <div class="profile-img">
+                <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Yard_Sale_Northern_CA_2005.JPG/1200px-Yard_Sale_Northern_CA_2005.JPG" alt="">
+            </div>
+            <div class="contact-details">
+                <div class="contact-detail contact-header">
+                    <p class="text thin">Contact</p>
+                </div>
+                <div class="contact-detail">
+                    <p class="text thin">
+                        Jeffrey Aaron
+                    </p>
+                </div>
+                <div class="contact-detail flex center-y">
+                    <i class="icon fa-solid fa-phone"></i>
+                    <p class="text thin">(630)-962-2100</p>
+                </div>
+                <div class="contact-detail flex center-y">
+                    <i class="icon fa-regular fa-envelope"></i>
+                    <p class="text thin">will.m.pattison@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="direct-messaging section">
+            <div class="dm-detail">
+                <p class="text intro">Start a Direct Message</p>
+            </div>
+            <div class="dm-detail">
+                <p class="text thin">Ask the owner about any inquiries or details about products, prices, availability of products, etc.</p>
+            </div>
+            <div class="dm-detail">
+                <button mat-raised-button id="my_btn">Direct Message</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="terms section">
+        <div class="terms-detail flex center-y">
+            <i class="fa-solid fa-shield-halved"></i>            
+            <p class="text intro">Terms and Conditions</p>
+        </div>
+        <div class="terms-detail">
+            <p class="text thin">These are the terms and conditions. We do not take credit. Please pay with cash when you show up on premise. This is a fair warning to all people that do not bring any cash with them.</p>
+        </div>
+    </div>
+
+    <div class="description section">
+        <div class="description-detail flex center-y">
+            <i class="fa-regular fa-file"></i>
+            <p class="text intro">Description</p>
+        </div>
+        <div class="description-detail">
+            <p class="text thin">This garage sale has many many different items. Check out our
+                 classical rock albums that have been signed by bands like led zepplin, 
+                 Beatles, aerosmith. We even have paul Mccartney's guitar. I know, this 
+                 is the craziest thing that we have ever done so far. Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui consequuntur ut deleniti non, nisi at quibusdam laboriosam porro totam possimus incidunt recusandae voluptatibus commodi? Illo facere nostrum provident, perferendis praesentium eos quasi qui ducimus autem ipsam, eligendi totam ipsum quisquam animi, neque ab. Sequi, harum iure ea provident eius rerum?</p>
+        </div>
+    </div>
+
+    <div class="gallery-section section">
+        <div class="gallery-header">
+            <p class="text intro">Items for Sale</p>
+        </div>
+        <div class="gallery-nav">
+            <div class="gallery-search">
+                <div class="input-wrapper">
+                    <input type="text" class="search">
+                </div>
+            </div>
+        </div>
+        <div class="gallery">
+            <app-item-listing></app-item-listing>
+        </div>
+    </div>
+
 </div>
