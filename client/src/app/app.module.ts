@@ -13,6 +13,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { SaleListingComponent } from './sale-listing/sale-listing.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { ItemListingComponent } from './item-listing/item-listing.component';
+import { ViewItemComponent } from './view-item/view-item.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ItemListingComponent } from './item-listing/item-listing.component';
     SaleListingComponent,
     SaleDetailComponent,
     ItemListingComponent,
+    ViewItemComponent,
   ],
   imports: [
     BrowserModule,
