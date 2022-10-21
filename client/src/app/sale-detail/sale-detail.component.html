@@ -122,8 +122,18 @@
             <p class="text thin">This garage sale has many many different items. Check out our
                  classical rock albums that have been signed by bands like led zepplin, 
                  Beatles, aerosmith. We even have paul Mccartney's guitar. I know, this 
-                 is the craziest thing that we have ever done so far. Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui consequuntur ut deleniti non, nisi at quibusdam laboriosam porro totam possimus incidunt recusandae voluptatibus commodi? Illo facere nostrum provident, perferendis praesentium eos quasi qui ducimus autem ipsam, eligendi totam ipsum quisquam animi, neque ab. Sequi, harum iure ea provident eius rerum?</p>
+                 is the craziest thing that we have ever done so far. Lorem ipsum dolor 
+                 sit amet consectetur adipisicing elit. Qui consequuntur ut deleniti non, 
+                 nisi at quibusdam laboriosam porro totam possimus incidunt recusandae 
+                 voluptatibus commodi? Illo facere nostrum provident, perferendis praesentium 
+                 eos quasi qui ducimus autem ipsam, eligendi totam ipsum quisquam animi, neque ab. Sequi, harum iure ea provident eius rerum?
+            </p>
+            <div class="read-more-wrapper flex center-y">
+                <p class="text read-more">Read more</p>
+                <i class="fa-solid fa-angle-down"></i>
+            </div>
         </div>
+        
     </div>
 
     <div class="gallery-section section">
@@ -131,13 +141,22 @@
             <p class="text intro">Items for Sale</p>
         </div>
         <div class="gallery-nav">
-            <div class="gallery-search">
+            <div class="gallery-search flex center-y">
+                <p class="text">Search for an item</p>
                 <div class="input-wrapper">
                     <input type="text" class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
         </div>
-        <div class="gallery">
+        <div class="gallery flex wrap center-xy">
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
             <app-item-listing></app-item-listing>
         </div>
     </div>

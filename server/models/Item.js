@@ -22,6 +22,10 @@ const ItemSchema = new mongoose.Schema({
         ref:'sale',
         required:[true,`Please provide a sale id`]
     },
+    description:{
+        type:String,
+        required: [true, 'please enter a description for item']
+    },
     highestBidder:{
         type: mongoose.Schema.ObjectId,
         ref: 'user'

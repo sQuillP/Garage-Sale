@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemListingComponent implements OnInit {
 
+
+  // Receive all data related to the item in this component
+  /* @Input the main data */
+
   constructor() { }
 
   ngOnInit(): void {

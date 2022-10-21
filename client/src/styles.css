@@ -31,7 +31,7 @@ html, body {
 .bold{font-weight: 700;}
 .faded{color: gray;}
 .light{color: rgb(99, 99, 99);}
-
+.small{font-size: 0.9em;}
 
 /* Flexbox properties */
 .flex{display: flex;}
