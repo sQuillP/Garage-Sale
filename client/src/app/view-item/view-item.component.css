@@ -1,37 +1,116 @@
 .main{
     max-width: 1350px;
-    margin: 20px auto;
+    margin: 100px auto 0 auto;
 }
+
+
+/* Grid layout specifications */
 
 .grid-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 2fr 2fr;
+    gap: 30px;
+    margin-bottom: 30px;
 }
 
 .section{
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-    color: white;
+    background-color: white;
+    color: black;
     padding: 20px;
 }
 
 .showcase{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
-
-
 
 .view-sale{
-
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 5;
 }
-
 
 
 .detail-bar{
-
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start:1;
+    grid-row-end: 3;
 }
 
-
-/* Direct message container */
 .direct-message{
-
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 5;
 }
+
+
+
+.img-track{
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    /* overflow-x: scroll; */
+    box-sizing: border-box;
+    background: var(--white-2);
+    /* justify-content: center; */
+    /* border: 1px solid black; */
+}
+
+.img-section-wrapper{
+    height: 400px;
+    width: 700px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    position: relative;
+}
+
+.img-track-wrapper{
+    min-height: 100px; 
+    min-width: 100px; 
+    max-height: 100px;
+    max-width: 100px;
+    margin: 0px 7px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.img{
+    height: 100%; 
+    width: 100%;
+    object-fit: cover;
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+}
+
+.left, .right {
+    position: absolute;
+    top: 200px;
+    cursor: pointer;
+    transition: transform 50ms linear;
+}
+
+.fa-circle {
+    color: #5e9544;
+}
+
+.fa-chevron-left, .fa-chevron-right{
+    color: white;
+}
+
+.left:hover, .right:hover{
+    transform: scale(1.1);
+}
+
+.left{ left: 20px;}
+.right{right: 20px;}
+
