@@ -41,6 +41,8 @@ html, body {
 .center-x{justify-content: center;}
 .center-y{align-items: center;}
 .center-xy{justify-content: center; align-items: center;}
+.start-x{justify-content: flex-start;}
+.start-y{align-items: flex-start;}
 .stretch-y{align-items: st;}
 .wrap{flex-wrap: wrap;}
 html, body { height: 100%; }

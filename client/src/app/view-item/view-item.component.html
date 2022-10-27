@@ -1,6 +1,12 @@
 <div class="main">
+    <div class="sticky-navigation">
+
+    </div>
     <div class="grid-container">
-        <div class="showcase section flex center-xy col">
+        <div class="showcase section flex center-y start-x col">
+            <div class="wraper">
+                <p class="text thin intro">Gallery</p>
+            </div>
             <div class="img-section-wrapper">
                 <img class="img" src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" alt="">
                 <span class="left fa-stack" style="vertical-align: top;">
@@ -31,22 +37,85 @@
                 </div>
             </div>
         </div>
-        <div class="view-sale section">
+        <div class="view-sale section flex col">
+            <div class="button-group flex">
+                <button mat-ripple class="button-toggler btn-toggler-active">Description</button>
+                <button mat-ripple matRippleColor="rgb(94, 149, 68,0.4)" class="button-toggler">Terms & Service</button>
+            </div>
+            <div class="sale-content">
+                <p class="text thin">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, in sequi aspernatur architecto delectus cumque pariatur maiores minus laboriosam at nulla, ipsa et ex voluptatum mollitia eligendi molestias quia dignissimos?</p>
+            </div>
         </div>
-        <div class="detail-bar section">
+        <div class="detail-bar section flex col sp-around">
+            <!-- Include border top and border bottom -->
+            <div class="contact-detail-header">
+                <p class="text intro thin">Contact The Owner</p>
+            </div>
+            <div class="contact-section flex center-y">
+                <div class="contact-item contact-img-container flex center-xy col">
+                    <div class="contact-img-wrapper">
+                        <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzHQv_th9wq3ivQ1CVk7UZRxhbPq64oQrg5Q&usqp=CAU" alt="">
+                    </div>
+                    <p class="text thin contact-detail">William Pattison</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-item flex center-y">
+                        <i class="contact-icon fa-solid fa-phone"></i>
+                        <p class="text thin contact-detail">(630)-962-2100</p>
+                    </div>
+                    <div class="contact-item flex center-y">
+                        <i class="contact-icon fa-solid fa-envelope"></i>
+                        <p class="text thin contact-detail">will.m.pattison@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-detail-header">
+                <p class="text intro">Sale Location</p>
+            </div>
+            <div class="location-section">   
+                   <!-- Angular Google map -->
+                <!-- <google-map
+                class="map"
+                width="100%"
+                height="300px">
+                </google-map> -->
+                <div class="location-item flex center-y">
+                    <p class="text">Pickup: </p>
+                    <i class="icon fa-solid fa-location-dot"></i>
+                    <p class="text thin">117 West Windsor Ave Lombard, IL</p>
+                </div>   
+            </div>
+            <div class="buy-now-header flex center-x">
+                <p class="text thin intro">Purchase for $13.99</p>
+            </div>
+            <div class="buy-now-item flex center-x">
+                <button mat-ripple class="buy-now">Buy Now</button>
+            </div>
         </div>
         <div class="direct-message section">
+            <p class="text intro">Send A Direct Message</p>
+            <p style="font-size: 1.2em;"class="text thin">Ask the owner about any inquiries or details about products, prices, availability of products, etc.</p>
+            <button mat-ripple id="dm">Direct Message</button>
         </div>
     </div>
-    <div class="main-footer">
-        <div class="section">
-
+    <div class="section footer-item">
+        <div class="sale-header">
+            <p class="text thin intro">More From This Sale</p>
         </div>
-        <div class="section">
-
+        <div class="sales-gallery flex wrap sp-around">
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
+            <app-item-listing></app-item-listing>
         </div>
-        <div class="recommended-sales">
-
+    </div>
+        
+    <div class="footer-item section">
+        <div class="sale-header">
+            <p class="text thin intro">Explore Other Sales</p>
         </div>
+        <app-sale-listing></app-sale-listing>
+        <app-sale-listing></app-sale-listing>
+        <app-sale-listing></app-sale-listing>
     </div>
 </div>
