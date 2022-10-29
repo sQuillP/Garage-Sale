@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-view-item',
@@ -7,53 +8,38 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class ViewItemComponent implements OnInit {
 
-  @ViewChild('slickModal')slickModal:ElementRef;
-
-  slideConfig = {
-    "slidesToShow": 3,
-    "slidesToScroll": 1,
-    "dots": false,
-    "infinite": true,
-    "autoplay" : true,
-    "autoplaySpeed" : 3000,
-    responsive: [
-      {
-        breakpoint: 2800,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: [ '<i class="fa-solid fa-chevron-left"></i>', '<i class="fa-solid fa-chevron-right"></i>' ],
+    responsive: {
+      0: {
+        items: 1
       },
-      {
-        breakpoint: 990,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
+      620: {
+        items: 2
       },
-      {
-        breakpoint: 600,
-        settings:{
-          slidesToShow:1,
-          slidesToScroll:1
-        }
-      }
-    ]
-  };
+      800: {
+        items: 3
+      },
+      1200: {
+        items: 4
+      },
+    },
+    nav: true,
+  }
 
-  slideCounter:number = 0;
-  totalSlides:number = 4;
 
   constructor() { }
 
-
-  onHandleSlickCounter(modal){
-    modal.slickGoTo((this.slideCounter+1));
-    this.slideCounter = (this.slideCounter+1)%this.totalSlides;
-  }
-
-
+  
   ngOnInit(): void {
+
   }
+
 
 }

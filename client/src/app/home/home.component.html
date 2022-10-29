@@ -54,26 +54,34 @@
         <div class="intro-wrapper">
             <p class="text intro">Garage Sales in My Area</p>
         </div>
-        <ngx-slick-carousel
-        #slickModal="slick-carousel"
-        class="carousel"
-        [config]="slideConfig" 
-        >
-            <app-sale-feature class="slide"  ngxSlickItem></app-sale-feature>
-            <app-sale-feature class="slide"  ngxSlickItem></app-sale-feature>
-            <app-sale-feature class="slide"  ngxSlickItem></app-sale-feature>
-            <app-sale-feature class="slide" ngxSlickItem></app-sale-feature>
-        </ngx-slick-carousel>
-        <span
-        (click)="onHandleSlickCounter(slickModal)"
+       <!-- owl carousel -->
+       <owl-carousel-o [options]="customOptions">
+        <ng-template  carouselSlide>
+            <app-sale-feature></app-sale-feature>
+        </ng-template>  
+        <ng-template carouselSlide>
+            <app-sale-feature></app-sale-feature>
+        </ng-template>  
+        <ng-template carouselSlide>
+            <app-sale-feature></app-sale-feature>
+        </ng-template>  
+        <ng-template carouselSlide>
+            <app-sale-feature ></app-sale-feature>
+        </ng-template>  
+        <!-- <ng-template carouselSlide>
+            <app-sale-feature></app-sale-feature>
+        </ng-template>   -->
+      </owl-carousel-o>
+        <!-- <span
         class="slider-left-toggle fa-stack fa-2x">
             <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
             <i  class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
         </span>
-        <span (click)="onHandleSlickCounter(slickModal)" class="slider-right-toggle fa-stack fa-2x">
+        <span 
+        class="slider-right-toggle fa-stack fa-2x">
             <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
             <i class="fa-solid fa-angle-right fa-stack-1x fa-inverse"></i>
-        </span>
+        </span> -->
     </div>
     
     <div class="container popular-garage-sales">

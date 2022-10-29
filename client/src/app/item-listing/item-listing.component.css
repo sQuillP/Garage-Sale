@@ -3,7 +3,7 @@
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     background: var(--dark);
     cursor: pointer;
-    margin: 15px;
+    margin: 0 auto;
     position: relative;
  }
 

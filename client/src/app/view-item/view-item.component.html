@@ -74,11 +74,11 @@
             </div>
             <div class="location-section">   
                    <!-- Angular Google map -->
-                <google-map
+                <!-- <google-map
                 class="map"
                 width="100%"
                 height="300px">
-                </google-map>
+                </google-map> -->
                 <div class="location-item flex center-y">
                     <p class="text">Pickup: </p>
                     <i class="icon fa-solid fa-location-dot"></i>
@@ -103,26 +103,35 @@
             <p class="text thin intro">More From This Sale</p>
         </div>
 
-        <ngx-slick-carousel
-        #slickModal="slick-carousel"
-        class="carousel"
-        [config]="slideConfig" 
-        >
-            <app-item-listing class="slide" ngxSlickItem></app-item-listing>
-            <app-item-listing class="slide" ngxSlickItem></app-item-listing>
-            <app-item-listing class="slide" ngxSlickItem></app-item-listing>
-            <app-item-listing class="slide" ngxSlickItem></app-item-listing>
-        </ngx-slick-carousel>
-        <span
-        (click)="onHandleSlickCounter(slickModal)"
+       <!-- Carousel component goes here -->
+
+       <owl-carousel-o [options]="customOptions">
+        <ng-template carouselSlide>
+            <app-item-listing></app-item-listing>
+        </ng-template>  
+        <ng-template carouselSlide>
+            <app-item-listing></app-item-listing>
+        </ng-template>  
+        <ng-template carouselSlide>
+            <app-item-listing></app-item-listing>
+        </ng-template>  
+        <ng-template carouselSlide>
+            <app-item-listing></app-item-listing>
+        </ng-template>  
+        <ng-template carouselSlide>
+            <app-item-listing></app-item-listing>
+        </ng-template>  
+      </owl-carousel-o>
+        <!-- <span
         class="slider-left-toggle fa-stack fa-2x">
             <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
             <i  class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
         </span>
-        <span (click)="onHandleSlickCounter(slickModal)" class="slider-right-toggle fa-stack fa-2x">
+        <span 
+        class="slider-right-toggle fa-stack fa-2x">
             <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
             <i class="fa-solid fa-angle-right fa-stack-1x fa-inverse"></i>
-        </span>
+        </span> -->
         <!-- <div class="sales-gallery flex wrap sp-around">
             <app-item-listing></app-item-listing>
             <app-item-listing></app-item-listing>
