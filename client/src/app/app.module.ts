@@ -17,6 +17,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import {MatRippleModule} from '@angular/material/core';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatRippleModule} from '@angular/material/core';
     SaleDetailComponent,
     ItemListingComponent,
     ViewItemComponent,
+    ProgressBarComponent,
   ],
   imports: [
     // BrowserModule,

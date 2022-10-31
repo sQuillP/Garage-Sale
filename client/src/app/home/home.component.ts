@@ -21,18 +21,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       0: {
         items: 1
       },
-      620: {
-        items: 2
-      },
-      800: {
+      720: {
         items: 2
       },
       1200: {
         items: 3
       },
+      1600:{
+        items: 4
+      }
     },
     nav: true,
-    center: true
+    // center: true,
   }
 
 

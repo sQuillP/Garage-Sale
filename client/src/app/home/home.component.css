@@ -55,9 +55,7 @@
 }
 
 
-.search{
-    position: relative;
-}
+.search{position: relative;}
 
 .search-icon{
     position: absolute;
@@ -130,13 +128,9 @@
     padding-top: 20px;
 }
 
-.section{
-    border: 1px solid black;
-}
+.section{border: 1px solid black;}
 
-.items-sale{
-    position: relative;
-}
+.items-sale{position: relative;}
 
 .slider {
     -webkit-appearance: none;
@@ -181,6 +175,8 @@
     overflow: hidden;
     
   }
+
+  .intro-wrapper{margin-bottom: 20px;}
 
   .slider-left-toggle, .slider-right-toggle{
     position: absolute;

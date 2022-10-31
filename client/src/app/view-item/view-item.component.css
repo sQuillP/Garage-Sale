@@ -212,6 +212,10 @@
     position: relative;
 }
 
+.sale-header{
+    margin-bottom: 20px;
+}
+
 /* .slider-left-toggle, .slider-right-toggle{
     top: 150px;
     position: absolute;
