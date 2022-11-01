@@ -18,6 +18,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import {MatRippleModule} from '@angular/material/core';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { CatalogueSearch } from './sale-search/sale-search.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     ItemListingComponent,
     ViewItemComponent,
     ProgressBarComponent,
+    CatalogueSearch,
   ],
   imports: [
-    // BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     GoogleMapsModule,
     BrowserAnimationsModule,

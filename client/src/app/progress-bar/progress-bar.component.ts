@@ -10,18 +10,21 @@ const MILLISECONDS_PER_MINUTE = 60000;
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.css']
 })
-export class ProgressBarComponent implements OnInit ,OnDestroy {
+export class ProgressBarComponent implements OnInit, AfterViewInit ,OnDestroy {
 
   @Input("remainingTime") remainingTime:Date;
+  @Input("width")width:string;
+
   @ViewChild("progressRef")progressRef:ElementRef;
+  @ViewChild("mainRef")mainRef:ElementRef;
 
   interval:any;
-  seconds:number;
-  minutes:number;
-  hours:number;
-  days:number;
-  totalTime:number;
-  timeStamp:number;
+  seconds:number = 0;
+  minutes:number = 0;
+  hours:number = 0;
+  days:number = 0;
+  totalTime:number = 0;
+  timeStamp:number = 0;
 
   constructor() {}
 
@@ -57,10 +60,14 @@ export class ProgressBarComponent implements OnInit ,OnDestroy {
       }
       this.seconds --;
       this.progressRef.nativeElement.style.width = `${100-Date.now()/this.timeStamp}%`
-      console.log(100-Date.now()/new Date(this.remainingTime).getTime())
+      console.log(100-Date.now()/new Date(this.remainingTime).getTime());
+      // console.log(this.mainRef)
     },1000);
   }
 
+  ngAfterViewInit(): void {
+      
+  }
 
   ngOnDestroy(): void {
       clearInterval(this.interval);

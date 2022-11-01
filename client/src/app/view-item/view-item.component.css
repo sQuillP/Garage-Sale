@@ -53,6 +53,7 @@
     border: 2px solid gray;
     border-radius: 5px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .img{

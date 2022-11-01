@@ -33,10 +33,30 @@ export class ViewItemComponent implements OnInit {
     nav: true,
   }
 
+  imageData = [
+    "https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png",
+    "https://na.rdcpix.com/4b5c1a3f5b62b1146984460bc8e138eew-c3944895653rd-w832_h468_r4_q80.jpg",
+    "https://garagesalefinder.com/images/screenshotofusamap.jpg",
+    "https://www.lakesaintlouis.com/ImageRepository/Document?documentId=1004"
+  ];
+
+  selectedImage:number = 0;
+
 
   constructor() { }
 
-  
+
+  onSelectImage(direction:string):void{
+    if(direction === 'right')
+      this.selectedImage =  (this.selectedImage + 1) % this.imageData.length;
+    else if(direction === 'left')
+      if(this.selectedImage === 0)
+        this.selectedImage = this.imageData.length-1;
+      else
+        this.selectedImage--;
+  }
+
   ngOnInit(): void {
 
   }

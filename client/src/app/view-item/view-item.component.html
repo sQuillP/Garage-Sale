@@ -8,34 +8,28 @@
                 <p class="text thin intro">Gallery</p>
             </div>
             <div class="img-section-wrapper">
-                <img class="img" src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" alt="">
-                <span class="left fa-stack" style="vertical-align: top;">
+                <!-- src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" -->
+                <img class="img" [src]="imageData[selectedImage]"  alt="">
+                <span (click)="onSelectImage('left')" class="left fa-stack" style="vertical-align: top;">
                     <i class="fa-solid fa-circle fa-stack-2x fa-inverse"></i>
                     <i class="fa-solid fa-chevron-left fa-stack-1x"></i>
                 </span>
-                <span class="right fa-stack" style="vertical-align: top;">
+                <span (click)="onSelectImage('right')" class="right fa-stack" style="vertical-align: top;">
                     <i class="fa-solid fa-circle fa-stack-2x fa-inverse"></i>
                     <i class="fa-solid fa-chevron-right fa-stack-1x"></i>
                 </span>
             </div>
             <div class="img-track">
                 <!-- Add the list of gallery images of the item -->
-                <div class="img-track-wrapper">
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" alt="" class="img">
-                </div>
-                <div class="img-track-wrapper">
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" alt="" class="img">
-                </div>
-                <div class="img-track-wrapper">
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" alt="" class="img">
-                </div>
-                <div class="img-track-wrapper">
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" alt="" class="img">
-                </div>
-                <div class="img-track-wrapper">
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" alt="" class="img">
+                <div 
+                *ngFor="let url of imageData; let i = index;"
+                (click)="selectedImage=i"
+                [ngStyle]="{'border': i === selectedImage?'5px solid #5e9544':'2px solid gray'}"
+                 class="img-track-wrapper">
+                    <img [src]="url" alt="uh oh" class="img">
                 </div>
             </div>
+            <app-progress-bar style="width: 100%" [remainingTime]="1667784200336"></app-progress-bar>
         </div>
         <div class="view-sale section flex col">
             <div class="button-group flex">
@@ -102,9 +96,7 @@
         <div class="sale-header">
             <p class="text thin intro">More From This Sale</p>
         </div>
-
        <!-- Carousel component goes here -->
-
        <owl-carousel-o [options]="customOptions">
         <ng-template carouselSlide>
             <app-item-listing></app-item-listing>
@@ -122,7 +114,18 @@
             <app-item-listing></app-item-listing>
         </ng-template>  
       </owl-carousel-o>
-        <!-- <span
+      <!-- span comment goes here -->
+    </div>
+    <div class="footer-item section">
+        <div class="sale-header">
+            <p class="text thin intro">Explore Other Sales</p>
+        </div>
+        <app-sale-listing></app-sale-listing>
+        <app-sale-listing></app-sale-listing>
+        <app-sale-listing></app-sale-listing>
+    </div>
+</div>
+ <!-- <span
         class="slider-left-toggle fa-stack fa-2x">
             <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
             <i  class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
@@ -138,14 +141,3 @@
             <app-item-listing></app-item-listing>
             <app-item-listing></app-item-listing>
         </div> -->
-    </div>
-        
-    <div class="footer-item section">
-        <div class="sale-header">
-            <p class="text thin intro">Explore Other Sales</p>
-        </div>
-        <app-sale-listing></app-sale-listing>
-        <app-sale-listing></app-sale-listing>
-        <app-sale-listing></app-sale-listing>
-    </div>
-</div>

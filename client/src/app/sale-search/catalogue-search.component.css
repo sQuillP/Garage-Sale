@@ -1,0 +1,63 @@
+.main{
+    max-width: 1100px;
+    margin: 120px auto 0 auto;
+}
+
+.layout-container {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;    background: var(--white-2);
+    box-sizing: border-box;
+}
+
+.back-nav{
+    width: 100%;
+    /* margin-top: 55px; */
+    position: sticky;
+    top: 65px;
+    left: 0px;
+    z-index: 2;
+    background: white;
+    padding: 10px;
+}
+
+#backbutton{
+    border: none;
+    padding: 10px;
+    font-weight: 300;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    margin-left: 150px;
+}
+
+.intro-wrapper{
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.sales-list{
+    padding: 0px 20px 0px 20px;
+   
+}
+
+.content{
+    position: relative;
+}
+.search-options{
+    position: sticky;
+    top: 65px;
+    left: 0px;
+    background: #5e9544;
+    padding: 10px;
+    z-index: 2;
+}
+
+.searchbar-wrapper{
+    position: relative;
+}
+
+#searchbar {
+    outline: none;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-icon{ position: absolute; right: 10px; top: 10px;}
