@@ -1,5 +1,4 @@
 <div class="main">
-
     <div class="section hero flex col center-xy">
         <p class="nav-title header text">Garage Sale Haven</p>
         <div class="hero-nav-container flex col center-xy">
@@ -26,7 +25,6 @@
             </div>
         </div>
     </div>
-
     <div class="container map-search">
         <div style="margin-bottom: 10px;" class="intro-wrapper">
             <p class="text intro">Sales near Lombard, IL</p>
@@ -40,13 +38,10 @@
         </google-map> -->
         <div class="filter-options flex sp-between">
             <div class="filter-container fc-left">
-                <label style="display: inline-block; margin: 0;" for="search_zip" class="filter-label thin">Search by zip code</label>
+                <label style="display: inline-block; margin: 0;" for="search_zip" class="filter-label ">Search by zip code</label>
                 <input id="search_zip" type="text" placeholder="Search Zip Code">
             </div>
-            <div class="filter-container flex col center-xy fc-right">
-                <label style="display: inline-block; margin: 0;" for="myRange" class="filter-label thin">Search Within 30 Miles</label>
-                <input type="range" min="1" max="100" value="30" class="slider" id="myRange">
-            </div>
+            <app-map-slider></app-map-slider>
         </div>
 
     </div>
@@ -68,20 +63,7 @@
         <ng-template carouselSlide>
             <app-sale-feature ></app-sale-feature>
         </ng-template>  
-        <!-- <ng-template carouselSlide>
-            <app-sale-feature></app-sale-feature>
-        </ng-template>   -->
       </owl-carousel-o>
-        <!-- <span
-        class="slider-left-toggle fa-stack fa-2x">
-            <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
-            <i  class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
-        </span>
-        <span 
-        class="slider-right-toggle fa-stack fa-2x">
-            <i style="color: #183153" class="fa-solid fa-circle fa-stack-1x"></i>
-            <i class="fa-solid fa-angle-right fa-stack-1x fa-inverse"></i>
-        </span> -->
     </div>
     
     <div class="container popular-garage-sales">

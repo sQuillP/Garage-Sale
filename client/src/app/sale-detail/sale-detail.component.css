@@ -209,9 +209,14 @@ li >*{display: inline-block;}
 }
 
 .input-wrapper{position: relative;}
-.input-wrapper i{
+
+.x-icon, .search-icon {
     position: absolute;
-    right: 20px;
+}
+
+/* .x-icon{right: 40px; font-size: .8em; top: 12px;} */
+
+.search-icon, .x-icon{right: 20px;
     top: 10px;
 }
 

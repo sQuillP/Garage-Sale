@@ -1,6 +1,6 @@
 .main{
-    max-width: 1100px;
-    margin: 120px auto 0 auto;
+    max-width: 1400px;
+    margin: 90px auto 0 auto;
 }
 
 .layout-container {
@@ -28,8 +28,10 @@
 }
 
 .intro-wrapper{
-    margin-bottom: 20px;
     padding: 20px;
+    background: var(--dark);
+    color: white;
+    font-weight: bold;
 }
 
 .sales-list{
@@ -44,7 +46,8 @@
     position: sticky;
     top: 65px;
     left: 0px;
-    background: #5e9544;
+    /* background: #5e9544; */
+    background: var(--dark);
     padding: 10px;
     z-index: 2;
 }
@@ -61,3 +64,39 @@
 }
 
 .search-icon{ position: absolute; right: 10px; top: 10px;}
+
+.filter-btn{
+    border: none;
+    background: white;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1.2em;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+.filter-btn:hover{
+    background-color: #5e9544;
+    color: white;
+}
+
+
+.active-filter-btn{
+    background: #5e9544;
+    color: white;
+}
+
+.toggle-dropdown{
+    position: absolute;
+    bottom: -56px;
+    left: 0;
+    background: white;
+    z-index: 2;
+    width: 100%;
+    padding: 15px;
+}
+
+.toggle-header{
+    font-size: 1.2em;
+}
+

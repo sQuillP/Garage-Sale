@@ -20,6 +20,7 @@
 .nav-logo{
     font-size: 2em;
     color: #5e9544;
+    cursor: pointer;
 }
 
 .nav-link{

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SaleDetailComponent } from './sale-detail/sale-detail.component';
-import { CatalogueSearch } from './sale-search/sale-search.component';
+import { CatalogueSearch } from './sale-search/catalogue-search.component';
 import { ViewItemComponent } from './view-item/view-item.component';
 
 const routes: Routes = [

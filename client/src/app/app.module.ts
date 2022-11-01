@@ -18,7 +18,11 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import {MatRippleModule} from '@angular/material/core';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
-import { CatalogueSearch } from './sale-search/sale-search.component';
+import { CatalogueSearch } from './sale-search/catalogue-search.component';
+import { MapSliderComponent } from './map-slider/map-slider.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,7 @@ import { CatalogueSearch } from './sale-search/sale-search.component';
     ViewItemComponent,
     ProgressBarComponent,
     CatalogueSearch,
+    MapSliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +47,9 @@ import { CatalogueSearch } from './sale-search/sale-search.component';
     BrowserModule,
     MatRippleModule,
     CarouselModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,32 +4,62 @@
 <div class="main">
     <div class="layout-container">
         <div class="intro-wrapper">
-            <p class="text thin header">Catalogue Search</p>
+            <p class="text header">Catalogue Search</p>
         </div>
         <div class="content">
             <!-- Google map goes here -->
             <!-- <google-map
-            height="300px"
+            height="400px"
             width="100%"
             ></google-map> -->
-            <div class="search-options flex wrap sp-around">
+            <div class="search-options flex center-y wrap sp-around">
                 <div class="searchbar-wrapper">
-                    <input type="text" id="searchbar" placeholder="Search items and sales">
+                    <input type="text" id="searchbar" placeholder="Filter items and sales">
                     <i class="search-icon fa-solid fa-magnifying-glass"></i>
                 </div>
-                <div class="t">
-                    slider goes here
+                <div class="filter-wrapper">
+                    <button matTooltip="Filter Settings" mat-fab style="background: #5e9544; color: white;" aria-label="Example icon button with a home icon">
+                        <mat-icon>tune</mat-icon>
+                    </button>
+                </div>
+                <div class="buttons">
+                    <button class="filter-btn active-filter-btn">Search Sales</button>
+                    <button class="filter-btn">Search Items</button>
                 </div>
                 <!-- slider component goes here -->
+                <app-map-slider style="color: white;"></app-map-slider>
+                <div class="toggle-dropdown">
+                    <div class="toggle-header">
+                        <p class="text">Filter Options</p>
+                    </div>
+                    <div class="filter-wrapper flex sp-around">
+                        <div class="sales-section">
+                            <div class="sales-filter-header">
+                                <p class="text thin toggle-header">Sales Search</p>
+                            </div>
+                            <div class="sales-filters">
+                                
+                            </div>
+                        </div>
+                        <div class="items-section">
+                            <div class="items-filter-header">
+                                <p class="text thin toggle-header">Items Search</p>
+                            </div>
+                            <div class="items-filters">
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="sales-list">
+            <!-- <div class="sales-list">
                 <app-sale-listing></app-sale-listing>
                 <app-sale-listing></app-sale-listing>
                 <app-sale-listing></app-sale-listing>
                 <app-sale-listing></app-sale-listing>
                 <app-sale-listing></app-sale-listing>
                 <app-sale-listing></app-sale-listing>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
