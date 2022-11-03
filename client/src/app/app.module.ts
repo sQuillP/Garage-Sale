@@ -16,13 +16,16 @@ import { ViewItemComponent } from './view-item/view-item.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
-import {MatRippleModule} from '@angular/material/core';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { CatalogueSearch } from './sale-search/catalogue-search.component';
 import { MapSliderComponent } from './map-slider/map-slider.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatIconModule,
     MatTooltipModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
