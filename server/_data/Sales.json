@@ -1,7 +1,7 @@
 [
     {
-        "start_date": "Mon Oct 10 2022 18:20:42 GMT-0500 (Central Daylight Time)",
-        "end_date":"Mon Oct 17 2022 18:19:40 GMT-0500 (Central Daylight Time)",
+        "start_date": "",
+        "end_date":"",
         "address":"117 west windsor ave",
         "description": "a wonderful sale",
         "terms_conditions":"you must accept these terms",
@@ -14,8 +14,8 @@
         "_id":null
     },
     {
-        "start_date": "Fri Oct 21 2022 18:20:42 GMT-0500 (Central Daylight Time)",
-        "end_date":"Sun Oct 23 2022 18:19:40 GMT-0500 (Central Daylight Time)",
+        "start_date": "",
+        "end_date":"",
         "address":"117 west windsor ave",
         "description": "Yard sale of things found in my garage",
         "terms_conditions":"I expect you to comply with these terms",
@@ -28,8 +28,8 @@
         "_id":null
     },
     {
-        "start_date": "Tues Oct 13 2022 18:20:42 GMT-0500 (Central Daylight Time)",
-        "end_date":"Fri Oct 16 2022 18:19:40 GMT-0500 (Central Daylight Time)",
+        "start_date": "",
+        "end_date":"",
         "address":"117 west windsor ave",
         "description": "Sale of rare porcelain plates. Get them while you can",
         "terms_conditions":"There are no discounts for these items",
@@ -42,8 +42,8 @@
         "_id":null
     },
     {
-        "start_date": "Tue Oct 18 2022 18:20:42 GMT-0500 (Central Daylight Time)",
-        "end_date":"Thu Oct 20 2022 18:19:40 GMT-0500 (Central Daylight Time)",
+        "start_date": "",
+        "end_date":"",
         "address":"117 west windsor ave",
         "description": "Some old antiques. Some items as far back as 1929",
         "terms_conditions":"You must buy more than one item to receive a discount.",

@@ -87,18 +87,33 @@
 }
 
 .toggle-dropdown{
-    position: absolute;
-    bottom: -275px;
-    left: 0;
+    /* position: absolute; */
+    /* bottom: -275px; */
+    /* left: 0; */
+    /* z-index: 2; */
+    /* padding: 15px; */
     background: white;
-    z-index: 2;
     width: 100%;
-    padding: 15px;
     box-sizing: border-box;
     border-bottom: 2px solid black;
     overflow: hidden;
+    opacity: 0;
+    max-height: 0px;
+    display: block;
+
+    /* margin: 0; */
+    transition: max-height .5s ease-out, opacity .5s ease-out, padding .5s ease-out,
+    margin .5s ease-out;
 }
 
+.toggle-dropdown-active{
+    padding: 15px;
+    transition: max-height .5s ease-out, opacity .5s ease-out, padding .5s ease-out,
+    margin .5s ease-out;
+    margin-top: 10px;
+    opacity: 1;
+    max-height: 900px;
+}
 
 .toggle-header{
     font-size: 1.2em;
@@ -108,9 +123,7 @@
     margin: 15px 0;
 }
 
-.combined-section{
-    align-self: center;
-}
+.input-group{position: relative;}
 
 .field-descriptor{display: block; margin: 5px 0px;}
 .input-group>.price-input, .input-group >p {display: inline-block;}
@@ -128,6 +141,13 @@
     box-shadow: 0 0 2px 2px rgba(94, 149, 68);
 }
 
+/* .ds-1, .ds-2{
+    position: absolute;
+    top: 35px;
+}
+
+.ds-1{ left: 10px;}
+.ds-2{right: 170px} */
 
 
 

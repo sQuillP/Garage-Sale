@@ -1,6 +1,7 @@
 [
     {
         "name":"electric guitar",
+        "description":"A one of a kind guitar that has never been played by anyone else.",
         "price": 99.23,
         "gallery":["guitar image"],
         "saleId":"",
@@ -8,6 +9,7 @@
     },
     {
         "name":"Teddy Bear",
+        "description":"Very comfortable teddy bear. One of a kind for sure. This teddy bear was made here in the USA!",
         "price": 19.99,
         "gallery":["teddy bear image"],
         "saleId":"",
@@ -16,6 +18,7 @@
     },
     {
         "name":"Shark Fin",
+        "description":"A real shark fin taken from a great white shark. Remember, hunting sharks for fins might be illegal in certain countries.",
         "price": 14.99,
         "gallery":["Shark fin"],
         "saleId":"",
@@ -24,6 +27,7 @@
     },
     {
         "name":"Fishing Pole",
+        "description":"A very flexible fishing pole. It can support up to 120 pounds of tug. Very reliable and can catch many fish.",
         "price": 99.23,
         "gallery":["Fishing pole image"],
         "saleId":"",
@@ -32,6 +36,7 @@
     },
     {
         "name":"I heart mom mug",
+        "description":"A classic I heart mom mug. The best gift for any holiday or birthday. Your mother will love you for this.",
         "price": 9.99,
         "gallery":["I <3 Mom mug"],
         "saleId":"",
@@ -40,6 +45,7 @@
     },
     {
         "name":"Juggling balls",
+        "description":"Juggle away with these non-bouncy juggling balls. Increase juggling productivity without having to chase after runaway balls.",
         "price": 12.99,
         "gallery":["Juggling balls"],
         "saleId":"",
@@ -48,6 +54,7 @@
     },
     {
         "name":"Signed Aaron Rogers Jersy",
+        "description":"Signed by Aaron Rogers right after he won the superbowl. It was the first thing he touched after he threw the game winning touchdown.",
         "price": 449.99,
         "gallery":["Signed Aaron Rogers Jersy"],
         "saleId":"",
@@ -56,6 +63,7 @@
     },
     {
         "name":"Used soccer ball",
+        "description":"A used soccer ball but holds up like it is brand new. Definitely something worth investing your 20 dollars into.",
         "price": 19.99,
         "gallery":["Used soccer ball"],
         "saleId":"",
@@ -64,6 +72,7 @@
     },
     {
         "name":"Unicycle",
+        "description":"Who needs two wheels when you can have only one? Save the environment and go with less rubber for your transportation.",
         "price": 49.99,
         "gallery":["unicycle"],
         "saleId":"",
@@ -72,6 +81,7 @@
     },
     {
         "name":"Noise cancelling headphones",
+        "description":"You won't be able ot hear a single thing. These are surely the best noise cancelling headphones you'll ever own.",
         "price": 29.99,
         "gallery":["signed jersy.png"],
         "saleId":"",
@@ -80,6 +90,7 @@
     },
     {
         "name":"Neck Support Pillow",
+        "description":"The best neck support pillow ever. You'll wake up with a straight neck in no time! Get yours today for only 40 dollars used! (please wash before using)",
         "price": 39.99,
         "gallery":["Neck Support Pillow"],
         "saleId":"",
@@ -88,6 +99,7 @@
     },
     {
         "name":"Buck Knife",
+        "description":"This is just a regular buck knife. The reason why it is so expensive is because it was once my great-great grandfathers knife. It is very sharp",
         "price": 449.99,
         "gallery":["Buck Knife.png"],
         "saleId":"",
@@ -96,6 +108,7 @@
     },
     {
         "name":"Train Set",
+        "description":"A one of a kind train set that nobody has ever seen before. This train set will definitely catch the eyes of any knowledgable collector out there.",
         "price": 199.99,
         "gallery":["Train Set"],
         "saleId":"",

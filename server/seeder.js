@@ -36,6 +36,8 @@ const populate = async ()=> {
             let sailId = new mongoose.Types.ObjectId();
             saleIds.push(sailId);
             sale._id = sailId;
+            sale.start_date = Date.now(); 
+            sale.end_date = Date.now()+1000*60*60*24*Math.floor(1 + Math.random()*6);
             
             let [lat,long] = [ //generate lat, long coordinates with variation
                 41.0+(Math.random()*2),

@@ -16,7 +16,9 @@ const ErrorResponse = require("../utils/ErrorResponse");
  *  - radius: distance in miles to view other garage sales.
  *  - long: longitude coordinate reference point 
  *  - lat: latitude coordinate reference point 
- *  - dayRange: Get sales within the day range. This can take in any form of date object i.e int or string.
+ *  - dayRange:Object -> Get sales within the day range.
+ *      - start: the first day the sale begins
+ *      - end: the last day of the garage sale.
  */
 exports.getSales = asyncHandler(async (req,res,next)=> {
     //Conversion rate for miles to kilometer
@@ -26,6 +28,8 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
     const [page,pageLimit] = [+req.query.page || 1, +req.query.limit || 10];
     let totalPages = await Sale.countDocuments();
     totalPages = Math.floor(totalPages/pageLimit) === 0? 1: Math.floor(totalPages/pageLimit);
+    //end pagination
+
     let query = {};
     if(req.query.radius){
         if(!req.query.long || !req.query.lat){
@@ -48,12 +52,20 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
         }
     }
 
-    if(req.query.dayRange){
-        if(!isNaN(req.query.dayRange))
-            req.query.dayRange = parseInt(req.query.dayRange,10);
+    if(req.query.dayRange) {
+        query['start_date'] = {
+            $gte: new Date(req.query.dayRange.start),
+            $lte: new Date(req.query.dayRange.end)
+        };
+    }
 
-        query['start_date'] = {$lte: new Date(req.query.dayRange)};
-    } 
+
+      // if(req.query.dayRange){ //
+    //     if(!isNaN(req.query.dayRange))
+    //         req.query.dayRange = parseInt(req.query.dayRange,10);
+
+    //     query['start_date'] = {$lte: new Date(req.query.dayRange)};
+    // } 
 
     const queryResults = await Sale.find(query).skip(pageLimit*(page-1)).limit(pageLimit);
     return res.status(200).json({

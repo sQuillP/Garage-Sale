@@ -5,11 +5,14 @@
         </div>
         <div class="content">
             <!-- Google map goes here -->
-            <!-- <google-map
+            <google-map
             height="400px"
             width="100%"
-            ></google-map> -->
+            ></google-map>
             <div class="search-options flex center-y wrap sp-around">
+                <div class="search-wrapper">
+                    
+                </div>
                 <div class="searchbar-wrapper">
                     <input type="text" id="searchbar" placeholder="Filter items and sales">
                     <i class="search-icon fa-solid fa-magnifying-glass"></i>
@@ -25,11 +28,11 @@
                 </div>
                 <!-- slider component goes here -->
                 <app-map-slider style="color: white;"></app-map-slider>
-                <div class="toggle-dropdown">
+                <div [ngClass]="{'toggle-dropdown-active':activateDropdownFilter}" class="toggle-dropdown">
                     <div class="toggle-header">
                         <p class="text">Filter Options</p>
                     </div>
-                    <div class="filter-wrapper flex sp-around">
+                    <div class="filter-wrapper flex sp-around wrap">
                         <!-- Search by address, sale interval, alphabetical sort, -->
                         <div class="sales-section">
                             <div class="filter-header">
@@ -38,7 +41,7 @@
                             <div class="sales-filters">
                                 <div class="input-group">
                                     <label class="field-descriptor" min="1">Search by Address</label>
-                                    <input type="text" class="filter-input">
+                                    <input placeholder="123 South Main St." type="text" class="filter-input">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group">
@@ -57,6 +60,9 @@
                             </div>
                         </div>
                         <div class="combined-section">
+                            <div class="filter-header">
+                                <p class="text thin toggle-header">Filter</p>
+                            </div>
                             <div class="form-section">
                                 <mat-checkbox color="primary" >Sort alphabetically</mat-checkbox>
                             </div>
@@ -70,9 +76,10 @@
                             <div class="items-filters">
                                 <div class="input-group">
                                     <label class="field-descriptor" min="1">Price range</label>
-                                    <input type="number" class="filter-input price-input">
-                                    <p style="margin: 0px 10px" class="text">-</p>
-                                    <input type="number" class="filter-input price-input" min="1">
+                                    <p style="margin: 0px 10px;"class="text">$</p>
+                                    <input type="number" placeholder="Min" class="filter-input price-input">
+                                    <p style="margin: 0px 10px" class="text"><span class="text bold">-</span> $</p>
+                                    <input type="number" placeholder="Max" class="filter-input price-input" min="1">
                                 </div>
                             </div>
                         </div>

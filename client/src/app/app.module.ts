@@ -26,6 +26,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { LoginComponent } from './login/login.component';
+import { DBService } from './Services/db.service';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,10 +44,13 @@ import {MatInputModule} from '@angular/material/input';
     ProgressBarComponent,
     CatalogueSearch,
     MapSliderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     GoogleMapsModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -58,7 +65,8 @@ import {MatInputModule} from '@angular/material/input';
     MatNativeDateModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,27 +12,26 @@ const MILLISECONDS_PER_MINUTE = 60000;
 })
 export class ProgressBarComponent implements OnInit, AfterViewInit ,OnDestroy {
 
-  @Input("remainingTime") remainingTime:Date;
+  @Input("dateInterval")dateInterval:any[];
   @Input("width")width:string;
 
   @ViewChild("progressRef")progressRef:ElementRef;
-  @ViewChild("mainRef")mainRef:ElementRef;
 
   interval:any;
   seconds:number = 0;
   minutes:number = 0;
   hours:number = 0;
   days:number = 0;
-  totalTime:number = 0;
-  timeStamp:number = 0;
-
   constructor() {}
 
   /* Convert the end date to number of days, hours,
     minutes, and seconds and display the timer to the user. */
   ngOnInit(): void {
-    this.timeStamp = new Date(this.remainingTime).getTime();
-    let milliseconds = this.timeStamp - Date.now();
+
+    this.dateInterval[0] = new Date(this.dateInterval[0]).getTime();
+    this.dateInterval[1] = new Date(this.dateInterval[1]).getTime();
+
+    let milliseconds = new Date(this.dateInterval[1]).getTime() - Date.now();//this.timeStamp - Date.now();
 
     this.days = Math.floor(milliseconds / MILLISECONDS_PER_DAY);
     milliseconds %= MILLISECONDS_PER_DAY;
@@ -59,9 +58,11 @@ export class ProgressBarComponent implements OnInit, AfterViewInit ,OnDestroy {
         this.seconds = 60;
       }
       this.seconds --;
-      this.progressRef.nativeElement.style.width = `${100-Date.now()/this.timeStamp}%`
-      console.log(100-Date.now()/new Date(this.remainingTime).getTime());
-      // console.log(this.mainRef)
+      let currentTime = Date.now();
+      
+      // Remaining % of time = 1-((tc-ts)/(te-ts))*100) -> tc = current time, ts = starting time, te = ending time
+      const remainingPercentage = (1-((currentTime-this.dateInterval[0])/(this.dateInterval[1]-this.dateInterval[0])))*100;
+      this.progressRef.nativeElement.style.width = `${remainingPercentage}%`;
     },1000);
   }
 

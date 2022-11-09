@@ -30,11 +30,19 @@ const ItemSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'user'
     },
+    expireAt: {
+        type: Date,
+        expires: 0,
+        required: true,
+        default: Date.now()+3600000
+    },
     purchased: {
         type: Boolean,
         default: false,
         required: true
     }
+},{
+    timestamps: true
 });
 
 
@@ -42,7 +50,8 @@ const ItemSchema = new mongoose.Schema({
 ItemSchema.index({name:"text"});
 
 
-/* Place a single picture of the item into the associated sale gallery */
+/* Place a single picture of the item into the associated sale gallery
+set the expiration date of the item to the sale's expiration date. */
 ItemSchema.pre('save', async function(next){
     const sale = await Sale.findById(this.saleId);
     if(sale == null){
@@ -57,6 +66,7 @@ ItemSchema.pre('save', async function(next){
     await sale.save({
         validateBeforeSave: true,
     });
+    this.expireAt = sale.expireAt;
     next();
 });
 
