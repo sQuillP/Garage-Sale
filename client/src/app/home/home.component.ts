@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     long: 0,
     radius: 200,
     start_date: new Date("11/12/2022"),
-    end_date: new Date("02/20/2023")
+    end_date: new Date(Date.now()+1000*60*60*24*100)
   };
 
 

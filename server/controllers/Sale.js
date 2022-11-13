@@ -78,7 +78,7 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
  */
 exports.getSale = asyncHandler( async(req,res,next)=> {
 
-    const fetchedSale = await Sale.findById(req.params.saleId);
+    const fetchedSale = await Sale.findById(req.params.saleId).populate("userId");
 
     console.log(req)
 

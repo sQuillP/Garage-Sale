@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Item } from '../models/db.models';
 
 @Component({
   selector: 'app-item-listing',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemListingComponent implements OnInit {
 
+  @Input("itemData")itemData:Item;
 
   // Receive all data related to the item in this component
   /* @Input the main data */

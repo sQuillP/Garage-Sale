@@ -12,7 +12,7 @@
                     </li>
                     <li>
                         <i class="icon fa-solid fa-map-location-dot"></i>
-                        <p class="text thin">117 West windsor Ave</p>
+                        <p class="text thin">{{(sale$|async)?.address}}</p>
                     </li>
                 </ul>
                 <ul class="meta-list">
@@ -22,11 +22,11 @@
                     </li>
                     <li>
                         <i class="icon  fa-regular fa-pen-to-square"></i>
-                        <p class="text thin small">Last updated 4 days ago</p>
+                        <p class="text thin small">Last updated {{(sale$|async)?.updatedAt}}</p>
                     </li>
                     <li>
                         <i class="icon fa-regular fa-eye"></i>
-                        <p class="text thin small">Total Views: 34121</p>
+                        <p class="text thin small">Total Views: {{(sale$|async)?.viewCount}}</p>
                     </li>
                     <li></li>
                 </ul>
@@ -39,7 +39,7 @@
                             <p class="text">Thursday</p>
                         </div>
                         <div class="calendar-body">
-                            <p class="text">Nov 17 <sup>th</sup></p>
+                            <p class="text">{{(sale$|async)?.start_date | formatDate} <sup>{{(sale$|async)?.end_date | formatSup}}</sup></p>
                         </div>
                     </div>
                     <p class="text intro bold">-</p>

@@ -60,6 +60,11 @@ export class DBService {
     }
 
 
+    /* Get a singlular sale from db */
+    getSale(saleId:string):Observable<Sale> {
+        return this.http.get<Sale>(`${this.URL}/sale/${saleId}`)
+    }
+
     /* Get items associated with a sale */
     findItems(saleId:string):Observable<Item[]> {
         return this.http.get<Item[]>(`${this.URL}/sales/${saleId}/items`,{
