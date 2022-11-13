@@ -2,7 +2,7 @@
     {
         "start_date": "",
         "end_date":"",
-        "address":"117 west windsor ave",
+        "address":"123 easy street",
         "description": "a wonderful sale",
         "terms_conditions":"you must accept these terms",
         "location":{
@@ -10,13 +10,17 @@
             "coordinates": []
         },
         "userId":"",
-        "gallery": [],
-        "_id":null
+        "gallery": [
+            "https://sp.apolloboxassets.com/vendor/product/productImages/2019-07-29/3y5n4Array_3.jpg"
+    
+        ],
+        "_id":null,
+        "viewCount":0
     },
     {
         "start_date": "",
         "end_date":"",
-        "address":"117 west windsor ave",
+        "address":"441 South Main Street",
         "description": "Yard sale of things found in my garage",
         "terms_conditions":"I expect you to comply with these terms",
         "location":{
@@ -24,13 +28,16 @@
             "coordinates": []
         },
         "userId":"",
-        "gallery": [],
-        "_id":null
+        "gallery": [
+            "https://i.pinimg.com/originals/47/cd/3f/47cd3f287d8c6eed882e33e621720fd5.jpg"
+        ],
+        "_id":null,
+        "viewCount":0
     },
     {
         "start_date": "",
         "end_date":"",
-        "address":"117 west windsor ave",
+        "address":"113 North Brookdale Ave",
         "description": "Sale of rare porcelain plates. Get them while you can",
         "terms_conditions":"There are no discounts for these items",
         "location":{
@@ -38,13 +45,16 @@
             "coordinates": []
         },
         "userId":"",
-        "gallery": [],
-        "_id":null
+        "gallery": [
+            "https://www.marineinsight.com/wp-content/uploads/2019/12/ship-in-bottle-1.png"
+        ],
+        "_id":null,
+        "viewCount":0
     },
     {
         "start_date": "",
         "end_date":"",
-        "address":"117 west windsor ave",
+        "address":"862 East Empire Ave",
         "description": "Some old antiques. Some items as far back as 1929",
         "terms_conditions":"You must buy more than one item to receive a discount.",
         "location":{
@@ -52,8 +62,11 @@
             "coordinates": []
         },
         "userId":"",
-        "gallery": [],
-        "_id":null
+        "gallery": [
+            "https://i.pinimg.com/originals/47/cd/3f/47cd3f287d8c6eed882e33e621720fd5.jpg"
+        ],
+        "_id":null,
+        "viewCount":0
     }
 
 ]

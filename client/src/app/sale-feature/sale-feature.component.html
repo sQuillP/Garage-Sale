@@ -1,38 +1,50 @@
 <div #mainRef class="main">
-    <!-- <div *ngIf="true" class="card-gallery">
-        <img class="img img-main" src="https://www.marineinsight.com/wp-content/uploads/2019/12/ship-in-bottle-1.png" alt="">
-        <img class="img img-2" src="https://i.pinimg.com/originals/47/cd/3f/47cd3f287d8c6eed882e33e621720fd5.jpg" alt="">
-        <img class="img img-3" src="https://sp.apolloboxassets.com/vendor/product/productImages/2019-07-29/3y5n4Array_3.jpg" alt="">
+    <div *ngIf="saleData.gallery.length>=3" class="card-gallery">
+        <img class="img img-main" [src]="saleData.gallery[0]"  alt="">
+        <img class="img img-2" [src]="saleData.gallery[1]" alt="">
+        <img class="img img-3" [src]="saleData.gallery[2]" alt="">
         <div class="overlay-details">
             <div class="overlay-detail">
                 <p class="text overlay-title">Garage Sale</p>
             </div>
             <div class="overlay-detail">
-                <p class="text overlay-date">Oct 19 <sup>th</sup> - Oct 21 <sup>st</sup></p>
+                <p class="text overlay-date">
+                    {{saleData.start_date | formatDate}}<sup>{{saleData.start_date | formatSup}}</sup> - 
+                    {{saleData.end_date | formatDate}} <sup>{{saleData.end_date | formatSup}}</sup>
+                </p>
             </div>
         </div>
-    </div> -->
-    <div class="single-card-gallery">
-        <img class="img" src="https://i.pinimg.com/originals/47/cd/3f/47cd3f287d8c6eed882e33e621720fd5.jpg"alt="">
+    </div>
+    <div *ngIf="saleData.gallery.length < 3" class="single-card-gallery">
+        <img class="img" [src]="saleData.gallery[0]"alt="">
         <div class="overlay-details">
             <div class="overlay-detail">
+                <!-- create a title/name here possibly -->
                 <p class="text overlay-title">Garage Sale</p>
             </div>
             <div class="overlay-detail">
-                <p class="text overlay-date">Oct 19 <sup>th</sup> - Oct 21 <sup>st</sup></p>
+                <p class="text overlay-date">
+                    {{saleData.start_date | formatDate}}<sup>{{saleData.start_date | formatSup}}</sup> - 
+                    {{saleData.end_date | formatDate}} <sup>{{saleData.end_date | formatSup}}</sup>
+                </p>
             </div>
         </div>
     </div>
     <div class="card-details">
         <div class="card-detail">
             <!-- Ensure max description length of 82 -->
-            <p class="text desc">The best garage sale you can ever get. this The best garage sale you can ever get.<span class="text bold">...</span></p>
+            <p class="text desc">
+                {{saleData.description.substring(0,83)}}
+                <span *ngIf="saleData.description.length > 82" class="text bold">
+                    ...
+                </span>
+            </p>
         </div>
         <div class="card-detail">
-            <p style="font-size: 0.95em" class="text thin">Owner: Donald Duck</p>
+            <p style="font-size: 0.95em" class="text thin">{{saleData.userId.fullName}}</p>
         </div>
         <div class="card-detail">
-            <p class="text light thin">Address: 117 West windsor Ave</p>
+            <p class="text light thin">{{saleData.address}}</p>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Sale } from 'src/app/models/db.models';
 
 @Component({
   selector: 'app-sale-feature',
@@ -7,11 +8,13 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 })
 export class SaleFeatureComponent implements OnInit, AfterViewInit {
 
+  @Input('sale')saleData:Sale;
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
   ngAfterViewInit(): void {
   }

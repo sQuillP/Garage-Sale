@@ -52,7 +52,7 @@ const SaleSchema = new mongoose.Schema({
         required: true,
         default: Date.now()+86400000
     },
-    visits:{
+    viewCount:{
         type: Number,
         default: 0,
         required:true

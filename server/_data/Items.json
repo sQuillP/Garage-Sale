@@ -3,7 +3,9 @@
         "name":"electric guitar",
         "description":"A one of a kind guitar that has never been played by anyone else.",
         "price": 99.23,
-        "gallery":["guitar image"],
+        "gallery":[
+            "https://www.stars-music.com/medias/eastone/str-mini-sss-trem-mn-hd-165773.jpg"
+        ],
         "saleId":"",
         "highestBidder":null
     },
@@ -11,7 +13,9 @@
         "name":"Teddy Bear",
         "description":"Very comfortable teddy bear. One of a kind for sure. This teddy bear was made here in the USA!",
         "price": 19.99,
-        "gallery":["teddy bear image"],
+        "gallery":[
+            "https://api.images.drivecommerce.com/api/v1/image/vtb-upload/laa12w20001-vtb-22731-tanminky_iconpza_20151207"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -20,7 +24,9 @@
         "name":"Shark Fin",
         "description":"A real shark fin taken from a great white shark. Remember, hunting sharks for fins might be illegal in certain countries.",
         "price": 14.99,
-        "gallery":["Shark fin"],
+        "gallery":[
+            "https://m.media-amazon.com/images/I/31+eLlHjceL._AC_SY580_.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -29,7 +35,9 @@
         "name":"Fishing Pole",
         "description":"A very flexible fishing pole. It can support up to 120 pounds of tug. Very reliable and can catch many fish.",
         "price": 99.23,
-        "gallery":["Fishing pole image"],
+        "gallery":[
+            "https://www.craftoutlet.com/media/catalog/product/cache/1/image/1000x1000/9df78eab33525d08d6e5fb8d27136e95/i/m/image_2203.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -38,7 +46,9 @@
         "name":"I heart mom mug",
         "description":"A classic I heart mom mug. The best gift for any holiday or birthday. Your mother will love you for this.",
         "price": 9.99,
-        "gallery":["I <3 Mom mug"],
+        "gallery":[
+            "https://m.media-amazon.com/images/I/41xQiecJLnL._AC_.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -47,7 +57,9 @@
         "name":"Juggling balls",
         "description":"Juggle away with these non-bouncy juggling balls. Increase juggling productivity without having to chase after runaway balls.",
         "price": 12.99,
-        "gallery":["Juggling balls"],
+        "gallery":[
+            "https://m.media-amazon.com/images/I/71g+gEzNdaL.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -56,7 +68,9 @@
         "name":"Signed Aaron Rogers Jersy",
         "description":"Signed by Aaron Rogers right after he won the superbowl. It was the first thing he touched after he threw the game winning touchdown.",
         "price": 449.99,
-        "gallery":["Signed Aaron Rogers Jersy"],
+        "gallery":[
+            "https://www.radtkesports.com/wp-content/uploads/7265_900_arodgerspackersgreen_tds.png"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -65,7 +79,9 @@
         "name":"Used soccer ball",
         "description":"A used soccer ball but holds up like it is brand new. Definitely something worth investing your 20 dollars into.",
         "price": 19.99,
-        "gallery":["Used soccer ball"],
+        "gallery":[
+            "https://static8.depositphotos.com/1001669/887/i/950/depositphotos_8877368-stock-photo-used-soccer-ball.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -74,7 +90,9 @@
         "name":"Unicycle",
         "description":"Who needs two wheels when you can have only one? Save the environment and go with less rubber for your transportation.",
         "price": 49.99,
-        "gallery":["unicycle"],
+        "gallery":[
+            "https://cdn11.bigcommerce.com/s-mrkn324fu0/images/stencil/1280x1280/products/1419/7875/Nimbus26muniredfull__42378.1624031156.jpg?c=2"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -83,7 +101,9 @@
         "name":"Noise cancelling headphones",
         "description":"You won't be able ot hear a single thing. These are surely the best noise cancelling headphones you'll ever own.",
         "price": 29.99,
-        "gallery":["signed jersy.png"],
+        "gallery":[
+            "https://snpi.dell.com/snp/images/products/large/en-us~AA687198_V2/AA687198_V2.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -92,7 +112,9 @@
         "name":"Neck Support Pillow",
         "description":"The best neck support pillow ever. You'll wake up with a straight neck in no time! Get yours today for only 40 dollars used! (please wash before using)",
         "price": 39.99,
-        "gallery":["Neck Support Pillow"],
+        "gallery":[
+            "https://specials-images.forbesimg.com/imageserve/619d80297e00089a4a7cfdf1/best-pillow-for-neck-pain--UTTU-Sandwich-Pillow/960x0.jpg?cropX1=0&cropX2=497&cropY1=115&cropY2=446"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -101,7 +123,9 @@
         "name":"Buck Knife",
         "description":"This is just a regular buck knife. The reason why it is so expensive is because it was once my great-great grandfathers knife. It is very sharp",
         "price": 449.99,
-        "gallery":["Buck Knife.png"],
+        "gallery":[
+            "https://m.media-amazon.com/images/I/61PK05RC87L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null
@@ -110,7 +134,9 @@
         "name":"Train Set",
         "description":"A one of a kind train set that nobody has ever seen before. This train set will definitely catch the eyes of any knowledgable collector out there.",
         "price": 199.99,
-        "gallery":["Train Set"],
+        "gallery":[
+            "https://i.ebayimg.com/images/g/~2kAAOSwNgxh1-M-/s-l500.jpg"
+        ],
         "saleId":"",
         "highestBidder":null,
         "_id":null

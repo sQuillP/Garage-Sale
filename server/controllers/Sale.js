@@ -19,17 +19,13 @@ const ErrorResponse = require("../utils/ErrorResponse");
  *  - dayRange:Object -> Get sales within the day range.
  *      - start: the first day the sale begins
  *      - end: the last day of the garage sale.
+ *  - mostPopular: boolean -> return the list of most viewed sales in ascending order
  */
 exports.getSales = asyncHandler(async (req,res,next)=> {
-    //Conversion rate for miles to kilometer
     const METERS_PER_MILE = 1609.34;
-    //Paginate results
-    console.log(req.url)
     const [page,pageLimit] = [+req.query.page || 1, +req.query.limit || 10];
     let totalPages = await Sale.countDocuments();
     totalPages = Math.floor(totalPages/pageLimit) === 0? 1: Math.floor(totalPages/pageLimit);
-    //end pagination
-
     let query = {};
     if(req.query.radius){
         if(!req.query.long || !req.query.lat){
@@ -51,22 +47,20 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
                 }
         }
     }
-
-    if(req.query.dayRange) {
+    if(req.query.start_date && req.query.end_date) {
+        console.log(req.query)
         query['start_date'] = {
-            $gte: new Date(req.query.dayRange.start),
-            $lte: new Date(req.query.dayRange.end)
+            $gte: new Date(req.query.start_date),
+        };
+        query["end_date"] = {
+            $lte: new Date(req.query.end_date)
         };
     }
-
-
-      // if(req.query.dayRange){ //
-    //     if(!isNaN(req.query.dayRange))
-    //         req.query.dayRange = parseInt(req.query.dayRange,10);
-
-    //     query['start_date'] = {$lte: new Date(req.query.dayRange)};
-    // } 
-
+    if(req.query.mostPopular){
+        query['$sort'] = {
+            visits:-1
+        }
+    }
     const queryResults = await Sale.find(query).skip(pageLimit*(page-1)).limit(pageLimit);
     return res.status(200).json({
         totalPages,

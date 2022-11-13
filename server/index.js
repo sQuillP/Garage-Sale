@@ -9,6 +9,12 @@ const connectDb = require('./environments/db');
 const helmet = require("helmet");
 const app = express();
 
+const cors = require('cors');
+
+app.use(cors({
+    origin:["http://localhost:4200"]
+}));
+
 
 /* Load middleware */
 app.use(morgan('tiny'));

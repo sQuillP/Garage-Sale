@@ -37,6 +37,7 @@ const populate = async ()=> {
             saleIds.push(sailId);
             sale._id = sailId;
             sale.start_date = Date.now(); 
+            sale.viewCount = Math.floor(Math.random()*10000 + 1);
             sale.end_date = Date.now()+1000*60*60*24*Math.floor(1 + Math.random()*6);
             
             let [lat,long] = [ //generate lat, long coordinates with variation

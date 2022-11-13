@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Sale } from 'src/app/models/db.models';
 
 @Component({
   selector: 'app-sale-listing',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleListingComponent implements OnInit {
 
+  @Input('sale')saleData:Sale;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.saleData);
   }
 
 }
