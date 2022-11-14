@@ -56,6 +56,10 @@ const SaleSchema = new mongoose.Schema({
         type: Number,
         default: 0,
         required:true
+    },
+    itemCount:{
+        type:Number,
+        default:0,
     }
 },{
     timestamps: true

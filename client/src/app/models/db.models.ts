@@ -16,6 +16,7 @@ export interface Sale {
     viewCount:number,
     createdAt?:Date,
     updatedAt?:Date,
+    itemCount:Number,
 }
 
 
@@ -36,7 +37,9 @@ export interface Item {
     description: string,
     highestBidder?:string,
     expireAt:Date,
-    purchased?:boolean
+    purchased?:boolean,
+    start_date:Date,
+    end_date:Date,
 };
 
 

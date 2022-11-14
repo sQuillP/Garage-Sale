@@ -40,6 +40,16 @@ const ItemSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    start_date:{
+        type: Date,
+        required: true,
+        default: Date.now()
+    },
+    end_date:{
+        type:Date,
+        required:true,
+        default: Date.now()+3600000 
     }
 },{
     timestamps: true
@@ -63,10 +73,13 @@ ItemSchema.pre('save', async function(next){
         );
     }
     sale.gallery.push(this.gallery[0]);
+    sale.itemCount ++;
     await sale.save({
         validateBeforeSave: true,
     });
     this.expireAt = sale.expireAt;
+    this.start_date = sale.start_date;
+    this.end_date = sale.end_date;
     next();
 });
 

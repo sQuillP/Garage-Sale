@@ -12,8 +12,9 @@ import { DBService } from '../Services/db.service';
 export class SaleDetailComponent implements OnInit {
 
   sale$ = new BehaviorSubject<Sale>(null);
-  items$:Observable<Item[]>;
+  items$ = new BehaviorSubject<Sale[]>(null);
 
+  showDescription:boolean = false;
 
   constructor(
     private router:Router,
@@ -22,16 +23,23 @@ export class SaleDetailComponent implements OnInit {
     ) { 
 
       //Get the sale and  the items associated with the sale
-       this.items$ = this.route.params.pipe(
-        mergeMap((params:Params)=> this.db.getSale(params['saleId'])),
-        catchError((error)=> this.router.navigate(["home"])),
-        mergeMap((res:any)=> {
-          this.sale$.next(res.data);
-          return this.db.findItems(this.sale$.value._id)
-        })
+      this.route.params.pipe(
+        mergeMap((params:Params) => this.db.getSale(params['saleId'])),
+        mergeMap((response:any) => {
+          this.sale$.next(response.data);
+          return this.db.findItems(response.data._id);
+        }),
       )
+      .subscribe({
+        next:(res:any)=> this.items$.next(res.data),
+        error: ()=> this.router.navigate(["home"])
+      })
     }
 
+
+    navigate(route):void{
+      this.router.navigate(route);
+    }
 
   ngOnInit(): void {
   }

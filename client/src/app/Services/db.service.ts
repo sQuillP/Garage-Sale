@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { mergeMap, Observable, tap } from "rxjs";
+import { catchError, map, mergeMap, Observable, tap } from "rxjs";
 import { Item, Sale } from "src/app/models/db.models";
 import { SaleParams } from "src/app/models/API.model";
 import { MapsService } from "./maps.service";
@@ -61,16 +61,23 @@ export class DBService {
 
 
     /* Get a singlular sale from db */
-    getSale(saleId:string):Observable<Sale> {
-        return this.http.get<Sale>(`${this.URL}/sale/${saleId}`)
+    getSale(saleId:string):Observable<any> {
+        return this.http.get<Sale>(`${this.URL}/sales/${saleId}`)
     }
 
     /* Get items associated with a sale */
-    findItems(saleId:string):Observable<Item[]> {
-        return this.http.get<Item[]>(`${this.URL}/sales/${saleId}/items`,{
+    findItems(saleId:string):Observable<any> {
+        return this.http.get<any>(`${this.URL}/sales/${saleId}/items`,{
             params:{
                 limit:1000
             }
         })
+    }
+
+
+    findItemById(itemId:string,params = {}):Observable<any> {
+        return this.http.get<Item>(`${this.URL}/items/${itemId}`,{
+            params
+        });
     }
 }

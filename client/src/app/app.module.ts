@@ -28,7 +28,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FormatDatePipe } from './pipes/formatDate.pipe';
 import { formatSuperScriptPipe } from './pipes/formatSuperscript.pipe';
-
+import { FormatPhonePipe } from './pipes/formatPhone.pipe';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,11 +45,13 @@ import { formatSuperScriptPipe } from './pipes/formatSuperscript.pipe';
     MapSliderComponent,
     LoginComponent,
     FormatDatePipe,
+    FormatPhonePipe,
     formatSuperScriptPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    RouterModule,
     AppRoutingModule,
     HttpClientModule,
     GoogleMapsModule,

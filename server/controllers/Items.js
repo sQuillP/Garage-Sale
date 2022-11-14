@@ -19,6 +19,7 @@ const ErrorResponse = require("../utils/ErrorResponse");
 exports.getItems = asyncHandler( async (req,res,next)=> {
     const [limit, page] = [req.query.limit || 100, req.query.page || 1];
     let query = {};
+    let items = null;
     if(req.params.saleId){//if querying only items for a sale
         items = await Item.find({saleId: req.params.saleId});
         if(items == null){
@@ -44,7 +45,7 @@ exports.getItems = asyncHandler( async (req,res,next)=> {
 
     query['isPurchased'] = false;
 
-    let items = await Item.find(query).skip((page-1)*limit).limit(limit);
+    items = await Item.find(query).skip((page-1)*limit).limit(limit);
 
     res.status(200).json({
         status: 200,

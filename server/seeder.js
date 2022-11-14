@@ -49,6 +49,7 @@ const populate = async ()=> {
             sale.userId = userIds[Math.floor(Math.random()*userIds.length)]; //assign userid to the sale
             await Sale.create(sale); 
         }
+        
         //Populate Items while manually creating an id
         for(let item of ItemsData){
             let itemId = new mongoose.Types.ObjectId();

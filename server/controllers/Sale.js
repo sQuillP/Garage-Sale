@@ -80,8 +80,6 @@ exports.getSale = asyncHandler( async(req,res,next)=> {
 
     const fetchedSale = await Sale.findById(req.params.saleId).populate("userId");
 
-    console.log(req)
-
     if(fetchedSale == null){
         return next(
             new ErrorResponse(

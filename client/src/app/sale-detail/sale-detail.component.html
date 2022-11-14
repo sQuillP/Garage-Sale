@@ -1,4 +1,4 @@
-<div class="main">
+<div *ngIf="(sale$|async) as sale" class="main">
 
     <div class="header-section section flex">
         <div class="header-left">
@@ -12,21 +12,21 @@
                     </li>
                     <li>
                         <i class="icon fa-solid fa-map-location-dot"></i>
-                        <p class="text thin">{{(sale$|async)?.address}}</p>
+                        <p class="text thin">{{sale.address}}</p>
                     </li>
                 </ul>
                 <ul class="meta-list">
                     <li>
                         <i class="icon fa-solid fa-boxes-stacked"></i>
-                        <p class="text thin small">More than 40 items listed</p>
+                        <p class="text thin small">{{sale.itemCount}} items listed</p>
                     </li>
                     <li>
                         <i class="icon  fa-regular fa-pen-to-square"></i>
-                        <p class="text thin small">Last updated {{(sale$|async)?.updatedAt}}</p>
+                        <p class="text thin small">Last updated {{sale.updatedAt | formatDate:"difference"}}</p>
                     </li>
                     <li>
                         <i class="icon fa-regular fa-eye"></i>
-                        <p class="text thin small">Total Views: {{(sale$|async)?.viewCount}}</p>
+                        <p class="text thin small">Total Views: {{sale.viewCount}}</p>
                     </li>
                     <li></li>
                 </ul>
@@ -36,19 +36,25 @@
                 <div class="calendar-container flex center-y">
                     <div class="calendar">
                         <div class="calendar-header">
-                            <p class="text">Thursday</p>
+                            <p class="text">{{sale.start_date | formatDate:"day"}}</p>
                         </div>
                         <div class="calendar-body">
-                            <p class="text">{{(sale$|async)?.start_date | formatDate} <sup>{{(sale$|async)?.end_date | formatSup}}</sup></p>
+                            <p class="text">
+                                {{sale.start_date | formatDate}} 
+                                <sup>{{sale.start_date| formatSup}}</sup>
+                            </p>
                         </div>
                     </div>
                     <p class="text intro bold">-</p>
                     <div class="calendar">
                         <div class="calendar-header">
-                            <p class="text">Monday</p>
+                            <p class="text">{{sale.end_date | formatDate:"day"}}</p>
                         </div>
                         <div class="calendar-body">
-                            <p class="text">Oct 17 <sup>th</sup></p>
+                            <p class="text">
+                                {{sale.end_date | formatDate}} 
+                                <sup>{{sale.end_date| formatSup}}</sup>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -58,20 +64,13 @@
             <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Yard_Sale_Northern_CA_2005.JPG/1200px-Yard_Sale_Northern_CA_2005.JPG" alt="">
         </div>
     </div>
-
-    <!-- Create into component -->
-    <!-- <div class="progress-section">
-        <p class="text thin">Sale ends in: 13 hrs 24 min 12 seconds</p>
-        <div class="progress-bar-wrapper">
-            <div class="progress"></div>
-        </div>
-    </div> -->
-    <app-progress-bar [dateInterval]="['11/06/2022','11/08/2022']"></app-progress-bar>
-
+    <app-progress-bar 
+    [dateInterval]="[sale.start_date, sale.end_date]">
+    </app-progress-bar>
     <div class="contact-section flex sp-between ">
         <div class="contact section flex center-y">
             <div class="profile-img">
-                <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Yard_Sale_Northern_CA_2005.JPG/1200px-Yard_Sale_Northern_CA_2005.JPG" alt="">
+                <img class="img" [src]="sale.userId.profileImg" alt="">
             </div>
             <div class="contact-details">
                 <div class="contact-detail contact-header">
@@ -79,16 +78,16 @@
                 </div>
                 <div class="contact-detail">
                     <p class="text thin">
-                        Jeffrey Aaron
+                        {{sale.userId.fullName}}
                     </p>
                 </div>
                 <div class="contact-detail flex center-y">
                     <i class="icon fa-solid fa-phone"></i>
-                    <p class="text thin">(630)-962-2100</p>
+                    <p class="text thin">{{sale.userId.phone | formatPhone}}</p>
                 </div>
                 <div class="contact-detail flex center-y">
                     <i class="icon fa-regular fa-envelope"></i>
-                    <p class="text thin">will.m.pattison@gmail.com</p>
+                    <p class="text thin">{{sale.userId.email}}</p>
                 </div>
             </div>
         </div>
@@ -121,17 +120,11 @@
             <p class="text intro">Description</p>
         </div>
         <div class="description-detail">
-            <p class="text thin">This garage sale has many many different items. Check out our
-                 classical rock albums that have been signed by bands like led zepplin, 
-                 Beatles, aerosmith. We even have paul Mccartney's guitar. I know, this 
-                 is the craziest thing that we have ever done so far. Lorem ipsum dolor 
-                 sit amet consectetur adipisicing elit. Qui consequuntur ut deleniti non, 
-                 nisi at quibusdam laboriosam porro totam possimus incidunt recusandae 
-                 voluptatibus commodi? Illo facere nostrum provident, perferendis praesentium 
-                 eos quasi qui ducimus autem ipsam, eligendi totam ipsum quisquam animi, neque ab. Sequi, harum iure ea provident eius rerum?
+            <p class="text thin">
+                {{sale.description.substring(0,showDescription?sale.showDescription.length:300)}}
             </p>
-            <div class="read-more-wrapper flex center-y">
-                <p class="text read-more">Read more</p>
+            <div *ngIf="sale.description.length>300" class="read-more-wrapper flex center-y">
+                <p (click)="showDescription = !showDescription" class="text read-more">Read more</p>
                 <i class="fa-solid fa-angle-down"></i>
             </div>
         </div>
@@ -153,14 +146,13 @@
             </div>
         </div>
         <div class="gallery flex wrap center-xy">
-            <app-item-listing style="margin: 30px"></app-item-listing>
-            <app-item-listing style="margin: 30px"></app-item-listing>
-            <app-item-listing style="margin: 30px"></app-item-listing>
-            <app-item-listing style="margin: 30px"></app-item-listing>
-            <app-item-listing style="margin: 30px"></app-item-listing>
-            <app-item-listing style="margin: 30px"></app-item-listing>
-            <app-item-listing style="margin: 30px"></app-item-listing>
-            <app-item-listing style="margin: 30px"></app-item-listing>
+            <app-item-listing
+            *ngFor="let item of (items$|async)"
+            [itemData]="item"
+            (click)="navigate(['viewItem',item._id])"
+
+            style="margin: 30px">
+        </app-item-listing>
         </div>
     </div>
 

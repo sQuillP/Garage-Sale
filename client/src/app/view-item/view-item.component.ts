@@ -1,5 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BehaviorSubject, catchError, mergeMap, Observable } from 'rxjs';
+import { Item, Sale } from '../models/db.models';
+import { DBService } from '../Services/db.service';
 
 @Component({
   selector: 'app-view-item',
@@ -42,9 +46,28 @@ export class ViewItemComponent implements OnInit {
   ];
 
   selectedImage:number = 0;
+  item$ = new BehaviorSubject<Item>(null);
+  featuredItems$ = new BehaviorSubject<Sale[]>(null);
 
+  constructor(
+    private db:DBService,
+    private router:Router,
+    private route:ActivatedRoute
+  ) { 
 
-  constructor() { }
+    this.route.params.pipe(
+      mergeMap((params:Params)=> this.db.findItemById(params['itemId'],{})),
+      mergeMap((res:any)=> {
+        this.item$.next(res.data);
+        return this.db.findItems(res.data.saleId);
+      })
+    )
+    .subscribe({
+      next:(response:any)=> this.featuredItems$.next(response.data),
+      // error:(error)=> this.router.navigate(['home'])
+    })
+
+  }
 
 
   onSelectImage(direction:string):void{
