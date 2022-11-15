@@ -50,18 +50,24 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
     if(req.query.start_date && req.query.end_date) {
         console.log(req.query)
         query['start_date'] = {
-            $gte: new Date(req.query.start_date),
+            $gte: new Date(req.query.start_date).getTime(),
         };
         query["end_date"] = {
-            $lte: new Date(req.query.end_date)
+            $lte: new Date(req.query.end_date).getTime()
         };
+
+        console.log(query['start_date'],query['end_date'])
     }
-    if(req.query.mostPopular){
-        query['$sort'] = {
-            visits:-1
-        }
-    }
-    const queryResults = await Sale.find(query).skip(pageLimit*(page-1)).limit(pageLimit);
+
+    let queryResults = Sale.find(query);
+
+    if(req.query.mostPopular)
+        queryResults = queryResults.sort({viewCount:-1});
+
+    queryResults = queryResults.skip(pageLimit*(page-1)).limit(pageLimit);
+
+    //execute the final query
+    queryResults = await queryResults;
     return res.status(200).json({
         totalPages,
         page: page,

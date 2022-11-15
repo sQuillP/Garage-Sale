@@ -5,10 +5,10 @@
         </div>
         <div class="content">
             <!-- Google map goes here -->
-            <google-map
+            <!-- <google-map
             height="400px"
             width="100%"
-            ></google-map>
+            ></google-map> -->
             <div class="search-options flex center-y wrap sp-around">
                 <div class="search-wrapper">
                     
@@ -27,29 +27,29 @@
                     <button class="filter-btn">Search Items</button>
                 </div>
                 <!-- slider component goes here -->
-                <app-map-slider style="color: white;"></app-map-slider>
+                <app-map-slider (radius)="radius = $event" style="color: white;"></app-map-slider>
                 <div [ngClass]="{'toggle-dropdown-active':activateDropdownFilter}" class="toggle-dropdown">
                     <div class="toggle-header">
                         <p class="text">Filter Options</p>
                     </div>
                     <div class="filter-wrapper flex sp-around wrap">
                         <!-- Search by address, sale interval, alphabetical sort, -->
-                        <div class="sales-section">
+                        <div [formGroup]="saleSection" class="sales-section">
                             <div class="filter-header">
                                 <p class="text thin toggle-header">Sales Search</p>
                             </div>
                             <div class="sales-filters">
                                 <div class="input-group">
-                                    <label class="field-descriptor" min="1">Search by Address</label>
-                                    <input placeholder="123 South Main St." type="text" class="filter-input">
+                                    <label class="field-descriptor">Search by Address</label>
+                                    <input formControlName="address" placeholder="123 South Main St." type="text" class="filter-input">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group">
                                         <mat-form-field appearance="fill">
                                             <mat-label>Search by Sale Date</mat-label>
                                             <mat-date-range-input [rangePicker]="picker">
-                                              <input matStartDate placeholder="Start date">
-                                              <input matEndDate placeholder="End date">
+                                              <input matStartDate formControlName="startDate" placeholder="Start date">
+                                              <input matEndDate formControlName="endDate" placeholder="End date">
                                             </mat-date-range-input>
                                             <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
                                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -87,12 +87,10 @@
                 </div>
             </div>
             <div class="sales-list">
-                <app-sale-listing></app-sale-listing>
-                <app-sale-listing></app-sale-listing>
-                <app-sale-listing></app-sale-listing>
-                <app-sale-listing></app-sale-listing>
-                <app-sale-listing></app-sale-listing>
-                <app-sale-listing></app-sale-listing>
+                <app-sale-listing
+                *ngFor="let sale of (saleResults$|async)"
+                [sale]="sale"
+                ></app-sale-listing>
             </div>
         </div>
     </div>

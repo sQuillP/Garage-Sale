@@ -8,21 +8,19 @@
                 <p class="text thin intro">Gallery</p>
             </div>
             <div class="img-section-wrapper">
-                <!-- src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg" -->
-                <img class="img" [src]="imageData[selectedImage]"  alt="">
-                <span (click)="onSelectImage('left')" class="left fa-stack" style="vertical-align: top;">
+                <img class="img" [src]="item.gallery[selectedImage]"  alt="">
+                <span *ngIf="item.gallery.length>1" (click)="onSelectImage('left')" class="left fa-stack" style="vertical-align: top;">
                     <i class="fa-solid fa-circle fa-stack-2x fa-inverse"></i>
                     <i class="fa-solid fa-chevron-left fa-stack-1x"></i>
                 </span>
-                <span (click)="onSelectImage('right')" class="right fa-stack" style="vertical-align: top;">
+                <span *ngIf="item.gallery.length>1" (click)="onSelectImage('right')" class="right fa-stack" style="vertical-align: top;">
                     <i class="fa-solid fa-circle fa-stack-2x fa-inverse"></i>
                     <i class="fa-solid fa-chevron-right fa-stack-1x"></i>
                 </span>
             </div>
             <div class="img-track">
-                <!-- Add the list of gallery images of the item -->
                 <div 
-                *ngFor="let url of imageData; let i = index;"
+                *ngFor="let url of item.gallery; let i = index;"
                 (click)="selectedImage=i"
                 [ngStyle]="{'border': i === selectedImage?'5px solid #5e9544':'2px solid gray'}"
                 class="img-track-wrapper">
@@ -33,11 +31,21 @@
         </div>
         <div class="view-sale section flex col">
             <div class="button-group flex">
-                <button mat-ripple class="button-toggler btn-toggler-active">Description</button>
-                <button mat-ripple matRippleColor="rgb(94, 149, 68,0.4)" class="button-toggler">Terms & Service</button>
+                <button 
+                [ngClass]="{'btn-toggler-active':viewContent==='desc'}" 
+                mat-ripple class="button-toggler btn-toggler-active"
+                (click)="viewContent ='desc'"
+                >Description</button>
+                <button
+                [ngClass]="{'btn-toggler-active':viewContent==='terms'}" 
+                mat-ripple 
+                matRippleColor="rgb(94, 149, 68,0.4)" 
+                class="button-toggler"
+                (click)="viewContent = 'terms'"
+                >Terms & Service</button>
             </div>
             <div class="sale-content">
-                <p class="text thin"></p>
+                <p class="text thin">{{viewContent==='desc'?item.description:item.terms}}</p>
             </div>
         </div>
         <div class="detail-bar section flex col sp-around">
@@ -50,16 +58,16 @@
                     <div class="contact-img-wrapper">
                         <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzHQv_th9wq3ivQ1CVk7UZRxhbPq64oQrg5Q&usqp=CAU" alt="">
                     </div>
-                    <p class="text thin contact-detail">William Pattison</p>
+                    <p class="text thin contact-detail">{{item.saleId.userId.fullName}}</p>
                 </div>
                 <div class="contact-content">
                     <div class="contact-item flex center-y">
                         <i class="contact-icon fa-solid fa-phone"></i>
-                        <p class="text thin contact-detail">(630)-962-2100</p>
+                        <p class="text thin contact-detail">{{item.saleId.userId.phone|formatPhone}}</p>
                     </div>
                     <div class="contact-item flex center-y">
                         <i class="contact-icon fa-solid fa-envelope"></i>
-                        <p class="text thin contact-detail">will.m.pattison@gmail.com</p>
+                        <p class="text thin contact-detail">{{item.saleId.userId.email}}</p>
                     </div>
                 </div>
             </div>
@@ -76,11 +84,11 @@
                 <div class="location-item flex center-y">
                     <p class="text">Pickup: </p>
                     <i class="icon fa-solid fa-location-dot"></i>
-                    <p class="text thin">117 West Windsor Ave Lombard, IL</p>
+                    <p class="text thin">{{item.saleId.address}}</p>
                 </div>   
             </div>
             <div class="buy-now-header flex center-x">
-                <p class="text thin intro">Purchase for $13.99</p>
+                <p class="text thin intro">Purchase for ${{item.price}}</p>
             </div>
             <div class="buy-now-item flex center-x">
                 <button mat-ripple class="buy-now">Buy Now</button>
@@ -98,21 +106,10 @@
         </div>
        <!-- Carousel component goes here -->
        <owl-carousel-o [options]="customOptions">
-        <ng-template carouselSlide>
-            <app-item-listing></app-item-listing>
+        <ng-template *ngFor="let featuredItem of (featuredItems$|async)" carouselSlide>
+            <app-item-listing [itemData]="featuredItem"></app-item-listing>
         </ng-template>  
-        <ng-template carouselSlide>
-            <app-item-listing></app-item-listing>
-        </ng-template>  
-        <ng-template carouselSlide>
-            <app-item-listing></app-item-listing>
-        </ng-template>  
-        <ng-template carouselSlide>
-            <app-item-listing></app-item-listing>
-        </ng-template>  
-        <ng-template carouselSlide>
-            <app-item-listing></app-item-listing>
-        </ng-template>  
+        
       </owl-carousel-o>
       <!-- span comment goes here -->
     </div>
@@ -120,8 +117,9 @@
         <div class="sale-header">
             <p class="text thin intro">Explore Other Sales</p>
         </div>
-        <app-sale-listing></app-sale-listing>
-        <app-sale-listing></app-sale-listing>
-        <app-sale-listing></app-sale-listing>
+        <app-sale-listing 
+        *ngFor="let sale of (featuredSales$|async)" 
+        [sale]="sale"
+        ></app-sale-listing>
     </div>
 </div>

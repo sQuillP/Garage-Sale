@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { BehaviorSubject, catchError, mergeMap, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, mergeMap, Observable, tap } from 'rxjs';
 import { Item, Sale } from '../models/db.models';
 import { DBService } from '../Services/db.service';
 
@@ -47,7 +47,11 @@ export class ViewItemComponent implements OnInit {
 
   selectedImage:number = 0;
   item$ = new BehaviorSubject<Item>(null);
-  featuredItems$ = new BehaviorSubject<Sale[]>(null);
+  featuredItems$ = new BehaviorSubject<Item[]>(null);
+  featuredSales$: Observable<Sale[]>;
+
+
+  viewContent:string = "terms";
 
   constructor(
     private db:DBService,
@@ -59,23 +63,27 @@ export class ViewItemComponent implements OnInit {
       mergeMap((params:Params)=> this.db.findItemById(params['itemId'],{})),
       mergeMap((res:any)=> {
         this.item$.next(res.data);
-        return this.db.findItems(res.data.saleId);
+        return this.db.findItems(res.data.saleId._id);
       })
     )
     .subscribe({
       next:(response:any)=> this.featuredItems$.next(response.data),
-      // error:(error)=> this.router.navigate(['home'])
-    })
-
+      error:(error)=> this.router.navigate(['home'])
+    });
+    this.featuredSales$ = this.db.getNearbySales(null,{}).pipe(
+      map((res)=> res.data)
+    );
   }
 
 
   onSelectImage(direction:string):void{
+    if(!this.item$.value) return;
+
     if(direction === 'right')
-      this.selectedImage =  (this.selectedImage + 1) % this.imageData.length;
+      this.selectedImage =  (this.selectedImage + 1) % this.item$.value.gallery.length;
     else if(direction === 'left')
       if(this.selectedImage === 0)
-        this.selectedImage = this.imageData.length-1;
+        this.selectedImage = this.item$.value.gallery.length-1;
       else
         this.selectedImage--;
   }

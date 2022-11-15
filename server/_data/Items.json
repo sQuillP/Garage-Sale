@@ -7,9 +7,7 @@
             "https://www.stars-music.com/medias/eastone/str-mini-sss-trem-mn-hd-165773.jpg"
         ],
         "saleId":"",
-        "highestBidder":null,
-        "start_date":null,
-        "end_date":null
+        "highestBidder":null
     },
     {
         "name":"Teddy Bear",
@@ -20,9 +18,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Shark Fin",
@@ -33,9 +29,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Fishing Pole",
@@ -46,9 +40,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"I heart mom mug",
@@ -59,9 +51,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Juggling balls",
@@ -72,9 +62,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Signed Aaron Rogers Jersy",
@@ -85,9 +73,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Used soccer ball",
@@ -98,9 +84,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Unicycle",
@@ -111,9 +95,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Noise cancelling headphones",
@@ -124,9 +106,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Neck Support Pillow",
@@ -137,9 +117,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Buck Knife",
@@ -150,9 +128,7 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     },
     {
         "name":"Train Set",
@@ -163,8 +139,6 @@
         ],
         "saleId":"",
         "highestBidder":null,
-        "_id":null,
-        "start_date":null,
-        "end_date":null
+        "_id":null
     }
 ]

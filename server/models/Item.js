@@ -50,6 +50,11 @@ const ItemSchema = new mongoose.Schema({
         type:Date,
         required:true,
         default: Date.now()+3600000 
+    },
+    terms:{
+        type:String,
+        required: true,
+        default: "there are no terms & conditions for this product. Please consult seller for any concerns."
     }
 },{
     timestamps: true
@@ -77,6 +82,8 @@ ItemSchema.pre('save', async function(next){
     await sale.save({
         validateBeforeSave: true,
     });
+
+    //Assign some of the fields from parent object
     this.expireAt = sale.expireAt;
     this.start_date = sale.start_date;
     this.end_date = sale.end_date;

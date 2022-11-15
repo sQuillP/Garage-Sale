@@ -35,6 +35,7 @@ export interface Item {
     gallery: string[],
     saleId: string,
     description: string,
+    terms:string,
     highestBidder?:string,
     expireAt:Date,
     purchased?:boolean,

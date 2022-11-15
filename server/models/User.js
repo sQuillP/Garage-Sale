@@ -38,6 +38,8 @@ const UserSchema = new mongoose.Schema({
         ref: 'user',
         default: []
     }
+},{
+    
 });
 
 /* Cascade delete chats when user is deleted */

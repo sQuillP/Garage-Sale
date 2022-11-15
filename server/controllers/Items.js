@@ -1,5 +1,6 @@
 const asyncHandler = require("../Middleware/AsyncHandler");
 const Item = require("../models/Item");
+const User = require("../models/User");
 const ErrorResponse = require("../utils/ErrorResponse");
 
 
@@ -74,7 +75,10 @@ exports.getItems = asyncHandler( async (req,res,next)=> {
  */
 exports.getItem = asyncHandler( async (req,res,next) => {
 
-    const fetchedResult = await Item.findById(req.params.itemId);
+    const fetchedResult = await Item.findById(req.params.itemId).populate("saleId");
+
+    //I am not sure how to handle strict populate so this will have to do for now...
+    fetchedResult.saleId.userId = await User.findById(fetchedResult.saleId.userId);
 
     if(fetchedResult == null){
         return next(

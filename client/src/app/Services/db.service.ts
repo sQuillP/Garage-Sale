@@ -9,7 +9,7 @@ import { MapsService } from "./maps.service";
 @Injectable({providedIn:"root"})
 export class DBService {
 
-    URL:string = "http://localhost:5000/api/v1";
+    private readonly URL:string = "http://localhost:5000/api/v1";
 
     constructor(
         private mapService:MapsService,

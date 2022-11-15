@@ -15,7 +15,7 @@ import { ViewItemComponent } from './view-item/view-item.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
-import { CatalogueSearch } from './sale-search/catalogue-search.component';
+import { CatalogueSearch } from './catalogue-search/catalogue-search.component';
 import { MapSliderComponent } from './map-slider/map-slider.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -30,6 +30,7 @@ import { FormatDatePipe } from './pipes/formatDate.pipe';
 import { formatSuperScriptPipe } from './pipes/formatSuperscript.pipe';
 import { FormatPhonePipe } from './pipes/formatPhone.pipe';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     FormsModule,
     RouterModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     GoogleMapsModule,
