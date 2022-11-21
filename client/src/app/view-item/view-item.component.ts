@@ -1,9 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { BehaviorSubject, catchError, map, mergeMap, Observable, tap } from 'rxjs';
 import { Item, Sale } from '../models/db.models';
 import { DBService } from '../Services/db.service';
+import { defaultOwlConfig } from '../util/owl.options';
+
 
 @Component({
   selector: 'app-view-item',
@@ -12,15 +14,9 @@ import { DBService } from '../Services/db.service';
 })
 export class ViewItemComponent implements OnInit {
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: [ '<i class="fa-solid fa-chevron-left"></i>', '<i class="fa-solid fa-chevron-right"></i>' ],
-    responsive: {
+
+  customOptions: OwlOptions = { ...defaultOwlConfig,
+    responsive:{
       0: {
         items: 1
       },
@@ -33,9 +29,8 @@ export class ViewItemComponent implements OnInit {
       1200: {
         items: 4
       },
-    },
-    nav: true,
-  }
+    }
+  };
 
   imageData = [
     "https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg",
@@ -58,6 +53,7 @@ export class ViewItemComponent implements OnInit {
     private router:Router,
     private route:ActivatedRoute
   ) { 
+    
 
     this.route.params.pipe(
       mergeMap((params:Params)=> this.db.findItemById(params['itemId'],{})),
@@ -74,6 +70,9 @@ export class ViewItemComponent implements OnInit {
       map((res)=> res.data)
     );
   }
+
+
+  onNavigate(route):void{this.router.navigate(route)}
 
 
   onSelectImage(direction:string):void{

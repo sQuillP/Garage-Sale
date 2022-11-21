@@ -17,6 +17,10 @@
     transition: opacity 75ms linear;;
 }
 
+.card-details{
+    height: 101px;;
+}
+
 .main:hover .card-details, .main:hover .card-gallery, .main:hover .single-card-gallery{
     opacity: 0.7;
 }
@@ -87,6 +91,14 @@
 
 .card-detail{
     padding: 5px 0px;
+}
+
+.card-detail>*{
+    display: inline-block;
+}
+
+.card-detail i {
+    margin-right: 10px;
 }
 
 .desc{

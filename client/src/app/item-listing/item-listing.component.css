@@ -1,5 +1,6 @@
  .item-container{
-    width: 250px;
+    max-width: 250px;
+    /* max-height: 353px; */
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     background: var(--dark);
     cursor: pointer;
@@ -34,7 +35,7 @@
 
  .item-title, .item-desc { background: white;}
  .img-main, .item-title, .item-desc{transition: opacity 50ms linear;}
- .item-container:hover .img-main, .item-container:hover .item-title, .item-container:hover .item-desc{opacity: 0.9;}
+ .item-container:hover .img-main, .item-container:hover .item-title, .item-container:hover .item-desc{opacity: 0.7;}
 .item-desc, .item-title{padding: 10px}
  .item-desc{box-sizing: border-box;}
  .item-section{margin-bottom: 10px;}

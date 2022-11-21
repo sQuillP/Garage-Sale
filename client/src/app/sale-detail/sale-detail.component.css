@@ -124,8 +124,8 @@ li >*{display: inline-block;}
 /* Direct Message Section */
 
 .direct-messaging{
-    /* padding: 20px; */
     text-align: center;
+    box-sizing: border-box;
     width: 50%;
 }
 
@@ -215,12 +215,9 @@ li >*{display: inline-block;}
     position: absolute;
 }
 
-/* .x-icon{right: 40px; font-size: .8em; top: 12px;} */
-
 .search-icon, .x-icon{right: 20px;
     top: 10px;
 }
-
 
 @media screen and (max-width: 1150px){
     .contact-section{

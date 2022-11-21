@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const asyncHandler = require("../Middleware/AsyncHandler");
 const Sale = require("../models/Sale");
 const ErrorResponse = require("../utils/ErrorResponse");
-
+const floorDate = require("../utils/utils");
 
 
 /**
@@ -46,17 +46,44 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
                     $minDistance: 0
                 }
         }
+        // query["$and"] = 
+        // [
+        //     {
+        //         location: 
+        //         {
+        //             $near: {
+                    
+        //                 $geometry: {
+        //                     type: "Point",
+        //                     coordinates: [parseFloat(req.query.long,10),parseFloat(req.query.lat,10)]
+        //                 },
+        //                 $maxDistance: parseFloat(req.query.radius,10)*METERS_PER_MILE, //takes in units for meters
+        //                 $minDistance: 0
+        //             }
+        //         }
+        //     }
+        // ]
     }
     if(req.query.start_date && req.query.end_date) {
-        console.log(req.query)
-        query['start_date'] = {
-            $gte: new Date(req.query.start_date).getTime(),
-        };
-        query["end_date"] = {
-            $lte: new Date(req.query.end_date).getTime()
-        };
+        console.log(req.query);
 
-        console.log(query['start_date'],query['end_date'])
+        // query['start_date'] = {
+        //     $gte: floorDate(req.query.start_date,-1),
+        // };
+        // query["end_date"] = {
+        //     $lte: floorDate(req.query.end_date,1)
+        // };
+
+        query["$and"] = [
+            {start_date:{$gte: floorDate(req.query.start_date,0)}},
+            {end_date:{$lte: floorDate(req.query.end_date,1)}}
+        ],
+        
+
+
+
+        console.log(query['start_date'],query['end_date']);
+        console.log(query);
     }
 
     let queryResults = Sale.find(query);

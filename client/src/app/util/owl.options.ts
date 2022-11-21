@@ -6,6 +6,7 @@ export const defaultOwlConfig: OwlOptions = {
     touchDrag: true,
     pullDrag: true,
     dots: false,
+    autoHeight: true,
     navSpeed: 700,
     navText: [ '<i class="fa-solid fa-chevron-left"></i>', '<i class="fa-solid fa-chevron-right"></i>' ],
     responsive: {

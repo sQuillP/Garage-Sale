@@ -37,6 +37,27 @@ exports.getItems = asyncHandler( async (req,res,next)=> {
         });
         return next();
     }
+    if(req.query.radius){ //query to find how far an item is
+        if(!req.query.long || !req.query.lat){
+            return next(
+                new ErrorResponse(
+                    401,
+                    `Please specify lat and long when including radius`
+                )
+            );
+        }
+        query['location'] = {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [parseFloat(req.query.long,10),parseFloat(req.query.lat,10)]
+                    },
+                    $maxDistance: parseFloat(req.query.radius,10)*METERS_PER_MILE, //takes in units for meters
+                    $minDistance: 0
+                }
+        }
+    }
+
     if(req.query.name)
         query['name'] = new RegExp(req.query.name,'gi');
     if(req.query.maxPrice)

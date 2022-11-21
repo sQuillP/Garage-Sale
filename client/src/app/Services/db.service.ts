@@ -75,9 +75,17 @@ export class DBService {
     }
 
 
+    /* Find an item using item id*/
     findItemById(itemId:string,params = {}):Observable<any> {
         return this.http.get<Item>(`${this.URL}/items/${itemId}`,{
             params
         });
+    }
+
+
+    catalogueItems(params):Observable<any> {
+        return this.http.get(`${this.URL}/items`, {
+            params
+        }).pipe((res:any) => res.data)
     }
 }

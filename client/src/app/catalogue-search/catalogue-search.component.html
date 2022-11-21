@@ -13,18 +13,40 @@
                 <div class="search-wrapper">
                     
                 </div>
-                <div class="searchbar-wrapper">
+                <!-- <div class="searchbar-wrapper">
                     <input type="text" id="searchbar" placeholder="Filter items and sales">
                     <i class="search-icon fa-solid fa-magnifying-glass"></i>
-                </div>
+                </div> -->
                 <div class="filter-wrapper">
-                    <button (click)="activateDropdownFilter = !activateDropdownFilter" matTooltip="Filter Settings" mat-fab style="background: #5e9544; color: white;" aria-label="Example icon button with a home icon">
+                    <button
+                    matTooltip="Refresh Query"
+                    (click)="onNewQuery()"
+                    mat-fab
+                    style="background-color:#5e9544; color:white; margin: 0 10px"
+                    >
+                    <mat-icon>sync</mat-icon>
+                    </button>
+                    <button 
+                    (click)="activateDropdownFilter = !activateDropdownFilter" 
+                    matTooltip="Filter Settings" mat-fab 
+                    style="background: #5e9544; color: white;"
+                    >
                         <mat-icon>tune</mat-icon>
                     </button>
                 </div>
                 <div class="buttons">
-                    <button class="filter-btn active-filter-btn">Search Sales</button>
-                    <button class="filter-btn">Search Items</button>
+                    <button 
+                    mat-ripple
+                    matRippleColor="rgba(0, 0, 0, 0.144)"
+                    (click)="searchSales = true"
+                    [ngClass]="{'active-filter-btn':searchSales}"
+                    class="filter-btn active-filter-btn">Search Sales</button>
+                    <button
+                    [ngClass]="{'active-filter-btn':!searchSales}"
+                    mat-ripple
+                    matRippleColor="rgba(0, 0, 0, 0.144)"
+                    (click)="searchSales = false"
+                    class="filter-btn">Search Items</button>
                 </div>
                 <!-- slider component goes here -->
                 <app-map-slider (radius)="radius = $event" style="color: white;"></app-map-slider>
@@ -44,29 +66,40 @@
                                     <input formControlName="address" placeholder="123 South Main St." type="text" class="filter-input">
                                 </div>
                                 <div class="input-group">
-                                    <div class="input-group">
+                                    <!-- <div class="input-group"> -->
                                         <mat-form-field appearance="fill">
                                             <mat-label>Search by Sale Date</mat-label>
                                             <mat-date-range-input [rangePicker]="picker">
-                                              <input matStartDate formControlName="startDate" placeholder="Start date">
-                                              <input matEndDate formControlName="endDate" placeholder="End date">
+                                              <input matStartDate formControlName="start_date" placeholder="Start date">
+                                              <input matEndDate formControlName="end_date" placeholder="End date">
                                             </mat-date-range-input>
                                             <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
                                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                             <mat-date-range-picker #picker></mat-date-range-picker>
                                           </mat-form-field>
-                                    </div>
+                                    <!-- </div> -->
+                                </div>
+                                <div class="input-group">
+                                    <mat-checkbox 
+                                    formControlName="sortMostPopular" 
+                                    color="primary" 
+                                    >Sort Most Popular</mat-checkbox>
                                 </div>
                             </div>
                         </div>
-                        <div class="combined-section">
+                        <!-- <div class="combined-section">
                             <div class="filter-header">
                                 <p class="text thin toggle-header">Filter</p>
                             </div>
                             <div class="form-section">
-                                <mat-checkbox color="primary" >Sort alphabetically</mat-checkbox>
+                                <mat-checkbox 
+                                [(ngModel)]="sortAscending" 
+                                [checked]="sortAscending" 
+                                color="primary" 
+
+                                >Sort alphabetically</mat-checkbox>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="items-section">
                             <!-- search by price range, alphabetical,  -->
                             <div class="items-filter-header">
@@ -86,12 +119,31 @@
                     </div>
                 </div>
             </div>
-            <div class="sales-list">
-                <app-sale-listing
-                *ngFor="let sale of (saleResults$|async)"
-                [sale]="sale"
-                ></app-sale-listing>
+            <div *ngIf="!serverError; else displayError">
+                <div *ngIf="searchSales" class="sales-list">
+                    <app-sale-listing
+                    *ngFor="let sale of (saleResults$|async)"
+                    [sale]="sale"
+                    (click)="onNavigate(['sale',sale._id])"
+                    ></app-sale-listing>
+                </div>
+                <div *ngIf="!searchSales" class="item-container">
+                    <app-item-listing 
+                    *ngFor="let item of (items$|async)"
+                    [itemData]="item"
+                    (click)="onNavigate(['viewItem',item._id])"
+                    >
+                    </app-item-listing>
+                </div>
             </div>
+            <ng-template #displayError>
+                <div class="error-container flex center-xy col ">
+                    <i class="error-icon fa-solid fa-triangle-exclamation"></i>
+                    <p class="text thin errormsg">
+                        Unable to fetch data. Server replied with status code {{errorStatus}}
+                    </p>
+                </div>
+            </ng-template>
         </div>
     </div>
 </div>

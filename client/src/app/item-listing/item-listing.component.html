@@ -8,9 +8,9 @@
         <p class="text">{{itemData.name}} </p>
     </div>
     <div class="item-desc">
-        <div class="item-section">
+        <div style="height: 72px" class="item-section">
             <p class="text small thin">
-                {{itemData.description}} <span id="seemore">See More ></span>
+                {{itemData.description.substring(0,100)}} <span id="seemore">See More ></span>
             </p>
         </div>
         <div class="item-section">

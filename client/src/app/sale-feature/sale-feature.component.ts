@@ -13,6 +13,7 @@ export class SaleFeatureComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.saleData)
   }
 
 

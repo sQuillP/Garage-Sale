@@ -51,6 +51,25 @@ const ItemSchema = new mongoose.Schema({
         required:true,
         default: Date.now()+3600000 
     },
+    location:{
+        type: {
+            type: String,
+            enum:["Point"],
+            required: true,
+            default: "Point"
+        },
+        coordinates:{
+            type: [Number],
+            required: [true,`Please insert coordinates here`],
+            validate: {
+                validator: function(vals){
+                    return Math.abs(vals[0]) <= 180 && Math.abs(vals[1]) <= 90;
+                },
+                message: `Longtitude values must range from [-180,180] and latitude must range from [-90,90]`
+            },
+            default:[0,0]
+        },
+    },
     terms:{
         type:String,
         required: true,
@@ -79,11 +98,13 @@ ItemSchema.pre('save', async function(next){
     }
     sale.gallery.push(this.gallery[0]);
     sale.itemCount ++;
+
     await sale.save({
         validateBeforeSave: true,
     });
 
     //Assign some of the fields from parent object
+    this.location.coordinates = sale.location.coordinates;
     this.expireAt = sale.expireAt;
     this.start_date = sale.start_date;
     this.end_date = sale.end_date;
