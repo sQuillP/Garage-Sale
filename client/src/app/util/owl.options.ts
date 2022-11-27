@@ -25,3 +25,5 @@ export const defaultOwlConfig: OwlOptions = {
     },
     nav: true,
   }
+
+  

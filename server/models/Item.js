@@ -81,8 +81,9 @@ const ItemSchema = new mongoose.Schema({
 
 
 /* Index the name property for ease of search */
-ItemSchema.index({name:"text"});
+// ItemSchema.index({name:"text"});
 
+ItemSchema.index({location:"2dsphere"});
 
 /* Place a single picture of the item into the associated sale gallery
 set the expiration date of the item to the sale's expiration date. */

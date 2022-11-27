@@ -10,17 +10,21 @@ const ErrorResponse = require("../utils/ErrorResponse");
  *  - GET api/v1/sales/:saleId/items
  * @Scope: Public
  * @Params:
- * - limit: the number of items you want retrieved per request
- * - page: which page you would like to view of the items.
- * - name: the type of name you would like to search for in the items.
- * - maxPrice: the max price for a certain item
- * - minPrice: the minimum price for a certain item
- * 
+ * - limit:number the number of items you want retrieved per request
+ * - page:number which page you would like to view of the items.
+ * - name:string - the type of name you would like to search for in the items.
+ * - maxPrice:number the max price for a certain item
+ * - minPrice:number the minimum price for a certain item
+ * - lat:number latitude of geographic location
+ * - long:number longitude of geographic location
+ * -sortByPrice:string -> ("ascending", "descending")
  */
 exports.getItems = asyncHandler( async (req,res,next)=> {
     const [limit, page] = [req.query.limit || 100, req.query.page || 1];
+    const METERS_PER_MILE = 1609.34;
     let query = {};
     let items = null;
+    console.log(req.query);
     if(req.params.saleId){//if querying only items for a sale
         items = await Item.find({saleId: req.params.saleId});
         if(items == null){
@@ -60,14 +64,30 @@ exports.getItems = asyncHandler( async (req,res,next)=> {
 
     if(req.query.name)
         query['name'] = new RegExp(req.query.name,'gi');
+
     if(req.query.maxPrice)
         query['price'] = { $lt: parseFloat(req.query.maxPrice,10)};
     if(req.query.minPrice)
         query['price']['$gt'] = parseFloat(req.query.minPrice,10);
 
+    if(req.query.sortByPrice){
+        const param = req.query.sortByPrice;
+        console.log(param);
+        if(param.toLowerCase() !== "asc" && param.toLowerCase() !== "desc")
+            return next(
+                new ErrorResponse(
+                    401,
+                    `sortByPrice value must be specified as "asc | desc"`
+                )
+            );
+    }
     query['isPurchased'] = false;
+    items =  Item.find(query);
 
-    items = await Item.find(query).skip((page-1)*limit).limit(limit);
+    if(req.query.sortByPrice)
+        items = items.sort({price: req.query.sortByPrice==="asc"?1:-1});
+    
+    items = await items.skip((page-1)*limit).limit(limit);
 
     res.status(200).json({
         status: 200,

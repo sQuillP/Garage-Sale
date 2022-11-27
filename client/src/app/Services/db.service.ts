@@ -35,7 +35,7 @@ export class DBService {
             console.log('making api request')
             console.log(params)
             params.lat = this.mapService.userLocation.value.lat;
-            params.long = this.mapService.userLocation.value.long
+            params.long = this.mapService.userLocation.value.long;
             return this.http.get<any>(`${this.URL}/sales`,{params})
         }
         return this.mapService.geocode(location).pipe(
@@ -83,9 +83,34 @@ export class DBService {
     }
 
 
-    catalogueItems(params):Observable<any> {
-        return this.http.get(`${this.URL}/items`, {
+
+    /* 
+    * @Description: Used for the catalog items component, 
+    * it uses lat and long to perform query. 
+    * 
+    * @param:
+    *   - lat:number latitude 
+    *   - long: longitude
+    *   - sortByPrice?: asc|desc -> sorts in either ascending or descending order
+    *   - maxPrice?:number -> retrieve values <= to maxPrice
+    *   - minPrice?:number -> retrieve values >= minPrice 
+    *   - page?:number -> which page you would like to retrieve
+    *   - limit?:number -> limit the number of items retrieved
+    */
+    catalogueItems(params,location?:string):Observable<any> {
+        if(!location){
+            this.mapService.geocode(location).pipe(
+                mergeMap(({lat, long})=> {
+                    return this.http.get(`${this.URL}/items`, {
+                        params: {...params, lat, long}
+                    });
+                })
+            );
+        }
+        params['lat'] = this.mapService.userLocation.value.lat;
+        params['long'] = this.mapService.userLocation.value.long;
+        return this.http.get(`${this.URL}/items`,{
             params
-        }).pipe((res:any) => res.data)
+        })
     }
 }

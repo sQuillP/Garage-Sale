@@ -33,19 +33,24 @@
     font-weight: bold;
 }
 
-.sales-list{
-    padding: 0px 20px 0px 20px;
+.sales-list, .item-container{
+    padding: 0px 20px 5px 20px;
    
 }
 
 .content{
     position: relative;
 }
+
+
+.item-container >*{
+    margin: 30px;
+}
+
 .search-options{
     position: sticky;
-    top: 65px;
+    top: 75px;
     left: 0px;
-    /* background: #5e9544; */
     background: var(--dark);
     padding: 10px;
     z-index: 2;
@@ -146,8 +151,18 @@
     text-align: center;
 }
 
+.invalid-input{
+    box-shadow: 0 0 2px 2px red;
+    
+}
+
 .errormsg{
     font-size: 1.4em;
+}
+
+.input-error-msg{
+    margin-top: 5px;
+    color: red;
 }
 
 .error-icon{

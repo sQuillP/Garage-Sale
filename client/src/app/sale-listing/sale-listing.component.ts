@@ -6,14 +6,11 @@ import { Sale } from 'src/app/models/db.models';
   templateUrl: './sale-listing.component.html',
   styleUrls: ['./sale-listing.component.css']
 })
-export class SaleListingComponent implements OnInit {
+export class SaleListingComponent {
 
   @Input('sale')saleData:Sale;
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.saleData)
-  }
 
 }

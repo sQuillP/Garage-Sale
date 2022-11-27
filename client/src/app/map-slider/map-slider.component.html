@@ -1,4 +1,4 @@
 <div class="filter-container flex col center-xy fc-right">
-    <label style="display: inline-block; margin: 0; margin-bottom: 10px;" for="myRange" class="filter-label thin">Search Within {{sliderValue}} Miles</label>
-    <input #slider type="range" min="1" max="100" value="30" class="slider" id="myRange">
+    <label style="display: inline-block; margin: 0; margin-bottom: 10px;" for="myRange" class="filter-label thin">Search Within {{value}} Miles</label>
+    <input #slider type="range" min="1" [max]="max" [value]="value" class="slider" id="myRange">
 </div>

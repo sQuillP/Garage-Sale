@@ -22,7 +22,11 @@ const floorDate = require("../utils/utils");
  *  - mostPopular: boolean -> return the list of most viewed sales in ascending order
  */
 exports.getSales = asyncHandler(async (req,res,next)=> {
+
+    //unit conversin for converting into miles
     const METERS_PER_MILE = 1609.34;
+
+    //pagination
     const [page,pageLimit] = [+req.query.page || 1, +req.query.limit || 10];
     let totalPages = await Sale.countDocuments();
     totalPages = Math.floor(totalPages/pageLimit) === 0? 1: Math.floor(totalPages/pageLimit);
@@ -36,6 +40,8 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
                 )
             );
         }
+
+        //Query all sales within a certain radius
         query['location'] = {
                 $near: {
                     $geometry: {
@@ -46,50 +52,28 @@ exports.getSales = asyncHandler(async (req,res,next)=> {
                     $minDistance: 0
                 }
         }
-        // query["$and"] = 
-        // [
-        //     {
-        //         location: 
-        //         {
-        //             $near: {
-                    
-        //                 $geometry: {
-        //                     type: "Point",
-        //                     coordinates: [parseFloat(req.query.long,10),parseFloat(req.query.lat,10)]
-        //                 },
-        //                 $maxDistance: parseFloat(req.query.radius,10)*METERS_PER_MILE, //takes in units for meters
-        //                 $minDistance: 0
-        //             }
-        //         }
-        //     }
-        // ]
     }
+
+    // Sort query sales between two dates
     if(req.query.start_date && req.query.end_date) {
-        console.log(req.query);
-
-        // query['start_date'] = {
-        //     $gte: floorDate(req.query.start_date,-1),
-        // };
-        // query["end_date"] = {
-        //     $lte: floorDate(req.query.end_date,1)
-        // };
-
         query["$and"] = [
             {start_date:{$gte: floorDate(req.query.start_date,0)}},
             {end_date:{$lte: floorDate(req.query.end_date,1)}}
-        ],
-        
-
-
-
-        console.log(query['start_date'],query['end_date']);
-        console.log(query);
+        ]
     }
 
     let queryResults = Sale.find(query);
 
-    if(req.query.mostPopular)
-        queryResults = queryResults.sort({viewCount:-1});
+    if(req.query.sortMostPopular){
+        let sort = req.query.sortMostPopular;
+        if(sort.toLowerCase() !== 'true' && sort.toLowerCase() !== "false")
+            return next(new ErrorResponse(
+                400,
+                `Please provide true | false value`
+            ));
+        if(sort.toLowerCase() ==="true")
+            queryResults = queryResults.sort({viewCount:-1});
+    }
 
     queryResults = queryResults.skip(pageLimit*(page-1)).limit(pageLimit);
 

@@ -45,7 +45,8 @@ const populate = async ()=> {
                 -88.0+(Math.random()*2)
             ];
 
-            sale.location.coordinates = [long,lat]; //assign lat, long coordinates and save the sale.
+            //IMPORTANT: As per mongoose docs, longitude comes first in the coordinates array
+            sale.location.coordinates = [long,lat]; //assign long, lat coordinates and save the sale.
             sale.userId = userIds[Math.floor(Math.random()*userIds.length)]; //assign userid to the sale
             await Sale.create(sale); 
         }

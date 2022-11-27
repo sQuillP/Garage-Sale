@@ -31,6 +31,11 @@ import { formatSuperScriptPipe } from './pipes/formatSuperscript.pipe';
 import { FormatPhonePipe } from './pipes/formatPhone.pipe';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LoadingComponent } from './loading/loading.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +52,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     FormatDatePipe,
     FormatPhonePipe,
-    formatSuperScriptPipe
+    formatSuperScriptPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    MatRadioModule,
+    MatSnackBarModule,
   ],
   providers: [
   ],
