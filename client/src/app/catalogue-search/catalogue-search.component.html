@@ -14,16 +14,18 @@
             map-circle="foo"
             >
                 <map-circle
-                [options]="circleOptions$ |async"
+                [options]="{strokeColor: '#4285F4',fillColor: '#4285F4'}"
+                [radius]="radius*METERS_PER_MILE"
+                [center]="currentPosition"
                 ></map-circle>
+
                 <map-marker
-                *ngFor="let marker of markers$|async"
+                *ngFor="let marker of (markers$|async)"
                 [position]="marker.position"
                 [info]="marker.info"
                 [title]="marker.title"
                 [label]="marker.label"
                 >
-
                 </map-marker>
         
             </google-map>

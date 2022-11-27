@@ -23,7 +23,7 @@ export class CatalogueSearch implements OnDestroy {
 
   saleResults$ = new BehaviorSubject<Sale[]>(null);
   itemResults$ = new BehaviorSubject<Item[]>(null);
-  markers$ = new BehaviorSubject<MapMarker[]>(null);
+  markers$ = new BehaviorSubject<any[]>(null);
 
   today = new Date();
   n:MapCircle
@@ -42,17 +42,6 @@ export class CatalogueSearch implements OnDestroy {
   currentPosition = {lat: 0, lng: 0};
   locationSubscription:Subscription;
 
-
-  circleOptions$ = new BehaviorSubject<any>( {
-    center: {
-      lat: this.map.userLocation.value.lat,
-      lng: this.map.userLocation.value.long
-    },
-    radius: this.radius*this.METERS_PER_MILE,
-    strokeColor: "#4285F4",
-    fillColor: "#4285F4",
-  });
-
   saleSection = new FormGroup({
     start_date: new FormControl(new Date(this.today.getFullYear(),this.today.getMonth(), this.today.getDate())),
     end_date: new FormControl(new Date(this.today.getFullYear()+1,this.today.getMonth(), this.today.getDate())),
@@ -69,9 +58,6 @@ export class CatalogueSearch implements OnDestroy {
     sortByPrice: new FormControl("asc")
   })
 
-
-
-
   constructor(
     private db:DBService,
     private router:Router,
@@ -81,10 +67,6 @@ export class CatalogueSearch implements OnDestroy {
 
     this.locationSubscription = this.map.userLocation.subscribe(({long,lat})=> {
       this.currentPosition = {lat, lng:long};
-      this.circleOptions$.next( {
-        ...this.circleOptions$.value,
-        center:{lat,lng:long}
-      });
     });
 
     this.querySales({
@@ -136,10 +118,6 @@ export class CatalogueSearch implements OnDestroy {
 
   onUpdateRadius(event:number):void{
     this.radius = event;
-    this.circleOptions$.next( {
-      ...this.circleOptions$.value,
-      radius: event
-    });
   }
 
 
@@ -195,10 +173,6 @@ export class CatalogueSearch implements OnDestroy {
   }
 
 
-
- 
-
-
  /* Perform a query for searching items.
   If the call is successful, remove any errors from the page.
   Otherwise, set the error flag to true. If there are no results,
@@ -243,8 +217,8 @@ export class CatalogueSearch implements OnDestroy {
       tap(data => console.log(data)),
     )
     .subscribe({
-      next: res => {
-        this.markers$.next(this.mapPoints(res)); //map the markers
+      next: (res) => {
+        this.markers$.next(this.mapPoints(res));//map the markers
         console.log(this.markers$.value)
         this.isLoading = false;
         this.serverError =false;
@@ -266,11 +240,11 @@ export class CatalogueSearch implements OnDestroy {
 
   /* Return a list of points gathered from the response object in API call
   to display to the google map */
-  private mapPoints(res):MapMarker[]{
-
+  private mapPoints(res):any[]{
+    console.log(res)
     return res.data.map(point => {
       return {
-        title:res.data.description,
+        title:"this is some information",
         info:"Some info here",
         position: {
           lat: point.location.coordinates[1], 
@@ -280,5 +254,4 @@ export class CatalogueSearch implements OnDestroy {
       }
     });
   }
-  
 }

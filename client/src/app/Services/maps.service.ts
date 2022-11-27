@@ -35,6 +35,7 @@ export class MapsService {
                 console.log(results);
                 const lat = results[0].geometry.location.lat();
                 const long = results[0].geometry.location.lng();
+                this.userLocation.next({long, lat});
                 observer.next({lat, long});
                 observer.complete();
             })
