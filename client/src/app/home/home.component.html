@@ -26,12 +26,29 @@
         <div style="margin-bottom: 10px;" class="intro-wrapper">
             <p class="text intro">Sales near Lombard, IL</p>
         </div>
-        <!-- <google-map
-        class="map"
-        width="100%"
-        height="300px"
+        <google-map
+            class="map"
+            width="100%"
+            height="300px"
+            [zoom]="6"
+            [center]="currentLocation$|async"
         >
-        </google-map> -->
+        <map-circle
+            [options]="{strokeColor: '#4285F4',fillColor: '#4285F4'}"
+            [radius]="searchConfig.radius*METERS_PER_MILE"
+            [center]="currentLocation$|async"
+        >
+        </map-circle>
+        <map-marker
+            *ngFor="let marker of markers$|async"
+            [position]="marker.position"
+            [info]="marker.info"
+            [title]="marker.title"
+            [label]="marker.label"
+        >
+        </map-marker>
+        </google-map>
+
         <div class="filter-options flex sp-between">
             <div class="filter-container fc-left">
                 <label style="display: inline-block; margin: 0;" for="search_zip" class="filter-label ">Search an Address</label>
@@ -45,14 +62,20 @@
             <p class="text intro">Garage Sales in My Area</p>
         </div>
        <!-- owl carousel -->
-       <owl-carousel-o [options]="customOptions">
-        <ng-template *ngFor="let sale of (saleSearchResults$|async)" carouselSlide>
+       <owl-carousel-o *ngIf="(saleSearchResults$|async)?.length!==0; else noResults" [options]="customOptions">
+        <ng-template *ngFor="let sale of saleSearchResults$|async" carouselSlide>
             <app-sale-feature 
             [sale]="sale"
             (click)="onNavigate(['sale',sale._id])"
             ></app-sale-feature>
         </ng-template>  
       </owl-carousel-o>
+      <ng-template #noResults>
+        <div class="no-results flex center-xy col">
+            <p class="intro thin">No sales found in your area!</p>
+            <i style="color: gray; font-size: 4em;" class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+      </ng-template>
     </div>
     <div class="container popular-garage-sales">
         <p style="margin-bottom: 15px;" class="text intro">Popular Sales</p>

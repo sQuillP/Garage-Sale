@@ -29,19 +29,17 @@ export class DBService {
  *      - end: the last day of the garage sale.
  */
     /*If there is no location specified, 
-        return sales near the users location */
+        return sales near the users location. Append the user location if it hasn't */
     getNearbySales(location:string, params):Observable<any>{
         if(!location){
-            console.log('making api request')
-            console.log(params)
-            params.lat = this.mapService.userLocation.value.lat;
-            params.long = this.mapService.userLocation.value.long;
+            params['lat']= this.mapService.userLocation.value.lat;
+            params['long'] = this.mapService.userLocation.value.lng;
             return this.http.get<any>(`${this.URL}/sales`,{params})
         }
         return this.mapService.geocode(location).pipe(
             mergeMap(({lat, long}) => {
-                params.long = long;
-                params.lat = lat;
+                params['long'] = long;
+                params['lat'] = lat;
                 return this.http.get<Sale[]>(`${this.URL}/sales`,{params})
             })
         );
@@ -85,9 +83,6 @@ export class DBService {
 
 
     /* 
-    * @Description: Used for the catalog items component, 
-    * it uses lat and long to perform query. 
-    * 
     * @param:
     *   - lat:number latitude 
     *   - long: longitude
@@ -96,6 +91,9 @@ export class DBService {
     *   - minPrice?:number -> retrieve values >= minPrice 
     *   - page?:number -> which page you would like to retrieve
     *   - limit?:number -> limit the number of items retrieved
+    * 
+    * @desc: If there is no location provided, it will grab last entered location
+    *  and query the sales as such.
     */
     catalogueItems(params,location?:string):Observable<any> {
         if(!location){
@@ -108,7 +106,7 @@ export class DBService {
             );
         }
         params['lat'] = this.mapService.userLocation.value.lat;
-        params['long'] = this.mapService.userLocation.value.long;
+        params['long'] = this.mapService.userLocation.value.lng;
         return this.http.get(`${this.URL}/items`,{
             params
         })

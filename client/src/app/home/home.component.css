@@ -137,6 +137,10 @@ margin-top: 20px;
 overflow: hidden;
 }
 
+
+.no-results p{
+}
+
   .intro-wrapper{margin-bottom: 20px;}
 
     @media screen and (max-width: 580px){

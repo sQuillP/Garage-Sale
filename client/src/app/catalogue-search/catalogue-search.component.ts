@@ -8,7 +8,7 @@ import { Item, Sale } from '../models/db.models';
 import { DBService } from '../Services/db.service';
 import { MapsService } from '../Services/maps.service';
 import { validatePriceRanges} from '../util/validators';
-
+import { mapPoints } from '../util/map.util';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class CatalogueSearch implements OnDestroy {
 
   saleResults$ = new BehaviorSubject<Sale[]>(null);
   itemResults$ = new BehaviorSubject<Item[]>(null);
-  markers$ = new BehaviorSubject<any[]>(null);
+  markers$ = new BehaviorSubject<MapMarker[]>(null);
 
   today = new Date();
   n:MapCircle
@@ -65,8 +65,8 @@ export class CatalogueSearch implements OnDestroy {
     private map:MapsService
   ) { 
 
-    this.locationSubscription = this.map.userLocation.subscribe(({long,lat})=> {
-      this.currentPosition = {lat, lng:long};
+    this.locationSubscription = this.map.userLocation.subscribe(({lng,lat})=> {
+      this.currentPosition = {lat, lng};
     });
 
     this.querySales({
@@ -75,8 +75,6 @@ export class CatalogueSearch implements OnDestroy {
       sortMostPopular: this.saleSection.get('sortMostPopular').value,
       limit: 15, 
       radius: this.radius, 
-      lat: 0, 
-      long: 0
     },
     null
     );
@@ -98,8 +96,6 @@ export class CatalogueSearch implements OnDestroy {
         sortMostPopular: this.saleSection.get('sortMostPopular').value,
         limit: 15,
         radius: this.radius,
-        lat:0,
-        long:0
       },this.address);
     }
     else {
@@ -139,8 +135,6 @@ export class CatalogueSearch implements OnDestroy {
         sortMostPopular: this.saleSection.get('sortMostPopular').value,
         limit: 15,
         radius: +this.radius,
-        lat:0,
-        long:0
       },this.address);
     } else {
       this.searchSales =false;
@@ -150,8 +144,6 @@ export class CatalogueSearch implements OnDestroy {
           ...this.itemSection.get('priceFilters').value,
           limit: 15,
           radius: this.radius,
-          lat:0,
-          long:0
         }, this.address)
     }
   }
@@ -185,11 +177,9 @@ export class CatalogueSearch implements OnDestroy {
       )
       .subscribe({
         next:(res)=> {
-          this.markers$.next(this.mapPoints(res)); //map the markers
-          console.log(this.markers$.value)
+          this.markers$.next(mapPoints(res)); //map the markers
           this.isLoading =false;
           this.serverError = false;
-          console.log(res.data.length)
           if(res.data.length === 0)
             this.noResults = true;
           else
@@ -218,16 +208,14 @@ export class CatalogueSearch implements OnDestroy {
     )
     .subscribe({
       next: (res) => {
-        this.markers$.next(this.mapPoints(res));//map the markers
-        console.log(this.markers$.value)
+        this.markers$.next(mapPoints(res));//map the markers
         this.isLoading = false;
-        this.serverError =false;
+        this.serverError = false;
         if(res.data.length === 0)
           this.noResults = true;
         else
           this.noResults = false;
         this.itemResults$.next(res.data);
-        console.log(this.itemResults$.value)
       },
       error:error=> {
         this.isLoading = false;
@@ -237,21 +225,4 @@ export class CatalogueSearch implements OnDestroy {
     })
   }
 
-
-  /* Return a list of points gathered from the response object in API call
-  to display to the google map */
-  private mapPoints(res):any[]{
-    console.log(res)
-    return res.data.map(point => {
-      return {
-        title:"this is some information",
-        info:"Some info here",
-        position: {
-          lat: point.location.coordinates[1], 
-          lng: point.location.coordinates[0]
-        },
-        options: google.maps.Animation.BOUNCE
-      }
-    });
-  }
 }

@@ -7,17 +7,14 @@ import { BehaviorSubject, Observable, tap } from "rxjs";
 export class MapsService {
     
     /*Track user lat and long for each request. Set initial geolocation to Chicago, IL */
-    userLocation = new BehaviorSubject<{long:number, lat:number}>({
+    userLocation = new BehaviorSubject<{lng:number, lat:number}>({
         lat: 41.8781,
-        long: -88
+        lng: -88
     });
 
     geocoder = new google.maps.Geocoder();
 
-    constructor(private http:HttpClient){
-        
-    }
-
+    constructor(private http:HttpClient){}
 
     /* Geocode an address/zipcode into lat, long coordinates.
     Returns the first item in the results array from Google Maps API */
@@ -32,10 +29,9 @@ export class MapsService {
                 else if(status === "ERROR"){
                     observer.error("Unable to fetch the geocoding location");
                 }
-                console.log(results);
                 const lat = results[0].geometry.location.lat();
                 const long = results[0].geometry.location.lng();
-                this.userLocation.next({long, lat});
+                this.userLocation.next({lng:long, lat});
                 observer.next({lat, long});
                 observer.complete();
             })
