@@ -84,8 +84,6 @@ export class CatalogueSearch implements OnDestroy {
   // Start a new query for searching a nearby sale.
   onNewQuery():void {
     if(!this.saleSection.valid || !this.itemSection.valid){
-      // for(let str of Object.keys(this.saleSection.value))
-        // console.log(str + " " +this.saleSection.get(str).value +" " + this.saleSection.get(str).valid);
       this.onShowSnackbar("Please apply correct filter fields");
       return;
     }

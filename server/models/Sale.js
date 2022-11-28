@@ -15,6 +15,12 @@ const SaleSchema = new mongoose.Schema({
     },
     description:{
         type:String,
+        required: true
+    },
+    title:{
+        type:String,
+        required: true,
+        maxLength: [45,`Description must be at most 45 characters`]
     },
     terms_conditions:{
         type:String,

@@ -29,23 +29,22 @@ export class ViewItemComponent implements OnInit {
       1200: {
         items: 4
       },
-    }
+    },
+    center: true
   };
 
-  imageData = [
-    "https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/Y5SVOBNZVBHDZDHVJQD4IJ77NU.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png",
-    "https://na.rdcpix.com/4b5c1a3f5b62b1146984460bc8e138eew-c3944895653rd-w832_h468_r4_q80.jpg",
-    "https://garagesalefinder.com/images/screenshotofusamap.jpg",
-    "https://www.lakesaintlouis.com/ImageRepository/Document?documentId=1004"
-  ];
-
+  /**
+   * The option 'items' in your options is 
+   * bigger than the number of slides. 
+   * This option is updated to the current number of slides 
+   * and the navigation got disabled
+   */
+  
   selectedImage:number = 0;
   item$ = new BehaviorSubject<Item>(null);
   featuredItems$ = new BehaviorSubject<Item[]>(null);
   featuredSales$: Observable<Sale[]>;
-
-
+  location:{lat:number, lng:number};
   viewContent:string = "terms";
 
   constructor(
@@ -59,6 +58,7 @@ export class ViewItemComponent implements OnInit {
       mergeMap((params:Params)=> this.db.findItemById(params['itemId'],{})),
       mergeMap((res:any)=> {
         this.item$.next(res.data);
+        this.location = {lat:res.data.location.coordinates[1], lng: res.data.location.coordinates[0]};
         return this.db.findItems(res.data.saleId._id);
       })
     )
@@ -67,7 +67,8 @@ export class ViewItemComponent implements OnInit {
       error:(error)=> this.router.navigate(['home'])
     });
     this.featuredSales$ = this.db.getNearbySales(null,{}).pipe(
-      map((res)=> res.data)
+      map((res)=> res.data),
+      // tap((data)=> this.customOptions = {...this.customOptions, }) FIX: when the carousel has a small large/small amount of items, make the carousel options correspond.
     );
   }
 

@@ -18,7 +18,7 @@
             </div>
             <div class="search">
                 <i class="search-icon fa-solid fa-magnifying-glass"></i>
-                <input class="searchLocation" type="text" placeholder="Search any location...">
+                <input #searchLocation class="searchLocation" [(ngModel)]="searchLocations"  type="text" placeholder="Search any location...">
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <google-map
             class="map"
             width="100%"
-            height="300px"
+            height="350px"
             [zoom]="6"
             [center]="currentLocation$|async"
         >
@@ -54,7 +54,7 @@
                 <label style="display: inline-block; margin: 0;" for="search_zip" class="filter-label ">Search an Address</label>
                 <input #searchAddressRef [(ngModel)]="searchAddress" id="search_zip" type="text" placeholder="123 Easy Street">
             </div>
-            <app-map-slider (radius)="onRadiusUpdate($event)"></app-map-slider>
+            <app-map-slider [sliderValue]="100" [max]="200"  (radius)="onRadiusUpdate($event)"></app-map-slider>
         </div>
     </div>
     <div class="container items-sale">

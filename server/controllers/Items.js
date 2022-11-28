@@ -119,6 +119,7 @@ exports.getItem = asyncHandler( async (req,res,next) => {
     const fetchedResult = await Item.findById(req.params.itemId).populate("saleId");
 
     //I am not sure how to handle strict populate so this will have to do for now...
+    //I want to populate the userId that is inside the saleId. I can only populate saleId.
     fetchedResult.saleId.userId = await User.findById(fetchedResult.saleId.userId);
 
     if(fetchedResult == null){
@@ -130,6 +131,7 @@ exports.getItem = asyncHandler( async (req,res,next) => {
         );
     }
 
+    console.log(fetchedResult);
 
     res.status(200).json({
         status: 200,

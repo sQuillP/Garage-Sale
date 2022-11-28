@@ -7,7 +7,7 @@
             <!-- Google map goes here -->
             <google-map
             #googleMap
-            height="400px"
+            height="450px"
             width="100%"
             [center]="currentPosition"
             [zoom]="6"
@@ -30,9 +30,9 @@
         
             </google-map>
             <div class="search-options flex center-y wrap sp-around">
-                <div class="search-wrapper">
+                <!-- <div class="search-wrapper">
                     
-                </div>
+                </div> -->
                 
                 <div class="filter-wrapper">
                     <button
@@ -68,7 +68,7 @@
                 <!-- slider component goes here -->
                 <app-map-slider 
                 [max]="200"
-                [value]="100"
+                [sliderValue]="100"
                 (radius)="onUpdateRadius($event)" 
                 style="color: white;"></app-map-slider>
                 <div [ngClass]="{'toggle-dropdown-active':activateDropdownFilter}" class="toggle-dropdown">

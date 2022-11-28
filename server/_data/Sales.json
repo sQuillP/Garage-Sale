@@ -4,6 +4,7 @@
         "end_date":"",
         "address":"123 easy street",
         "description": "a wonderful sale",
+        "title":"My garage sale",
         "terms_conditions":"you must accept these terms",
         "location":{
             "type":"Point",
@@ -21,7 +22,8 @@
         "start_date": "",
         "end_date":"",
         "address":"441 South Main Street",
-        "description": "Yard sale of things found in my garage",
+        "description": "Yard sale of things I found...",
+        "title":"Sal's Garage Sale",
         "terms_conditions":"I expect you to comply with these terms",
         "location":{
             "type":"Point",
@@ -39,6 +41,7 @@
         "end_date":"",
         "address":"113 North Brookdale Ave",
         "description": "Sale of rare porcelain plates. Get them while you can",
+        "title":"Will's garage sale!",
         "terms_conditions":"There are no discounts for these items",
         "location":{
             "type":"Point",
@@ -56,6 +59,7 @@
         "end_date":"",
         "address":"862 East Empire Ave",
         "description": "Some old antiques. Some items as far back as 1929",
+        "title":"Nate's garage sale.",
         "terms_conditions":"You must buy more than one item to receive a discount.",
         "location":{
             "type":"Point",

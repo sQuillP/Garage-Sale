@@ -54,7 +54,7 @@ const ItemSchema = new mongoose.Schema({
     location:{
         type: {
             type: String,
-            enum:["Point"],
+            enum:["Point"], 
             required: true,
             default: "Point"
         },
@@ -98,13 +98,14 @@ ItemSchema.pre('save', async function(next){
         );
     }
     sale.gallery.push(this.gallery[0]);
-    sale.itemCount ++;
+    sale.itemCount+= 1;
 
     await sale.save({
         validateBeforeSave: true,
     });
 
     //Assign some of the fields from parent object
+    this.terms = sale.terms_conditions;
     this.location.coordinates = sale.location.coordinates;
     this.expireAt = sale.expireAt;
     this.start_date = sale.start_date;

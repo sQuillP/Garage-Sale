@@ -17,3 +17,16 @@ export const validateDate = (control:AbstractControl):ValidationErrors|null=> {
     }
     return null;
 }
+
+
+export const validatePassword = (control:AbstractControl):ValidationErrors|null=> {
+    if(
+        !(/[a-z]/gi.test(control.value)&&
+        /[0-9]/gi.test(control.value)&&
+        /[^a-z0-9]/g.test(control.value))
+    )
+        return {invalidPassword:true};
+    
+    return null;
+    
+}

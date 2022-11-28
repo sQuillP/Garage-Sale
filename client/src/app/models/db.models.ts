@@ -41,6 +41,10 @@ export interface Item {
     purchased?:boolean,
     start_date:Date,
     end_date:Date,
+    location:{
+        type:'Point',
+        coordinates:number[]
+    }
 };
 
 

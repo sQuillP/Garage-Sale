@@ -22,14 +22,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly METERS_PER_MILE= 1609.34;
 
   @ViewChild("searchAddressRef")searchAddressRef:ElementRef;
+  @ViewChild("searchLocation")searchLocationRef:ElementRef;
+
   searchAddress:string = "";
   searchListener:Subscription;
+  searchLocationListener:Subscription;
+  searchLocations:string;
 
   saleSearchResults$ = new Subject<Sale[]>();
   topSaleSearchResults$:Observable<Sale[]>;
   markers$ = new BehaviorSubject<MapMarker[]>(null);
   currentLocation$:Observable<any>;
   customOptions:OwlOptions = defaultOwlConfig;
+
 
   /* Default options for a search config. */
   searchConfig:SaleParams = {
@@ -43,7 +48,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private router:Router,
     private db:DBService,
     private locationService:MapsService,
-    private _snackbar:MatSnackBar
+    private _snackbar:MatSnackBar,
+    private map:MapsService
   ) { 
     this.queryTopSales();
     this.querySales();
@@ -77,18 +83,26 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   //search the api to convert the address to geolocation, then make request to api.
   ngAfterViewInit(): void {
     this.searchListener = fromEvent(this.searchAddressRef.nativeElement,'keypress')
-    .pipe(
-      filter((event:any) => event.key === "Enter"),
-      filter(results => results.length !==0)
-    )
+    .pipe(filter((event:any) => event.key === "Enter"))
     .subscribe((res:any)=> {
       this.querySales(this.searchAddress);
     });
+
+    this.searchLocationListener = fromEvent(this.searchLocationRef.nativeElement, 'keypress')
+    .pipe(filter((event:any) => event.key === "Enter"))
+    .subscribe(()=>{
+      this.map.updateLocationAddress(this.searchLocations).then(coords=>{
+        this.router.navigate(["catalogue-search"]);
+      }).catch((error)=> {
+        this.showErrorMsg("Unable to update location");
+      })
+    })
   }
 
 
   ngOnDestroy(): void {
     this.searchListener.unsubscribe();
+    this.searchLocationListener.unsubscribe();
   }
 
   private querySales(address?:string):void{
@@ -102,11 +116,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.markers$.next(mapPoints(res));
       },
       error:(error)=>{
-        this._snackbar.open("Unable to query sales","OK",{
-          horizontalPosition:"center",
-          verticalPosition:"bottom",
-          duration: 5000
-        });
+        this.showErrorMsg("Unable to update sales");
       }
     })
   }
@@ -115,14 +125,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.topSaleSearchResults$ = this.db.getMostPopularSales().pipe(
       map((res:any)=> res.data),
       catchError((error)=> {
-        this._snackbar.open("Unable to query top sales","OK",{
-          horizontalPosition:"center",
-          verticalPosition:"bottom",
-          duration:5000
-        });
+        this.showErrorMsg("Unable to query top sales");
         return [];
       })
     );
+  }
+
+  private showErrorMsg(message:string):void{
+    this._snackbar.open(message,"OK",{
+      horizontalPosition:"center",
+      verticalPosition:"bottom",
+      duration:5000
+    })
   }
 
 }

@@ -1,3 +1,38 @@
-<div class="main">
+<div class="main flex center-xy">
+
+
+    <div *ngIf="false; else loading"  [formGroup]="loginForm" class="login-container">
+        <div class="header-wrapper">
+            <p class="text intro">Garage Sales</p>
+        </div>
+        <div class="descriptor">
+            <p class="text thin">Login</p>
+        </div>
+        <div class="input-container">
+            <label class="label" for="email">Username</label><br>
+            <input autocomplete="off" class="input" formControlName="email" id="email" type="email" placeholder="alice@gmail.com">
+        </div>
+        <div class="divider"></div>
+        <div class="input-container">
+            <label class="label" for="password">Password</label><br>
+            <input autocomplete="off" formControlName="password" type="password" id="password" class="input">
+        </div>
+        <div class="submit-wrapper flex center-xy">
+            <button 
+            mat-ripple
+            matRippleColor="rgba(0, 0, 0, 0.083)"
+            class="submit-btn">Login</button>
+        </div>
+        <div class="click-here">
+            <p class="text thin">Not a member? Click here to login</p>
+        </div>
+    </div>
+    <ng-template #loading>
+        <div class="login-container loader-container flex center-xy col">
+            <div class="loader"></div>
+            <p class="text thing">Logging in...</p>
+        </div>
+    </ng-template>
 
 </div>
+ 

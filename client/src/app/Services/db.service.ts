@@ -37,8 +37,8 @@ export class DBService {
             return this.http.get<any>(`${this.URL}/sales`,{params})
         }
         return this.mapService.geocode(location).pipe(
-            mergeMap(({lat, long}) => {
-                params['long'] = long;
+            mergeMap(({lat, lng}) => {
+                params['long'] = lng;
                 params['lat'] = lat;
                 return this.http.get<Sale[]>(`${this.URL}/sales`,{params})
             })
@@ -98,9 +98,9 @@ export class DBService {
     catalogueItems(params,location?:string):Observable<any> {
         if(!location){
             this.mapService.geocode(location).pipe(
-                mergeMap(({lat, long})=> {
+                mergeMap(({lat, lng})=> {
                     return this.http.get(`${this.URL}/items`, {
-                        params: {...params, lat, long}
+                        params: {...params, lat, long:lng}
                     });
                 })
             );
