@@ -1,7 +1,11 @@
 <div class="main flex center-xy">
 
 
-    <div *ngIf="false; else loading"  [formGroup]="loginForm" class="login-container">
+    <div 
+    [ngClass]="{'shake':shakeForm}"
+    *ngIf="true; else loading"  
+    [formGroup]="loginForm" 
+    class="login-container">
         <div class="header-wrapper">
             <p class="text intro">Garage Sales</p>
         </div>
@@ -10,21 +14,51 @@
         </div>
         <div class="input-container">
             <label class="label" for="email">Username</label><br>
-            <input autocomplete="off" class="input" formControlName="email" id="email" type="email" placeholder="alice@gmail.com">
+            <input 
+            autocomplete="off"
+            class="input" 
+            formControlName="email" 
+            id="email"
+            type="email" 
+            placeholder="alice@gmail.com"
+            >
+            <mat-icon class="left-icon">alternate_email</mat-icon>
         </div>
         <div class="divider"></div>
         <div class="input-container">
             <label class="label" for="password">Password</label><br>
-            <input autocomplete="off" formControlName="password" type="password" id="password" class="input">
+            <input 
+            autocomplete="off" 
+            formControlName="password" 
+            [type]="showPasswordVisibility?'password':'text'" 
+            id="password" 
+            class="input"
+            >
+            <mat-icon 
+            (click)="showPasswordVisibility = false"
+            *ngIf="showPasswordVisibility" 
+            matTooltip="enable visibilty"
+            [matTooltipShowDelay]="1500"
+            class="right-icon">visibility</mat-icon>
+            <mat-icon 
+            (click)="showPasswordVisibility=true"
+            *ngIf="!showPasswordVisibility" 
+            [matTooltipShowDelay]="1500"
+            matTooltip="disable visibility"
+            class="right-icon">visibility_off</mat-icon>
+            <mat-icon class="left-icon">lock</mat-icon>
         </div>
         <div class="submit-wrapper flex center-xy">
-            <button 
+            <button
+            (click)="onSubmit()" 
             mat-ripple
             matRippleColor="rgba(0, 0, 0, 0.083)"
-            class="submit-btn">Login</button>
+            class="submit-btn">{{loginMode?"Login":"Signup"}}</button>
         </div>
         <div class="click-here">
-            <p class="text thin">Not a member? Click here to login</p>
+            <p class="text thin">
+                {{loginMode?"Need an account?":"Already a member?"}} <br>
+                <span (click)="loginMode = !loginMode" class="login-options">Click here to {{!loginMode?"sign up!":"login!"}}</span></p>
         </div>
     </div>
     <ng-template #loading>

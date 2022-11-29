@@ -5,11 +5,13 @@ import { SaleDetailComponent } from './sale-detail/sale-detail.component';
 import { CatalogueSearch } from './catalogue-search/catalogue-search.component';
 import { ViewItemComponent } from './view-item/view-item.component';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
   {path: "sale/:saleId", component: SaleDetailComponent},
   {path: "viewItem/:itemId",component:ViewItemComponent},
+  {path:"signup", component:SignupComponent},
   {path: "login", component:LoginComponent},
   {path: "catalogue-search", component: CatalogueSearch},
   {path:"**", redirectTo:"/home", pathMatch: 'full'}

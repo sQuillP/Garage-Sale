@@ -29,8 +29,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   searchLocationListener:Subscription;
   searchLocations:string;
 
-  saleSearchResults$ = new Subject<Sale[]>();
-  topSaleSearchResults$:Observable<Sale[]>;
+  isLoadingTopSales:boolean = false;
+  isLoadingSearchedSales:boolean = false;
+
+  saleSearchResults$ = new BehaviorSubject<Sale[]>(null);
+  topSaleSearchResults$ = new BehaviorSubject<Sale[]>(null);
   markers$ = new BehaviorSubject<MapMarker[]>(null);
   currentLocation$:Observable<any>;
   customOptions:OwlOptions = defaultOwlConfig;
@@ -106,6 +109,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private querySales(address?:string):void{
+    this.isLoadingSearchedSales = true;
     this.db.getNearbySales(address,this.searchConfig)
     .pipe(
       retry(3)
@@ -114,21 +118,30 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       next:(res:any)=>{
         this.saleSearchResults$.next(res.data);
         this.markers$.next(mapPoints(res));
+        this.isLoadingSearchedSales =false;
       },
       error:(error)=>{
         this.showErrorMsg("Unable to update sales");
+        this.isLoadingSearchedSales =false;
       }
     })
   }
 
   private queryTopSales():void{
-    this.topSaleSearchResults$ = this.db.getMostPopularSales().pipe(
+    this.isLoadingTopSales = true;
+    this.db.getMostPopularSales().pipe(
       map((res:any)=> res.data),
-      catchError((error)=> {
+    )
+    .subscribe({
+      next:(data:Sale[])=>{
+        this.topSaleSearchResults$.next(data);
+        this.isLoadingTopSales = false;
+      },
+      error:(err)=>{
         this.showErrorMsg("Unable to query top sales");
-        return [];
-      })
-    );
+        this.isLoadingTopSales = false;
+      }
+    })
   }
 
   private showErrorMsg(message:string):void{

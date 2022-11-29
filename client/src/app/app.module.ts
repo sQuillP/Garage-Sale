@@ -34,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { LoadingComponent } from './loading/loading.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { LoadingComponent } from './loading/loading.component';
     FormatDatePipe,
     FormatPhonePipe,
     formatSuperScriptPipe,
-    LoadingComponent
+    LoadingComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

@@ -137,6 +137,9 @@ margin-top: 20px;
 overflow: hidden;
 }
 
+.load-wrap{
+    margin: 20px 0px;
+}
 
 .no-results p{
 }

@@ -61,29 +61,71 @@
         <div class="intro-wrapper">
             <p class="text intro">Garage Sales in My Area</p>
         </div>
+
        <!-- owl carousel -->
-       <owl-carousel-o *ngIf="(saleSearchResults$|async)?.length!==0; else noResults" [options]="customOptions">
-        <ng-template *ngFor="let sale of saleSearchResults$|async" carouselSlide>
-            <app-sale-feature 
-            [sale]="sale"
-            (click)="onNavigate(['sale',sale._id])"
-            ></app-sale-feature>
-        </ng-template>  
-      </owl-carousel-o>
-      <ng-template #noResults>
+       <!-- If there are search results available, display them. -->
+       <div *ngIf="!isLoadingSearchedSales; else searchSalesLoader">
+        <owl-carousel-o *ngIf="saleSearchResults$.value !==null&& saleSearchResults$.value.length!==0 ; else noSearchResults" [options]="customOptions">
+            <ng-template *ngFor="let sale of saleSearchResults$|async" carouselSlide>
+                <app-sale-feature 
+                [sale]="sale"
+                (click)="onNavigate(['sale',sale._id])"
+                ></app-sale-feature>
+            </ng-template>  
+          </owl-carousel-o>
+       </div>
+      <!-- Otherwise, display that there are no search results -->
+      <ng-template #noSearchResults>
         <div class="no-results flex center-xy col">
             <p class="intro thin">No sales found in your area!</p>
             <i style="color: gray; font-size: 4em;" class="fa-solid fa-triangle-exclamation"></i>
         </div>
       </ng-template>
+      <ng-template #searchSalesLoader>
+        <div class="no-results flex center-xy col ld-container">
+            <app-loading></app-loading>
+            <p class="thin">Loading Sales</p>
+        </div>
+      </ng-template>
     </div>
-    <div class="container popular-garage-sales">
-        <p style="margin-bottom: 15px;" class="text intro">Popular Sales</p>
-        <!-- Include list of top 5 or so sales i.e sales with the most visits -->
-        <app-sale-listing 
-        *ngFor="let sale of (topSaleSearchResults$|async)" 
-        [sale]="sale" 
-        (click)="onNavigate(['sale',sale._id])">
-        </app-sale-listing>
+
+    <!-- Display any available top sales -->
+    <div *ngIf="!isLoadingTopSales; else popularSalesLoader">
+        <div 
+            *ngIf="topSaleSearchResults$.value !==null&& 
+                    topSaleSearchResults$.value.length!==0; 
+                    else noPopularSales" 
+            class="container popular-garage-sales"
+        >
+            <p style="margin-bottom: 15px;" class="text intro">Popular Sales</p>
+            <!-- Include list of top 5 or so sales i.e sales with the most visits -->
+            <app-sale-listing 
+            *ngFor="let sale of (topSaleSearchResults$|async)" 
+            [sale]="sale" 
+            (click)="onNavigate(['sale',sale._id])">
+            </app-sale-listing>
+        </div>
     </div>
+
+    <!-- If there no no top sales available from API, display "no sales found" to user-->
+    <ng-template #noPopularSales>
+        <div class="container popular-garage-sales">
+            <p class="text intro">Popular Sales</p>
+            <div class="no-results flex center-xy col">
+                <p class="intro thin">No sales found in your area!</p>
+                <i style="color: gray; font-size: 4em;" class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- Display loading screen for the most popular sales -->
+    <ng-template #popularSalesLoader>
+        <div class="container popular-garage-sales">
+            <p class="text intro">Popular Sales</p>
+            <div class="load-wrap flex center-xy col">
+                <app-loading></app-loading>
+                <p class="text thin">Loading Sales</p>
+            </div>
+        </div>
+    </ng-template>
 </div>

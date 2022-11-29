@@ -47,6 +47,9 @@ exports.login = asyncHandler(async (req,res,next)=> {
 /**
  * @Route: POST api/v1/auth/signup
  * @Scope: Public
+ * 
+ * @params:
+ *  - username
  */
 exports.signup = asyncHandler( async(req,res,next)=> {
 
