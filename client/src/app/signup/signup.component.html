@@ -1,43 +1,106 @@
-<div class="main">
+<div class="main flex center-xy">
 
     <div [formGroup]="signupForm" class="signup-form">
         <div class="signup-logo">
-            <p class="text intro">Garage Sale</p>
+            <p class="text header">Garage Sale</p>
         </div>
         <div class="title-wrapper">
-            <p class="text title">Sign Up</p>
+            <p class="text intro">Sign Up Today!</p>
+        </div>
+        <div class="top-inputs-container flex">
+            <div class="top-inputs flex col">
+                <div class="input-container">
+                    <label for="full_name">Full Name <span class="required">*</span></label>
+                    <input  
+                    autocomplete="off" 
+                    id="full_name" 
+                    formControlName="fullName" 
+                    type="text" 
+                    class="form-input"
+                    placeholder="Adam Smith"
+                    >
+                    <mat-icon class="left-icon">badge</mat-icon>
+                </div>
+                <div class="input-container">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input
+                    placeholder="adamsmith@gmail.com"
+                    autocomplete="off" 
+                    id="email" 
+                    formControlName="email"
+                    id="email" 
+                    type="email" 
+                    class="form-input"
+
+                      >
+                    <mat-icon class="left-icon">mail</mat-icon>
+                </div>
+            </div>
+            <div class="top-inputs flex col">
+                <div class="input-container">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <input 
+                    autocomplete="off" 
+                    formControlName="password" 
+                    id="password" 
+                    [type]="enablePasswordVisibility?'text':'password'"
+                    class="form-input"
+                     >
+                    <mat-icon class="left-icon">lock</mat-icon>
+                    <mat-icon 
+                    *ngIf="!enablePasswordVisibility" 
+                    matTooltip="Enable password visibility"
+                    (click)="enablePasswordVisibility=true"
+                    [matTooltipShowDelay]="1500"
+                    class="right-icon">visibility</mat-icon>
+                    <mat-icon 
+                    (click)="enablePasswordVisibility=false"
+                    [matTooltipShowDelay]="1500"
+                    matTooltip="Disable password visibility"
+                    *ngIf="enablePasswordVisibility"
+                     class="right-icon">visibility_off</mat-icon>
+                </div>
+                <div class="input-container">
+                    <label for="phone">Phone <span class="required">*</span></label>
+                    <input 
+                    autocomplete="off"
+                     id="phone" 
+                     formControlName="phone" 
+                     type="text" 
+                     class="form-input"
+                     placeholder="(630)-123-4567"
+                     >
+                    <mat-icon class="left-icon">phone</mat-icon>
+                </div>
+            </div>
         </div>
         <div class="input-container">
-            <label for="full_name">Full Name <span class="required">*</span></label>
-            <input formControlName="fullName" type="text" class="form-input">
-        </div>
-        <div class="input-container">
-            <label for="full_name">email <span class="required">*</span></label>
-            <input formControlName="email" id="email" type="email" class="form-input">
-        </div>
-        <div class="input-container">
-            <label for="full_name">Password <span class="required">*</span></label>
-            <input formControlName="password" type="password" class="form-input">
-        </div>
-        <div class="input-container">
-            <label for="full_name">Phone <span class="required">*</span></label>
-            <input formControlName="phone" type="tel" class="form-input">
-        </div>
-        <div class="input-container">
-            <label for="full_name">Profile Image <span class="required">*</span></label>
+            <label for="profile_img">Profile Image <span class="required">*</span></label>
             <input 
+            id="profile_img"
             formControlName="profileImg"
              type="text" 
              class="form-input"
-             placeholder="Profile Image goes here"
+             autocomplete="off"
+             placeholder="Profile image goes here"
              >
+             <mat-icon class="left-icon">photo_camera</mat-icon>
         </div>
-        <div class="submit-container">
+        <div class="submit-container flex center-xy">
             <button
             mat-ripple
             matRippleColor="rgba(0, 0, 0, 0.083)"
+            class="submit-btn"
             (click)="null"
-            >Create Account</button>
+            >Register Account</button>
+        </div>
+        <div class="text-wrapper">
+            <p class="text thin">
+                Already a member?
+                <span 
+                (click)="onNavigate(['login'])"
+                class="switch-login">Click here to log in!</span>
+            </p>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { debounce, interval, throttleTime, timeout } from 'rxjs';
 import { validatePassword } from '../util/validators';
 @Component({
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit {
   shakeForm:boolean = false;
   showPasswordVisibility:boolean = false;
 
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -30,6 +33,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit():void{
     this.triggerShake();
+  }
+
+
+  onNavigate(route:string[]):void{
+    this.router.navigate(route);
   }
 
 

@@ -8,6 +8,10 @@
         </div>
     </div>
     <div class="nav-group-right flex center-xy">
-        <button (click)="onNavigate(['login'])" mat-raised-button color="basic">Login</button>
+        <button (click)="onNavigate(['login'])" mat-raised-button color="none">Login</button>
+        <button mat-raised-button 
+        style="background-color: #5e9544!important; margin-left: 10px; color: white;"
+        (click)="onNavigate(['signup'])"
+        >Sign Up</button>
     </div>
 </div>
