@@ -1,0 +1,85 @@
+<div class="main">
+
+    <div class="dashboard-header flex center-y">
+        <div class="img-wrapper">
+            <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" 
+            alt="Profile image" 
+            class="img">
+        </div>
+        <p class="text thin">My Dashboard</p>
+    </div>
+    <!-- Divide into three sections -->
+    <div class="dashboard-layout flex">
+        <div class="sale-col">
+            <div class="sale-desc-wrapper"> 
+                <p class="text sale-descriptor">My Sales</p>
+            </div>
+            <!-- ngfor -->
+            <div class="my-sale-item flex sp-between center-xy">
+                <p class="text">My Garage Sale</p>
+                <!-- Insert fontawesome icon here -->
+                <mat-icon>inventory_2</mat-icon>
+                <p class="text thin">+32 items</p>
+                <!-- insert goto icon -->
+                <mat-icon id="nav-to-sales-icon">navigate_next</mat-icon>
+            </div>
+        </div>
+        <div class="info-col">
+
+            <div class="create-sale-container">
+                <p class="text create-sale-txt">Start a new sale</p>
+                <button><mat-icon>add_circle</mat-icon></button>
+            </div>
+
+            <div class="info-item">
+                <div class="info-header flex center-y">
+                    <mat-icon>badge</mat-icon>                    
+                    <p class="text">Full Name</p>
+                </div>
+                <div class="info-content">
+                    <p class="text">William Pattison</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-header flex center-y">
+                    <i class="info-icon fa-solid fa-at"></i>                    
+                    <p class="text">Email Address</p>
+                </div>
+                <div class="info-content">
+                    <p class="text">will.m.pattison@gmail.com</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-header flex center-y">
+                    <mat-icon>phone</mat-icon>
+                    <p class="text">Phone</p>
+                </div>
+                <div class="info-content">
+                    <p class="text">(630)-962-2100</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-header flex center-y">
+                    <mat-icon>lock</mat-icon>
+                    <p class="text">Password</p>
+                </div>
+                <div class="info-content">
+                    <p class="text">•••••••</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-header flex center-y">
+                    <mat-icon>person</mat-icon>
+                    <p class="text">Profile Image</p>
+                </div>
+                <div class="info-content">
+                    <p class="text">https://yourimagehere.png</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

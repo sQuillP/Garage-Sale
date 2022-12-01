@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 
 /**
  * tested: false
- * GET: api/v1/auth/login
+ * POST: api/v1/auth/login
  */
 exports.login = asyncHandler(async (req,res,next)=> {
 
@@ -35,11 +35,14 @@ exports.login = asyncHandler(async (req,res,next)=> {
         );
     }
 
+    //Just delete the password of the user that is signing in.
+    delete fetchedUser.password;
+
     const signedToken = signToken(fetchedUser);
 
     res.json({
         status: 200,
-        content: signedToken
+        data: signedToken
     });
 });
 

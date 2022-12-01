@@ -20,7 +20,7 @@
     padding: 20px 0px;
 }
 
-.required{
+.required, .error-msg{
     color: red;
 }
 
@@ -80,6 +80,10 @@
     box-shadow: 0 0 0px 3px rgba(94, 149, 68,0.5);
 }
 
+.invalid-input{
+    box-shadow: 0 0 0px 3px rgba(173, 37, 37, 0.5);
+}
+
 .submit-btn{
     padding: 10px 20px;
     border: none;
@@ -100,8 +104,25 @@
 
 .text-wrapper{
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 20px; 
     font-size: 1.1em;
 }
 
 .switch-login{cursor: pointer;}
+
+.shake-form {
+    animation: shake_form 500ms;
+}
+
+.error-msg{
+    position: absolute;
+    bottom: 0px;
+    left: 25px;
+}
+
+
+@keyframes shake_form {
+    25%{transform: translateX(-40px);}
+    50%{transform: translateX(40px);}
+    75%{transform: translateX(-40px);}
+}

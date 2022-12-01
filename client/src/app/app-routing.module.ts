@@ -6,6 +6,7 @@ import { CatalogueSearch } from './catalogue-search/catalogue-search.component';
 import { ViewItemComponent } from './view-item/view-item.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:"signup", component:SignupComponent},
   {path: "login", component:LoginComponent},
   {path: "catalogue-search", component: CatalogueSearch},
+  {path:"dashboard/:userId", component: MyDashboardComponent},
   {path:"**", redirectTo:"/home", pathMatch: 'full'}
 ];
 

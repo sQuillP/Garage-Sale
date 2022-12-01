@@ -1,6 +1,10 @@
 <div class="main flex center-xy">
 
-    <div [formGroup]="signupForm" class="signup-form">
+    <div
+    [ngClass]="{'shake-form':shakeForm}"
+    [formGroup]="signupForm" 
+    class="signup-form"
+    >
         <div class="signup-logo">
             <p class="text header">Garage Sale</p>
         </div>
@@ -12,6 +16,7 @@
                 <div class="input-container">
                     <label for="full_name">Full Name <span class="required">*</span></label>
                     <input  
+                    [ngClass]="{'invalid-input':hasError('fullName')}"
                     autocomplete="off" 
                     id="full_name" 
                     formControlName="fullName" 
@@ -20,10 +25,16 @@
                     placeholder="Adam Smith"
                     >
                     <mat-icon class="left-icon">badge</mat-icon>
+                    <div
+                    *ngIf="hasError('fullName')"
+                    class="error-msg">
+                        <p class="text">{{displayError('fullName')}}</p>
+                    </div>
                 </div>
                 <div class="input-container">
                     <label for="email">Email <span class="required">*</span></label>
                     <input
+                    [ngClass]="{'invalid-input':hasError('email')}"
                     placeholder="adamsmith@gmail.com"
                     autocomplete="off" 
                     id="email" 
@@ -31,15 +42,20 @@
                     id="email" 
                     type="email" 
                     class="form-input"
-
                       >
                     <mat-icon class="left-icon">mail</mat-icon>
+                    <div
+                    *ngIf="hasError('email')"
+                    class="error-msg">
+                        <p class="text">{{displayError('email')}}</p>
+                    </div>
                 </div>
             </div>
             <div class="top-inputs flex col">
                 <div class="input-container">
                     <label for="password">Password <span class="required">*</span></label>
                     <input 
+                    [ngClass]="{'invalid-input':hasError('password')}"
                     autocomplete="off" 
                     formControlName="password" 
                     id="password" 
@@ -59,24 +75,37 @@
                     matTooltip="Disable password visibility"
                     *ngIf="enablePasswordVisibility"
                      class="right-icon">visibility_off</mat-icon>
+                     <div
+                    *ngIf="hasError('password')"
+                    class="error-msg">
+                        <p class="text">{{displayError('password')}}</p>
+                    </div>
                 </div>
                 <div class="input-container">
                     <label for="phone">Phone <span class="required">*</span></label>
                     <input 
                     autocomplete="off"
+                    [ngClass]="{'invalid-input':hasError('phone')}"
                      id="phone" 
+                     maxlength="14"
                      formControlName="phone" 
                      type="text" 
                      class="form-input"
                      placeholder="(630)-123-4567"
                      >
                     <mat-icon class="left-icon">phone</mat-icon>
+                    <div
+                    *ngIf="hasError('phone')"
+                    class="error-msg">
+                        <p class="text">{{displayError('phone')}}</p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="input-container">
             <label for="profile_img">Profile Image <span class="required">*</span></label>
             <input 
+            [ngClass]="{'invalid-input':hasError('profileImg')}"
             id="profile_img"
             formControlName="profileImg"
              type="text" 
@@ -85,13 +114,18 @@
              placeholder="Profile image goes here"
              >
              <mat-icon class="left-icon">photo_camera</mat-icon>
+             <div
+                *ngIf="hasError('profileImg')"
+                class="error-msg">
+                    <p class="text">{{displayError('profileImg')}}</p>
+            </div>
         </div>
         <div class="submit-container flex center-xy">
             <button
             mat-ripple
             matRippleColor="rgba(0, 0, 0, 0.083)"
             class="submit-btn"
-            (click)="null"
+            (click)="onSubmit()"
             >Register Account</button>
         </div>
         <div class="text-wrapper">

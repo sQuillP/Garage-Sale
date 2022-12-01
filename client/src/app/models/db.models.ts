@@ -49,10 +49,10 @@ export interface Item {
 
 
 export interface User {
-    fullName:string,
-    email:string,
-    password:string,
-    phone:string,
-    profileImg:string,
-    conversations:string[];
+    fullName?:string,
+    email?:string,
+    password?:string,
+    phone?:string,
+    profileImg?:string,
+    conversations?:string[];
 }

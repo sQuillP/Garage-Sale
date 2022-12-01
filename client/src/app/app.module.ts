@@ -35,6 +35,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { LoadingComponent } from './loading/loading.component';
 import { SignupComponent } from './signup/signup.component';
+import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { SignupComponent } from './signup/signup.component';
     FormatPhonePipe,
     formatSuperScriptPipe,
     LoadingComponent,
-    SignupComponent
+    SignupComponent,
+    MyDashboardComponent
   ],
   imports: [
     BrowserModule,
