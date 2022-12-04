@@ -36,6 +36,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { LoadingComponent } from './loading/loading.component';
 import { SignupComponent } from './signup/signup.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
+import { PopupMenuComponent } from './popup-menu/popup-menu.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -57,7 +60,8 @@ import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
     formatSuperScriptPipe,
     LoadingComponent,
     SignupComponent,
-    MyDashboardComponent
+    MyDashboardComponent,
+    PopupMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,7 @@ import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
     MatInputModule,
     MatRadioModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
   providers: [
   ],

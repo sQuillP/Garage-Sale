@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../Services/auth.service';
-import { validateImage, validatePassword, validatePhone } from '../util/validators';
+import { formatPhoneInput, _getError, validateImage, validatePassword, validatePhone } from '../util/validators';
 
 @Component({
   selector: 'app-signup',
@@ -27,12 +27,14 @@ export class SignupComponent implements OnInit, OnDestroy {
   shakeForm:boolean = false;
   shakeFormTimeout:any;
 
+  displayError = _getError(this.signupForm);
+
   phoneInputSub:Subscription;
 
   constructor(
     private router:Router,
     private auth:AuthService,
-    private _snackbar:MatSnackBar
+    private _snackbar:MatSnackBar,
   ) { }
 
 
@@ -45,12 +47,11 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   
   ngOnInit(): void {
-    this._formatPhoneInput();
-  }
+    this.phoneInputSub = formatPhoneInput(this.signupForm);
+  } 
 
 
   ngOnDestroy(): void {
-      this.phoneInputSub.unsubscribe();
   }
 
 
@@ -83,40 +84,26 @@ export class SignupComponent implements OnInit, OnDestroy {
 
 
   /* Return an error if there is an invalid form field */
-  displayError(inputName:string):string | void {
-    const error:any = Object.keys(this.signupForm.get(inputName).errors)[0];
-    if(error === "required")
-      return "This field is required";
+  // displayError(inputName:string):string | void {
+  //   const error:any = Object.keys(this.signupForm.get(inputName).errors)[0];
+  //   if(error === "required")
+  //     return "This field is required";
 
-    if(error === "invalidDateFormat")
-      return "Please provide a valid date";
+  //   if(error === "invalidDateFormat")
+  //     return "Please provide a valid date";
 
-    if(error === "email")
-      return "Please provide a valid email";
+  //   if(error === "email")
+  //     return "Please provide a valid email";
 
-    if(error === "invalidPhone")
-      return "Please provide a valid phone number";
+  //   if(error === "invalidPhone")
+  //     return "Please provide a valid phone number";
 
-    if(error==="invalidImage")
-      return "Please provide a valid image URL"
+  //   if(error==="invalidImage")
+  //     return "Please provide a valid image URL"
 
-    if(error === "invalidPassword")
-      return "Must contain an uppercase letter and a number";
-  }
-
-
-  /* Validate the user input as they type to perfectly format the 
-  phone number. */
-  private  _formatPhoneInput():void{
-    this.phoneInputSub = this.signupForm.get('phone').valueChanges.subscribe((value)=>{
-      const formRef = this.signupForm.get('phone');
-      if(value?.length === 3){
-        formRef.setValue("("+value+")-");
-      }
-      if(value?.length===9)
-        formRef.setValue(value + "-");
-    })
-  }
+  //   if(error === "invalidPassword")
+  //     return "Must contain an uppercase letter and a number";
+  // }
 
 
   /* Trigger shake animation when the form is invalid. */

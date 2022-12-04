@@ -4,6 +4,7 @@ import { catchError, map, mergeMap, Observable, tap } from "rxjs";
 import { Item, Sale } from "src/app/models/db.models";
 import { SaleParams } from "src/app/models/API.model";
 import { MapsService } from "./maps.service";
+import { AuthService } from "./auth.service";
 
 
 @Injectable({providedIn:"root"})
@@ -13,7 +14,8 @@ export class DBService {
 
     constructor(
         private mapService:MapsService,
-        private http:HttpClient
+        private http:HttpClient,
+        private auth:AuthService
     ){
 
     }
@@ -110,5 +112,13 @@ export class DBService {
         return this.http.get(`${this.URL}/items`,{
             params
         })
+    }
+
+
+
+    updateUser(update:any):Observable<any> {
+        return this.http
+        .put<any>(`${this.URL}/users/${this.auth.currentUser$.value._id}`,update)
+
     }
 }

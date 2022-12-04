@@ -53,9 +53,10 @@ exports.createUser = asyncHandler(async (req,res,next)=> {
 
 /**
  * PUT: api/v1/users/:userId
+ * 
  */
  exports.updateUser = asyncHandler(async (req,res,next)=> {
-   const updatedUser = await User.findByIdAndUpdate(req.params.userId);
+   const updatedUser = await User.findByIdAndUpdate(req.params.userId,req.body);
 
 
    if(updatedUser == null){

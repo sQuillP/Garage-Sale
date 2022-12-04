@@ -8,7 +8,7 @@ import jwt_decode from 'jwt-decode';
 @Injectable({providedIn:"root"})
 export class AuthService {
 
-    readonly URL:string = "http://localhost:5000/api/v1/auth"
+    readonly URL:string = "http://localhost:5000/api/v1/auth";
 
     /* Determine if the user is logged in or not */
     userToken$ = new BehaviorSubject<string>(null);

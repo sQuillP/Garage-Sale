@@ -1,0 +1,65 @@
+  onEdit(event:any,controlName:string):void{
+    const currentControl = this.userInfo.get(controlName);
+    //If the input was already clicked prompt user to save what happened.
+    if(currentControl.enabled && 
+      currentControl.valid 
+      // currentControl.value !== this.savedValue
+      ){ 
+      currentControl.disable();
+      this._openSaveDialog(
+        controlName,
+        `Save modified field1?`,
+        `Previous field will be overwritten with ${currentControl.value}`
+      );
+      return;
+    }
+    else if(currentControl.enabled&&!currentControl.valid){
+      console.log("invalid control sending to error popup")
+      this.dialog.open(PopupMenuComponent,{
+          data: {
+            title:"Invalid field value", 
+            content: this.displayError(controlName),
+            type:"error"
+          }
+        }
+      )
+      // currentControl.
+      currentControl.disable();
+      return;
+    }
+    //If there was another input that was previously clicked
+    //Disable any other control that was previously enabled
+    for(const controlField of Object.keys(this.userInfo.value)){
+      const otherControl = this.userInfo.get(controlField);
+      if(
+        controlField !== controlName && 
+        otherControl.enabled && 
+        otherControl.valid && 
+        otherControl.value !== this.savedValue
+        ){
+        otherControl.disable();
+        this._openSaveDialog(
+          controlField,
+          "Save Changes to Previous Field?",
+          `Any changes will be overwritten to "${otherControl.value}"`
+        );
+        return;
+      }
+      //Otherwise, tell user that the currently set input is incorrect
+      else if(otherControl.enabled && !otherControl.valid){
+        this.dialog.open(PopupMenuComponent,{
+          data: {
+            title:"Invalid field value", 
+            message: this.displayError(controlField),
+            type:"error"
+          }
+        });
+        otherControl.setValue(this.savedValue);
+        return;
+      }
+    }
+    //Set selected input as the current input.
+    this.userInfo.get(controlName).enable();
+    this.savedValue = currentControl.value;
+    this._focusElement(controlName);
+  }
