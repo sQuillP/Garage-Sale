@@ -25,7 +25,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormatDatePipe } from './pipes/formatDate.pipe';
 import { formatSuperScriptPipe } from './pipes/formatSuperscript.pipe';
 import { FormatPhonePipe } from './pipes/formatPhone.pipe';
@@ -38,6 +38,8 @@ import { SignupComponent } from './signup/signup.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
 import { PopupMenuComponent } from './popup-menu/popup-menu.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { CreateSaleComponent } from './create-sale/create-sale.component';
 
 
 
@@ -61,7 +63,8 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     LoadingComponent,
     SignupComponent,
     MyDashboardComponent,
-    PopupMenuComponent
+    PopupMenuComponent,
+    CreateSaleComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,11 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     MatDialogModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -20,7 +20,7 @@ export class DBService {
 
     }
 
-    /*
+/*
     *  - page: which page the user would like to see
  *  - limit?: how many items per query
  *  - radius: distance in miles to view other garage sales.
@@ -116,9 +116,14 @@ export class DBService {
 
 
 
-    updateUser(update:any):Observable<any> {
+    updateMyInfo(update:any):Observable<any> {
         return this.http
         .put<any>(`${this.URL}/users/${this.auth.currentUser$.value._id}`,update)
+    }
 
+
+    /* Return observable containing response of user's sales */
+    getMySales():Observable<any> {
+        return this.http.get<any>(`${this.URL}/sales/mysales`);
     }
 }

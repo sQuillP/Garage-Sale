@@ -7,6 +7,7 @@ import { ViewItemComponent } from './view-item/view-item.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
+import { CreateSaleComponent } from './create-sale/create-sale.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: "login", component:LoginComponent},
   {path: "catalogue-search", component: CatalogueSearch},
   {path:"dashboard/:userId", component: MyDashboardComponent},
+  {path: "create-sale", component: CreateSaleComponent},
   {path:"**", redirectTo:"/home", pathMatch: 'full'}
 ];
 

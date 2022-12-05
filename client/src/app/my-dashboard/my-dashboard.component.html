@@ -7,7 +7,9 @@
             class="img">
         </div>
         <p class="text thin">Will's Dashboard</p>
-        <div class="create-sale-container">
+        <div 
+        (click)="onNavigate(['new-sale'])"
+        class="create-sale-container">
             <p class="text intro thin">New sale</p>
             <mat-icon class="add-circle">add_circle</mat-icon>
         </div>
@@ -135,23 +137,43 @@
         </div>
         <div class="sale-col">
             <div class="sale-descriptor"> 
-                <p class="text intro">My Sales</p>
+                <p class="text header">My Sales</p>
             </div>
-            <!-- ngfor -->
-            <!-- <div class="my-sale-item flex sp-between center-y">
-                <p class="text">My Garage Sale</p>
-                <div class="flex center-y">
-                    <mat-icon>inventory_2</mat-icon>
-                    <p class="text thin">+32 items</p>
-                </div>
-                <mat-icon id="nav-to-sales-icon">navigate_next</mat-icon>
-            </div> -->
-            <!-- <app-sale-listing
-            *ngFor="let sale of MySales$|async"
-            [sale]=""
-            ></app-sale-listing> -->
-        </div>
-        
-    </div>
 
+            <div class="my-sale-section">
+                <div *ngIf="mySales$ |async;" class="my-sale-wrapper">
+                    <app-sale-listing
+                    *ngFor="let sale of mySales$|async"
+                    [sale]="sale"
+                    ></app-sale-listing>
+                </div>
+                <div *ngIf="displayNoSales" class="no-sale-wrapper">
+                    <div class="no-sale-content">
+                        <p class="text intro">
+                            You Currently Have no Sales
+                        </p>
+                        <p class="text small">Get to selling your stuff today</p>
+                        <i 
+                        style="color: gray;"
+                        class="no-sale-icon fa-sharp fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                </div>
+                <div *ngIf="displayFetchSalesError" class="no-sale-wrapper">
+                    <div class="no-sale-content">
+                        <p class="text intro">
+                            Unable to Fetch Sales
+                        </p>
+                        <p class="text small">Check your internet connection and refresh the page</p>
+                        <i 
+                        style="color: red;"
+                        class="no-sale-icon fa-sharp fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                </div>
+                <div *ngIf="loadingSales" class="no-sale-wrapper flex center-xy col">
+                    <app-loading></app-loading>
+                    <p class="small">loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

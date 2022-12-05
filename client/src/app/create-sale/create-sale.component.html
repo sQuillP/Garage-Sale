@@ -1,0 +1,116 @@
+<div class="main">
+    <div [formGroup]="saleForm" class="create-sale-form">
+        <div class="create-sale-header">
+            <i 
+            matTooltip="Back to Dashboard"
+            matTooltipPosition="right"
+            class="exit-icon fa-solid fa-arrow-left"></i>
+            <p class="header text">Create a New Sale</p>
+        </div>
+        <div class="input-cols-wrapper flex sp-around">
+            <div class="form-col">
+                <div class="input-container flex col">
+                    <label class="input-label"for="_start_date">
+                        Start Date 
+                        <span class="required">*</span>
+                    </label>
+                    <input id="_start_date" 
+                    formControlName="start_date" 
+                    type="text" 
+                    placeholder="ex: 11/23/2022"
+                    class="form-input"
+                    >
+                    <i class="input-icon fa-solid fa-hourglass-start"></i>
+                </div>
+                <div class="input-container flex col">
+                    <label class="input-label"for="_end_date">
+                        End date
+                        <span class="required">*</span>
+                    </label>
+                    <input 
+                    id="_end_date" 
+                    formControlName="end_date" 
+                    type="text"
+                    placeholder="ex: 11/30/2022"
+                    class="form-input"
+                     >
+                    <i class="input-icon fa-solid fa-hourglass-end"></i>
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="input-container flex col">
+                    <label class="input-label"for="address">
+                        Address
+                        <span class="required">*</span>
+                    </label>
+                    <input 
+                    id="_address" 
+                    formControlName="address" 
+                    type="text" 
+                    placeholder="111 S. Main St"
+                    class="form-input"
+                    >
+                    <i class="input-icon fa-solid fa-location-dot"></i>
+                </div>
+                <div class="input-container flex col">
+                    <label class="input-label"for="_title">
+                        Title
+                        <span class="required">*</span>
+                    </label>
+                    <input 
+                    id="_title" 
+                    formControlName="title" 
+                    type="text" 
+                    placeholder="My Garage Sale"
+                    class="form-input"
+                    >
+                    <i class="input-icon fa-solid fa-heading"></i>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-wrapper">
+            <p class="intro">Sale Gallery Images <span class="required">*</span></p>
+            <p class="text">(at least one is required)</p>
+            <div class="img-input-wrapper" *ngFor="let control of gallery.controls; let i = index;">
+                <input 
+                class="img-input" 
+                placeholder="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
+                type="text" [formControl]="gallery.controls[i]">
+                <i class="icon fas fa-camera"></i>
+                <i 
+                matTooltip="Delete This Image Link"
+                (click)="onRemoveImage(i)"
+                *ngIf="i !== 0"
+                class="icon-right fas fa-x"></i>
+            </div>
+            <button
+            (click)="onAddNewImage()"
+            class="img-btn"
+            mat-ripple
+            matRippleColor="rgba(0, 0, 0, 0.083)"
+            > <i class="fas fa-plus"></i> Add Another image URL</button>
+        </div>
+        <div class="form-text-wrapper">
+                <p class="text intro form-text-intro">Description <span class="required">*</span></p>
+                <textarea 
+                placeholder="Talk about what you are selling. Try not to leave this field blank"
+                formControlName="description" class="form-textarea">
+                </textarea>
+        </div>
+        <div class="form-text-wrapper">
+                <p class="text intro form-text-intro">Terms and Conditions <span class="required">*</span></p>
+                <textarea 
+                placeholder="Let customers know what you expect from them and vice versa"
+                class="form-textarea" 
+                formControlName="terms_conditions">
+                </textarea>
+        </div>
+        <div class="btn-wrapper">
+            <button 
+            mat-ripple
+            matRippleColor="rgba(0, 0, 0, 0.083)"
+            class="img-btn">Start Sellin'</button>
+        </div>
+    </div>
+</div>
+ 

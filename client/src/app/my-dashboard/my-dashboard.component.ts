@@ -2,7 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { fromEvent, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, fromEvent, map, Observable, Subscription } from 'rxjs';
 import { PopupMenuComponent } from '../popup-menu/popup-menu.component';
 import { AuthService } from '../Services/auth.service';
 import { DBService } from '../Services/db.service';
@@ -23,6 +24,8 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
   @ViewChild('phone')phone:ElementRef;
 
 
+  mySales$ = new BehaviorSubject<any>(null);
+
   /* Form validation/contents */
   userInfo = new FormGroup({
     fullName: new FormControl("WilliamPattison",[Validators.required]),
@@ -34,6 +37,10 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
 
   savedValue:string;
 
+  displayNoSales:boolean = false;
+  displayFetchSalesError:boolean = false;
+  loadingSales:boolean = false;
+
   /* subscription for when user clicks away from focused input */
   clickSubscription:Subscription;
   formatPhoneSubscription:Subscription;
@@ -43,7 +50,8 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
   constructor(
     private db:DBService,
     private _snackbar:MatSnackBar,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private router:Router
   ) { 
     this.userInfo.disable();
   }
@@ -58,8 +66,10 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
       this._focusElement(controlName);
       return
     };
+    
     //user clicks different control
-    if(this._clickedAnotherEdit(controlName)) return;
+    if(this._clickedAnotherEdit(controlName)) 
+      return;
 
     //Set selected input as the current input.
     this.userInfo.get(controlName).enable();
@@ -72,6 +82,8 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     /* Autoformat the users phone input */
     this.formatPhoneSubscription = formatPhoneInput(this.userInfo);
+    /* Fetch user's sales */
+    this._fetchMySales();
     /* Detect when user clicks away from editing field or edit icon. */
     this.clickSubscription = fromEvent(document,'click').subscribe((event:any)=> {
       const classes:string[] = Array.from(event.path[0].classList);
@@ -80,6 +92,9 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+
+  onNavigate(path:string[]):void{this.router.navigate(path);}
 
 
   ngOnDestroy(){
@@ -92,7 +107,7 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
   //Catch any error that arises and display success or error to screen.
   private _saveField(controlName:string):void {
     const updatedValue:string = this.userInfo.get(controlName).value;
-    this.db.updateUser({[controlName]:updatedValue}).subscribe({
+    this.db.updateMyInfo({[controlName]:updatedValue}).subscribe({
       next:(res:any)=> {
         this._snackbar.open("successfully saved",null,{
           duration:1000,
@@ -115,7 +130,7 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
           this.email.nativeElement.focus(); break;
       case "password":
           this.password.nativeElement.focus(); break;
-      case "profileImage":
+      case "profileImg":
           this.profileImage.nativeElement.focus(); break;
       case "phone":
           console.log('clicked the phone')
@@ -201,13 +216,31 @@ private _clickedAnotherEdit(controlName:string):boolean {
     dialogRef.afterClosed().subscribe((saveData:boolean)=>{
       if(saveData){
         console.log("saving data");
-        // this._saveField(controlName);
+        this._saveField(controlName);
       } else{
-        console.log('cancelling modification')
-        //reset the control name
         this.userInfo.get(controlName).setValue(this.savedValue);
       }
     });
+  }
+
+  private _fetchMySales(): void {
+    this.loadingSales = true;
+    this.db.getMySales().pipe(map((res:any)=> res.data))
+    .subscribe({
+      next:(data:any)=> {
+        if(data.length === 0)
+          this.displayNoSales = true;
+        this.mySales$.next(data);
+        this.loadingSales = false;
+        this.displayFetchSalesError = false;
+      },
+      error:(err)=> {
+        this._snackbar.open("Cannot connect to server","OK",{ duration: 5000});
+        this.displayNoSales = false;
+        this.displayFetchSalesError = true;
+        this.loadingSales = false;
+      }
+    })
   }
 
 

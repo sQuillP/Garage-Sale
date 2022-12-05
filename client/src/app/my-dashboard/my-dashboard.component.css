@@ -159,10 +159,34 @@
     font-size: 1.4em;
 }
 
-.info-content >p {
-}
-
 .info-input:focus{
     background: rgb(78, 124, 56);
 }
+
+.my-sale-section{
+}
+
+.no-sale-wrapper{
+    
+}
+
+.no-sale-wrapper {
+    height: 30vh;
+    width: 100%;
+    background: white;
+}
+
+.no-sale-icon{
+    font-size: 2em;
+}
+
+.no-sale-content{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.no-sale-content >*{
+    margin-bottom: 10px;
+}
+
 /* Media queries for layout!*/

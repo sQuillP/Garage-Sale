@@ -64,8 +64,9 @@ export  const validateImage = (control:AbstractControl<string>):ValidationErrors
   }
 
 
-  /* Return error message of a particular field  */
-export function _getError(formGroup:FormGroup):(str)=> string |void {
+
+
+export function _getError(formGroup:FormGroup):(str)=> string| void {
     return (inputName:string):string|void=>{
         console.log(formGroup.get(inputName).errors)
         const error:any = Object.keys(formGroup.get(inputName).errors)[0];
@@ -87,4 +88,5 @@ export function _getError(formGroup:FormGroup):(str)=> string |void {
         if(error === "invalidPassword")
         return "Must contain an uppercase letter and a number";
     }
+
 }

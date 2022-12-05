@@ -11,7 +11,7 @@ import { formatPhoneInput, _getError, validateImage, validatePassword, validateP
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
 
 
   signupForm = new FormGroup({
@@ -43,16 +43,9 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.router.navigate(path);
   }
 
-
-
-  
   ngOnInit(): void {
     this.phoneInputSub = formatPhoneInput(this.signupForm);
   } 
-
-
-  ngOnDestroy(): void {
-  }
 
 
   // Return true if a form field is invalid
@@ -80,31 +73,6 @@ export class SignupComponent implements OnInit, OnDestroy {
       });
     }
   }
-
-
-
-  /* Return an error if there is an invalid form field */
-  // displayError(inputName:string):string | void {
-  //   const error:any = Object.keys(this.signupForm.get(inputName).errors)[0];
-  //   if(error === "required")
-  //     return "This field is required";
-
-  //   if(error === "invalidDateFormat")
-  //     return "Please provide a valid date";
-
-  //   if(error === "email")
-  //     return "Please provide a valid email";
-
-  //   if(error === "invalidPhone")
-  //     return "Please provide a valid phone number";
-
-  //   if(error==="invalidImage")
-  //     return "Please provide a valid image URL"
-
-  //   if(error === "invalidPassword")
-  //     return "Must contain an uppercase letter and a number";
-  // }
-
 
   /* Trigger shake animation when the form is invalid. */
   private _shakeForm():void{

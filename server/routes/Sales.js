@@ -7,12 +7,16 @@ const {
     getSale,
     mySales
 }  = require("../controllers/Sale");
+
+const {
+    authenticate
+} = require('../Middleware/Auth')
 const itemsRoute = require('./Items');
 
 router.use("/:saleId/items",itemsRoute);
 
 router.route('/')
-.get(getSales)
+.get(authenticate,getSales)
 .post(createSale)
 ;
 
