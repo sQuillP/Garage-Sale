@@ -1,7 +1,3 @@
-.main{
-    
-}
-
 .create-sale-form{
     max-width: 1100px;
     margin: 100px auto 0 auto;
@@ -9,7 +5,6 @@
     background: white;
     border-radius: 15px;
     overflow: hidden;
-    ;
 }
 
 .create-sale-header{
@@ -20,7 +15,6 @@
     position: relative;
 }
 
-
 .input-cols-wrapper{width: 100%}
 
 .input-container{
@@ -28,42 +22,23 @@
     position: relative;
 }
 
-.form-input{
+.form-input, .img-input {
     outline: none;
     background: var(--white-2);
     border: none;
-    transition:  box-shadow 100ms linear;
     border-radius: 4px;
     margin: 10px 0px;
-    width: 100%;
     box-sizing: border-box;
     font-size: 1.2em;
     transition: box-shadow 200ms linear;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
-    padding: 13px 45px;
 }
 
-.form-input:focus, .img-input:focus, .form-textarea:focus {
-    box-shadow: 0 0 0px 3px rgba(94, 149, 68,0.5);
-}
 
-.error-input {
-    box-shadow: 0 0 0px 3px rgba(149, 68, 68, 0.5);
-
-}
-
-.form-text-wrapper{
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
-}
-.required{color: red;}
-.form-text-intro{margin-bottom: 20px;}
 .form-textarea {
     padding: 10px;
     box-sizing: border-box;
     resize: none;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
     width: 750px;
     height: 150px;
     font-size: 1.2em;
@@ -72,7 +47,35 @@
     border: none;
     transition: box-shadow 200ms linear;
     border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
+
+.form-input{
+    width: 100%;
+    padding: 13px 45px;
+}
+
+.img-input{
+    width: 750px;
+    padding: 13px 45px;
+}
+
+.form-input:focus, .img-input:focus, .form-textarea:focus {
+    box-shadow: 0 0 0px 3px rgba(94, 149, 68,0.5);
+}
+
+.error-input {
+    box-shadow: 0 0 0px 3px rgba(218, 50, 50, 0.5);
+}
+
+.form-text-wrapper{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.required, .error{color: red;}
+.form-text-intro{margin-bottom: 20px;}
+
 
 
 .gallery-wrapper{
@@ -82,22 +85,12 @@
     margin-bottom: 50px;
 }
 
-.img-input{
-    outline: none;
-    background: var(--white-2);
-    border: none;
-    transition:  box-shadow 100ms linear;
-    border-radius: 4px;
-    margin: 10px 0px;
-    width: 750px;
-    box-sizing: border-box;
-    font-size: 1.2em;
-    transition: box-shadow 200ms linear;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
-    padding: 13px 45px;
-}
 
-.img-input-wrapper{ position: relative;}
+
+.img-input-wrapper{ 
+    position: relative;
+
+}
 
 .img-btn {
     padding: 10px 20px;
@@ -109,11 +102,10 @@
     margin-top: 20px;
 }
 
-.icon, .input-icon, .exit-icon, .icon-right{
+.camera-icon, .input-icon, .exit-icon, .icon-right{
     position: absolute;
     color: gray;
     font-size: 1.4em;
-
 }
 
 .exit-icon{
@@ -122,12 +114,10 @@
     color: white;
     cursor: pointer;
     transition: transform 100ms linear;
-    ;
 }
 
-.exit-icon:hover{
-    transform: scale(1.1);
-}
+.exit-icon:hover{transform: scale(1.1);}
+.icon-right:hover{transform: scale(1.2);}
 
 .icon-right{
     right: 15px;;
@@ -137,22 +127,44 @@
     transition: 100ms linear transform;
 }
 
-.icon-right:hover{transform: scale(1.2);}
 
-.icon{
+.camera-icon{
     top: 23px;
-    left: 15px;
+    left: 13px;
 
 }
 
 .input-icon{
     top: 41px;
-    left: 15px;
-
+    left: 13px;
 }
 
 
 .btn-wrapper{
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
+}
+
+
+/*Small screens and mobile*/
+@media screen and (max-width: 900px) {
+    .input-cols-wrapper{flex-direction: column;}
+    .input-container, .img-input-wrapper{padding: 10px;}
+    .input-container{margin: 25px 0px;}
+    .form-textarea{width: 100%}
+    .input-icon{
+        top: 52px;;
+        left: 20px;
+    }
+    .camera-icon{
+        top: 34px;
+        left: 20px;
+    }
+    .form-text-wrapper{
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .img-input{
+        width: 100%;
+    }
 }

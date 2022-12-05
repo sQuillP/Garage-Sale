@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup, ValidationErrors } from "@angular/forms"
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from "@angular/forms"
 import { Subscription } from "rxjs";
 
 
@@ -65,7 +65,7 @@ export  const validateImage = (control:AbstractControl<string>):ValidationErrors
 
 
 
-
+//Return an error message for a particular form input.
 export function _getError(formGroup:FormGroup):(str)=> string| void {
     return (inputName:string):string|void=>{
         console.log(formGroup.get(inputName).errors)
@@ -88,5 +88,15 @@ export function _getError(formGroup:FormGroup):(str)=> string| void {
         if(error === "invalidPassword")
         return "Must contain an uppercase letter and a number";
     }
+}
 
+
+//Return an error message for a form array.
+export function _getFormArrayError(formGroup:FormGroup):(control:FormControl)=> string|void {
+    return (control:FormControl): string | void => {
+        const error = Object.keys(control.errors)[0];
+        if(error === "required")
+            return "This field is required";
+        //Add more case statements as more validations are required
+    }
 }

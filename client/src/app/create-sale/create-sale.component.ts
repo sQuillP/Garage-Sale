@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { validateDate } from '../util/validators';
+import { PopupMenuComponent } from '../popup-menu/popup-menu.component';
+import { DBService } from '../Services/db.service';
+import { validateDate, _getFormArrayError } from '../util/validators';
 import {_getError} from "../util/validators"
 @Component({
   selector: 'app-create-sale',
@@ -21,10 +25,12 @@ export class CreateSaleComponent implements OnInit {
   });
 
   showError = _getError(this.saleForm);
-
+  showFormArrayError = _getFormArrayError(this.saleForm);
 
   constructor(
-    private router:Router
+    private router:Router,
+    private db:DBService,
+    private dialog:MatDialog
   ) { }
 
   get gallery():FormArray{
@@ -46,6 +52,27 @@ export class CreateSaleComponent implements OnInit {
   hasError(field:string):boolean {
     const control = this.saleForm.get(field);
     return control.touched && !control.valid;
+  }
+
+  imgFieldError(imgControl:FormControl):boolean{
+    return imgControl.touched && !imgControl.valid;
+  }
+
+  onCreateSale():void{
+    if(!this.saleForm.valid){
+      console.log('sale form not valid');
+      this.dialog.open(PopupMenuComponent,{
+        data:{
+          title:"Unable to Create Garage Sale",
+          content: "Please make sure all fields are filled out correctly.",
+          type:"error"
+        }
+      })
+      return;
+    }
+
+    const saleObj = {...this.saleForm.value};
+    console.log(saleObj)
   }
 
   ngOnInit(): void {

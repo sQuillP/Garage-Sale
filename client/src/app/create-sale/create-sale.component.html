@@ -2,6 +2,7 @@
     <div [formGroup]="saleForm" class="create-sale-form">
         <div class="create-sale-header">
             <i 
+            (click)="onNavigate(['dashboard','asdf'])"
             matTooltip="Back to Dashboard"
             matTooltipPosition="right"
             class="exit-icon fa-solid fa-arrow-left"></i>
@@ -14,13 +15,18 @@
                         Start Date 
                         <span class="required">*</span>
                     </label>
-                    <input id="_start_date" 
+                    <input 
+                    [ngClass]="{'error-input':hasError('start_date')}"
+                    id="_start_date" 
                     formControlName="start_date" 
                     type="text" 
                     placeholder="ex: 11/23/2022"
                     class="form-input"
                     >
                     <i class="input-icon fa-solid fa-hourglass-start"></i>
+                    <p *ngIf="hasError('start_date')" class="text error">
+                        {{showError('start_date')}}
+                    </p>
                 </div>
                 <div class="input-container flex col">
                     <label class="input-label"for="_end_date">
@@ -28,6 +34,8 @@
                         <span class="required">*</span>
                     </label>
                     <input 
+                    [ngClass]="{'error-input':hasError('end_date')}"
+
                     id="_end_date" 
                     formControlName="end_date" 
                     type="text"
@@ -35,6 +43,10 @@
                     class="form-input"
                      >
                     <i class="input-icon fa-solid fa-hourglass-end"></i>
+                    <p *ngIf="hasError('end_date')" class="text error">
+                        {{showError('end_date')}}
+                    </p>
+
                 </div>
             </div>
             <div class="form-col">
@@ -44,6 +56,8 @@
                         <span class="required">*</span>
                     </label>
                     <input 
+                    [ngClass]="{'error-input':hasError('address')}"
+
                     id="_address" 
                     formControlName="address" 
                     type="text" 
@@ -51,6 +65,10 @@
                     class="form-input"
                     >
                     <i class="input-icon fa-solid fa-location-dot"></i>
+                    <p *ngIf="hasError('address')" class="text error">
+                        {{showError('address')}}
+                    </p>
+
                 </div>
                 <div class="input-container flex col">
                     <label class="input-label"for="_title">
@@ -58,6 +76,8 @@
                         <span class="required">*</span>
                     </label>
                     <input 
+                    [ngClass]="{'error-input':hasError('title')}"
+
                     id="_title" 
                     formControlName="title" 
                     type="text" 
@@ -65,6 +85,10 @@
                     class="form-input"
                     >
                     <i class="input-icon fa-solid fa-heading"></i>
+                    <p *ngIf="hasError('title')" class="text error">
+                        {{showError('title')}}
+                    </p>
+
                 </div>
             </div>
         </div>
@@ -73,40 +97,56 @@
             <p class="text">(at least one is required)</p>
             <div class="img-input-wrapper" *ngFor="let control of gallery.controls; let i = index;">
                 <input 
-                class="img-input" 
+                [ngClass]="{'error-input':imgFieldError(gallery.controls[i])}"
+                class="img-input error-input" 
                 placeholder="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
                 type="text" [formControl]="gallery.controls[i]">
-                <i class="icon fas fa-camera"></i>
+                <i class="camera-icon fas fa-camera"></i>
                 <i 
                 matTooltip="Delete This Image Link"
                 (click)="onRemoveImage(i)"
                 *ngIf="i !== 0"
                 class="icon-right fas fa-x"></i>
+                <p 
+                *ngIf="imgFieldError(gallery.controls[i])"
+                class="text error">{{showFormArrayError(gallery.controls[i])}}</p>
             </div>
             <button
             (click)="onAddNewImage()"
             class="img-btn"
             mat-ripple
             matRippleColor="rgba(0, 0, 0, 0.083)"
-            > <i class="fas fa-plus"></i> Add Another image URL</button>
+            > 
+            <i class="fas fa-plus"></i> Add Another image URL</button>
         </div>
         <div class="form-text-wrapper">
                 <p class="text intro form-text-intro">Description <span class="required">*</span></p>
                 <textarea 
+                [ngClass]="{'error-input':hasError('description')}"
                 placeholder="Talk about what you are selling. Try not to leave this field blank"
-                formControlName="description" class="form-textarea">
+                formControlName="description" 
+                class="form-textarea">
                 </textarea>
+                <p *ngIf="hasError('description')" class="text error">
+                    {{showError('description')}}
+                </p>
         </div>
         <div class="form-text-wrapper">
                 <p class="text intro form-text-intro">Terms and Conditions <span class="required">*</span></p>
                 <textarea 
+                [ngClass]="{'error-input':hasError('terms_conditions')}"
                 placeholder="Let customers know what you expect from them and vice versa"
                 class="form-textarea" 
-                formControlName="terms_conditions">
+                formControlName="terms_conditions"
+                >
                 </textarea>
+                <p *ngIf="hasError('terms_conditions')" class="text error">
+                    {{showError('terms_conditions')}}
+                </p>
         </div>
         <div class="btn-wrapper">
             <button 
+            (click)="onCreateSale()"
             mat-ripple
             matRippleColor="rgba(0, 0, 0, 0.083)"
             class="img-btn">Start Sellin'</button>
