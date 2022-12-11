@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const {
-    login, signup
+ authenticate
+} = require("../Middleware/Auth")
+const {
+    login, 
+    signup, 
+    refreshToken
 } = require('../controllers/Auth');
 
 
@@ -11,6 +16,9 @@ router.route('/login')
 router.route('/signup')
 .post(signup)
 ;
+
+router.route("/refreshToken")
+.get(authenticate,refreshToken);
 
 
 module.exports = router;

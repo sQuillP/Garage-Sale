@@ -16,12 +16,12 @@ const itemsRoute = require('./Items');
 router.use("/:saleId/items",itemsRoute);
 
 router.route('/')
-.get(authenticate,getSales)
+.get(getSales)
 .post(createSale)
 ;
 
 router.route('/mysales')
-.get(mySales)
+.get(authenticate,mySales)
 ;
 
 

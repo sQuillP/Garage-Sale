@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, map, mergeMap, Observable, tap } from "rxjs";
+import { catchError, map, mergeMap, Observable, of, tap } from "rxjs";
 import { Item, Sale } from "src/app/models/db.models";
 import { SaleParams } from "src/app/models/API.model";
 import { MapsService } from "./maps.service";
@@ -15,7 +15,6 @@ export class DBService {
     constructor(
         private mapService:MapsService,
         private http:HttpClient,
-        private auth:AuthService
     ){
 
     }
@@ -115,15 +114,9 @@ export class DBService {
     }
 
 
-
-    updateMyInfo(update:any):Observable<any> {
-        return this.http
-        .put<any>(`${this.URL}/users/${this.auth.currentUser$.value._id}`,update)
-    }
-
-
     /* Return observable containing response of user's sales */
     getMySales():Observable<any> {
         return this.http.get<any>(`${this.URL}/sales/mysales`);
     }
+
 }

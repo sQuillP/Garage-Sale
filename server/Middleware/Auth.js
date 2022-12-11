@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 
 exports.authenticate = (req,res,next)=> {
 
-
     if(!req.headers.authorization){
         return next(
             new ErrorResponse(

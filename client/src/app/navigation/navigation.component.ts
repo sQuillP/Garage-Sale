@@ -30,4 +30,7 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(route);
   }
 
+  onLogout():void{
+    this.auth.logout();
+  }
 }

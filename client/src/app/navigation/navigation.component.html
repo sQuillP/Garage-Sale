@@ -14,5 +14,17 @@
         (click)="onNavigate(['signup'])"
         >Sign Up</button>
     </div>
+    <div *ngIf="isLoggedIn" class="nav-group-right flex center-xy">
+        <button 
+        mat-raised-button 
+        style="background-color: #5e9544!important; margin-right: 10px; color: white;"
+        (click)="onNavigate(['dashboard'])"
+        >Dashboard</button>
+        <button 
+        mat-raised-button 
+        color="none"
+        (click)="onLogout()"
+        >Logout</button>
+    </div>
     
 </div>

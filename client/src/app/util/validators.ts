@@ -42,7 +42,8 @@ export const validatePhone = (control:AbstractControl<string>):ValidationErrors|
 /* returns true if there is a value provided and it does not match the 
     provided extensions */
 export  const validateImage = (control:AbstractControl<string>):ValidationErrors|null => {
-    if(control.value&&!control.value.match(/\.(jpeg|jpg|gif|png)$/) !== null)
+    if(!control.value) return null;
+    if(/\.(jpeg|jpg|gif|png)$/.test(control.value) === false)
         return {invalidImage:true};
     return null;
 }
@@ -68,7 +69,6 @@ export  const validateImage = (control:AbstractControl<string>):ValidationErrors
 //Return an error message for a particular form input.
 export function _getError(formGroup:FormGroup):(str)=> string| void {
     return (inputName:string):string|void=>{
-        console.log(formGroup.get(inputName).errors)
         const error:any = Object.keys(formGroup.get(inputName).errors)[0];
         if(error === "required")
         return "This field is required";

@@ -30,7 +30,7 @@
             <input 
             autocomplete="off" 
             formControlName="password" 
-            [type]="showPasswordVisibility?'password':'text'" 
+            [type]="!showPasswordVisibility?'password':'text'" 
             id="password" 
             class="input"
             >

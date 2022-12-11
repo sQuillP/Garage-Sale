@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounce, interval, throttleTime, timeout } from 'rxjs';
 import { validatePassword } from '../util/validators';
+import {AuthService} from "../Services/auth.service"
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,15 +25,32 @@ export class LoginComponent implements OnInit {
   showPasswordVisibility:boolean = false;
 
   constructor(
-    private router:Router
+    private router:Router,
+    private auth:AuthService,
+    private _snackbar:MatSnackBar
   ) { }
 
   ngOnInit(): void {
   }
 
 
-  onSubmit():void{
-    this.triggerShake();
+  async onSubmit(){
+    if(!this.loginForm.valid){
+      this.triggerShake();
+      this.loginForm.reset();
+      return;
+    }
+    
+    try{
+      await this.auth.login(this.loginForm.value);
+      this.router.navigate(['dashboard']);
+    } catch(error){
+      this.triggerShake();
+      this.loginForm.reset();
+      this._snackbar.open(error.message || "Unable to login","OK",{
+        duration: 3000
+      });
+    }
   }
 
 
@@ -48,7 +66,7 @@ export class LoginComponent implements OnInit {
     this.shakeForm = true;
     this.timeout = setTimeout(()=> {
       this.shakeForm = false;
-    },1000)
+    },1000);
   }
 
 }

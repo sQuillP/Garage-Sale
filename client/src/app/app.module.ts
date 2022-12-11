@@ -40,6 +40,9 @@ import { PopupMenuComponent } from './popup-menu/popup-menu.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CreateSaleComponent } from './create-sale/create-sale.component';
+import { AuthGuardComponent } from './guards/auth.guard';
+import { AuthService } from './Services/auth.service';
+import { PopupAddItemComponent } from './popup-add-item/popup-add-item.component';
 
 
 
@@ -64,7 +67,8 @@ import { CreateSaleComponent } from './create-sale/create-sale.component';
     SignupComponent,
     MyDashboardComponent,
     PopupMenuComponent,
-    CreateSaleComponent
+    CreateSaleComponent,
+    PopupAddItemComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +99,9 @@ import { CreateSaleComponent } from './create-sale/create-sale.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    AuthGuardComponent,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

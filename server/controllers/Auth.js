@@ -70,6 +70,21 @@ exports.signup = asyncHandler( async(req,res,next)=> {
 });
 
 
+/**
+ * Send a new token to a user with their updated details ecoded to token.
+ * @Route: POST api/v1/auth/refreshToken
+ */
+exports.refreshToken = asyncHandler(async (req,res,next)=> {
+    const updatedUser = await User.findById(req.user);
+    const signedToken = signToken(updatedUser);
+    res.status(200).json({
+        success: true,
+        data: signedToken
+    })
+
+});
+
+
 function signToken(userObj){
 
     return jwt.sign({...userObj},process.env.JWT_SECRET,{

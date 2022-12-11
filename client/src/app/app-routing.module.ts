@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
 import { CreateSaleComponent } from './create-sale/create-sale.component';
+import { AuthGuardComponent } from './guards/auth.guard';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -16,8 +17,8 @@ const routes: Routes = [
   {path:"signup", component:SignupComponent},
   {path: "login", component:LoginComponent},
   {path: "catalogue-search", component: CatalogueSearch},
-  {path:"dashboard/:userId", component: MyDashboardComponent},
-  {path: "create-sale", component: CreateSaleComponent},
+  {path:"dashboard", component: MyDashboardComponent, /*canActivate:[AuthGuardComponent]*/},
+  {path: "create-sale", component: CreateSaleComponent, /*canActivate: [AuthGuardComponent]*/},
   {path:"**", redirectTo:"/home", pathMatch: 'full'}
 ];
 

@@ -185,8 +185,8 @@ exports.deleteSale = asyncHandler( async( req,res,next)=> {
  */
 exports.mySales = asyncHandler( async (req,res,next) => {
     
+    // console.log(req.user);
     const mySales = await Sale.find({userId: req.user._id});
-
     res.status(200).json({
         status: 200,
         data:mySales

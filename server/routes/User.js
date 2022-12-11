@@ -16,9 +16,12 @@ router
 .post(createUser);
 
 router.route('/:userId')
-.get(getUserById)
-.put(updateUser)
+.get(authenticate, getUserById)
 .delete(deleteUser);
+
+router.route("/updateUser")
+.put(authenticate, updateUser);
+
 
 
 // update, delete, getbyid routes for user.

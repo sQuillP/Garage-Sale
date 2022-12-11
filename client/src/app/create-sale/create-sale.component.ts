@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { PopupAddItemComponent } from '../popup-add-item/popup-add-item.component';
 import { PopupMenuComponent } from '../popup-menu/popup-menu.component';
 import { DBService } from '../Services/db.service';
 import { validateDate, _getFormArrayError } from '../util/validators';
@@ -30,8 +31,13 @@ export class CreateSaleComponent implements OnInit {
   constructor(
     private router:Router,
     private db:DBService,
-    private dialog:MatDialog
-  ) { }
+    private dialog:MatDialog,
+  ) { 
+    const addItemRef = this.dialog.open(PopupAddItemComponent,{
+      width: "1100px"
+    });
+
+  }
 
   get gallery():FormArray{
     return (this.saleForm.get('gallery') as FormArray);
@@ -58,6 +64,8 @@ export class CreateSaleComponent implements OnInit {
     return imgControl.touched && !imgControl.valid;
   }
 
+
+  //create a sale
   onCreateSale():void{
     if(!this.saleForm.valid){
       console.log('sale form not valid');
@@ -70,9 +78,19 @@ export class CreateSaleComponent implements OnInit {
       })
       return;
     }
-
     const saleObj = {...this.saleForm.value};
-    console.log(saleObj)
+  }
+
+
+  onAddItem():void{
+    const addItemRef = this.dialog.open(PopupAddItemComponent,{
+      width: "1000px"
+    });
+
+
+    addItemRef.afterClosed().subscribe(data => {
+
+    })
   }
 
   ngOnInit(): void {

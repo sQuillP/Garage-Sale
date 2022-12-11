@@ -59,7 +59,7 @@
                     autocomplete="off" 
                     formControlName="password" 
                     id="password" 
-                    [type]="enablePasswordVisibility?'text':'password'"
+                    [type]="!enablePasswordVisibility?'text':'password'"
                     class="form-input"
                      >
                     <mat-icon class="left-icon">lock</mat-icon>

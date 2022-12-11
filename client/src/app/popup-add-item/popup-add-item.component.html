@@ -1,0 +1,50 @@
+<p class="title thin" mat-dialog-title >Add Item to Garage Sale</p>
+<div class="content flex center-xy col" mat-dialog-content>
+    <div 
+    [ngClass]="{'no-img':true}"
+    class="img-showcase">
+        <img *ngIf="false" class="https://media.guitarcenter.com/is/image/MMGS7/L54573000001000-00-720x720.jpg" alt="">
+        <p class="text">Item Image here</p>
+            <i class="fa-solid fa-image"></i>
+    </div>
+    <div [formGroup]="itemForm" class="inputs flex col">
+        <div class="inputs-section flex sp-around start-y">
+            <div class="inputs-left flex col">
+                <div class="input-field">
+                    <label for="_name" class="bold">Item Name <span class="required">*</span></label><br>
+                    <input formControlName="name" type="text" class="field">
+                </div>
+                <div class="input-field">
+                    <label for="_price" class="field-label bold">Price <span class="required">*</span></label><br>
+                    <strong>$ </strong>
+                    <input type="number" class="field" id="_price" min="1" formControlName="price">
+                </div>
+                
+            </div>
+            <div class="inputs-right">
+                <p class="text image-field-label bold">Image URL <span class="required">*</span></p>
+                <div class="image-field">
+                    <input type="text" class="img-field field">
+                </div>
+                <div class="add-btn-wrapper">
+                    <button 
+                    mat-ripple
+                    matRippleColor="rgba(0, 0, 0, 0.083)"
+                    class="add-btn"><i class="fas fa-plus"></i> Add Image</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <label for="_desc" class="desc-label bold">Description <span class="required"> *</span></label><br>
+            <textarea 
+            placeholder="Describe what your product is"
+            formControlName="description" name="description" id="_desc" ></textarea>
+        </div>
+    </div>
+</div>
+<div class="actions" mat-dialog-actions align="end">
+    <!-- buttons -->
+    <button mat-raised-button [mat-dialog-close]="false" color="none">Back</button>
+    <button mat-raised-button [mat-dialog-close]="true" class="create-item">Add</button>
+</div>

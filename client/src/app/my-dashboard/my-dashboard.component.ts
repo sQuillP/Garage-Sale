@@ -4,9 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BehaviorSubject, fromEvent, map, Observable, Subscription } from 'rxjs';
+import { User } from '../models/db.models';
 import { PopupMenuComponent } from '../popup-menu/popup-menu.component';
 import { AuthService } from '../Services/auth.service';
 import { DBService } from '../Services/db.service';
+import { UserService } from '../Services/user.service';
 import { formatPhoneInput, validatePassword, validatePhone, _getError } from '../util/validators';
 
 @Component({
@@ -28,11 +30,11 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
 
   /* Form validation/contents */
   userInfo = new FormGroup({
-    fullName: new FormControl("WilliamPattison",[Validators.required]),
-    email: new FormControl("will.m.pattison@gmail.com",[Validators.required, Validators.email]),
-    password: new FormControl("abcAb#2",[Validators.required, validatePassword]),
-    profileImg: new FormControl("https://myprofileurlpngpictureorsomething.png",[Validators.required]),
-    phone: new FormControl("(630)-962-2100",[Validators.required, validatePhone])
+    fullName: new FormControl("",[Validators.required]),
+    email: new FormControl("",[Validators.required, Validators.email]),
+    password: new FormControl("",[Validators.required, validatePassword]),
+    profileImg: new FormControl("",[Validators.required]),
+    phone: new FormControl("",[Validators.required, validatePhone])
   });
 
   savedValue:string;
@@ -50,10 +52,21 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
   constructor(
     private db:DBService,
     private _snackbar:MatSnackBar,
+    private user:UserService,
     private dialog:MatDialog,
-    private router:Router
+    private router:Router,
+    private auth:AuthService
   ) { 
     this.userInfo.disable();
+    const curUserRef:User = this.user.currentUser$.getValue();
+
+    this.userInfo.setValue({
+      fullName:curUserRef.fullName,
+      email: curUserRef.email,
+      password: "foobarbaz",
+      profileImg: curUserRef.profileImg,
+      phone: curUserRef.phone
+    }); 
   }
 
 
@@ -105,20 +118,19 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
 
   //Call API service and update the current user credentials
   //Catch any error that arises and display success or error to screen.
-  private _saveField(controlName:string):void {
+  private async _saveField(controlName:string):Promise<any> {
     const updatedValue:string = this.userInfo.get(controlName).value;
-    this.db.updateMyInfo({[controlName]:updatedValue}).subscribe({
-      next:(res:any)=> {
-        this._snackbar.open("successfully saved",null,{
-          duration:1000,
-        })
-      },
-      error:(err)=> {
-        this._snackbar.open("Unable to save field",null,{
-          duration:1000
-        });
-      }
-    });
+    try {
+      await this.user.updateMyInfo({[controlName]:updatedValue});
+      this.auth.refreshToken();
+      this._snackbar.open("successfully saved",null,{
+        duration:1000,
+      });
+    }catch(error){
+      this._snackbar.open("Unable to save field",null,{
+        duration:1000
+      });
+    }
   }
 
   /* put an input into focus */

@@ -24,6 +24,14 @@ exports.getUsers = asyncHandler(async (req,res,next)=> {
 GET: api/v1/users/:userId
 */
 exports.getUserById = asyncHandler(async (req,res,next)=> {
+    if(req.user._id !== req.params.userId)
+        return next(
+            new ErrorResponse(
+                402,
+                `Users can only fetch their own credentials`,
+            )
+        );
+        
     const user = await User.findById(req.params.userId);
     let status = 200;
     if(user == null)
@@ -52,11 +60,12 @@ exports.createUser = asyncHandler(async (req,res,next)=> {
 
 
 /**
- * PUT: api/v1/users/:userId
+ * PUT: api/v1/users/updateUser
  * 
  */
  exports.updateUser = asyncHandler(async (req,res,next)=> {
-   const updatedUser = await User.findByIdAndUpdate(req.params.userId,req.body);
+
+   const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body);
 
 
    if(updatedUser == null){

@@ -91,7 +91,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> 
         <div class="gallery-wrapper">
             <p class="intro">Sale Gallery Images <span class="required">*</span></p>
             <p class="text">(at least one is required)</p>
@@ -118,6 +118,13 @@
             matRippleColor="rgba(0, 0, 0, 0.083)"
             > 
             <i class="fas fa-plus"></i> Add Another image URL</button>
+        </div>
+        <div class="add-items flex center-xy col">
+            <p class="intro">Add Items To Your Sale <span class="required">*</span></p>
+            <p class="text">(At least one is required)</p>
+            <div class="add-items">
+                <button (click)="onAddItem()" class="img-btn"> <i class="fas fa-plus"></i> Add Item</button>
+            </div>
         </div>
         <div class="form-text-wrapper">
                 <p class="text intro form-text-intro">Description <span class="required">*</span></p>
