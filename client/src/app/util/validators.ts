@@ -72,21 +72,38 @@ export function _getError(formGroup:FormGroup):(str)=> string| void {
         const error:any = Object.keys(formGroup.get(inputName).errors)[0];
         if(error === "required")
         return "This field is required";
-
         if(error === "invalidDateFormat")
         return "Please provide a valid date";
-
         if(error === "email")
         return "Please provide a valid email";
-
         if(error === "invalidPhone")
         return "Please provide a valid phone number";
-
         if(error==="invalidImage")
         return "Please provide a valid image URL"
-
         if(error === "invalidPassword")
         return "Must contain an uppercase letter and a number";
+    }
+}
+ 
+
+export function _getItemFormError(formGroup:FormGroup):(str:string)=> string | void {
+    return (inputName:string):string | void => {
+        const error = Object.keys(formGroup.get(inputName).errors)[0];
+        console.log(error);
+        if(error ==='required')
+            return "This field is required"
+        if(error === 'name')
+            return "Pleaes provide a name";
+        if(error === 'price')
+            return "Please provide a price"
+        if(error === "min")
+            return "Must be at least $1.00"
+        if(error === "description")
+            return "Please provide a description";
+        if(error === 'imageLimit')
+            return 'Please provide at most 5 images'
+        if(error === 'invalidImage')
+            return "Please provide an image URL"
     }
 }
 

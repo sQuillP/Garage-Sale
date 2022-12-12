@@ -1,33 +1,66 @@
 <p class="title thin" mat-dialog-title >Add Item to Garage Sale</p>
 <div class="content flex center-xy col" mat-dialog-content>
     <div 
-    [ngClass]="{'no-img':true}"
+    *ngIf="gallery.length > 0; else noImage "
     class="img-showcase">
-        <img *ngIf="false" class="https://media.guitarcenter.com/is/image/MMGS7/L54573000001000-00-720x720.jpg" alt="">
-        <p class="text">Item Image here</p>
-            <i class="fa-solid fa-image"></i>
+        <img class="img" [src]="gallery[currentPicture]"
+        onerror="this.onerror=null; this.src='../assets/images/no_image.jpg'"
+        alt="no image">
+        <i 
+        (click)="onRemoveImage()"
+        matTooltip="Delete From Gallery"
+        matTooltipPosition="right"
+        class="close-icon fa-solid fa-circle-xmark"></i>
+        <i 
+        (click)="onNextImage('forwards')"
+        class="img-toggle fa-solid fa-circle-chevron-right"></i>
+        <i 
+        (click)="onNextImage('backwards')"
+        class="img-toggle fa-solid fa-circle-chevron-left"></i>
     </div>
+    <div *ngIf="gallery.length > 0" class="img-tracker">
+        <p class="text thin">Showing {{currentPicture+1}} of {{gallery.length}}</p>
+    </div>
+ 
+    <ng-template #noImage>
+        <div class="img-showcase no-img">
+            <p class="text">Item Image here</p>
+            <i class="fa-solid fa-image"></i>
+        </div>
+    </ng-template>
     <div [formGroup]="itemForm" class="inputs flex col">
         <div class="inputs-section flex sp-around start-y">
             <div class="inputs-left flex col">
                 <div class="input-field">
                     <label for="_name" class="bold">Item Name <span class="required">*</span></label><br>
-                    <input formControlName="name" type="text" class="field">
+                    <input 
+                    [ngClass]="{'invalid-field':hasError('name')}"
+                    formControlName="name" type="text" class="field">
+                    <p *ngIf="hasError('name')" class="text required">{{getError('name')}}</p>
                 </div>
                 <div class="input-field">
                     <label for="_price" class="field-label bold">Price <span class="required">*</span></label><br>
                     <strong>$ </strong>
-                    <input type="number" class="field" id="_price" min="1" formControlName="price">
+                    <input 
+                    [ngClass]="{'invalid-field':hasError('price')}"
+                    type="number" class="field" id="_price" min="1" formControlName="price">
+                    <p *ngIf="hasError('price')" class="text required">{{getError('price')}}</p>
                 </div>
                 
             </div>
             <div class="inputs-right">
                 <p class="text image-field-label bold">Image URL <span class="required">*</span></p>
                 <div class="image-field">
-                    <input type="text" class="img-field field">
+                    <input 
+                    type="text"
+                    formControlName="gallery"
+                    class="img-field field">
+                    <p *ngIf="itemForm.get('gallery').hasError('imageLimit')"class="text required">Maximum of 5 images</p>
+
                 </div>
                 <div class="add-btn-wrapper">
                     <button 
+                    (click)="onAddImage()"
                     mat-ripple
                     matRippleColor="rgba(0, 0, 0, 0.083)"
                     class="add-btn"><i class="fas fa-plus"></i> Add Image</button>
@@ -37,14 +70,16 @@
 
         <div class="input-field">
             <label for="_desc" class="desc-label bold">Description <span class="required"> *</span></label><br>
-            <textarea 
+            <textarea
+            [ngClass]="{'invalid-field':hasError('description')}"
             placeholder="Describe what your product is"
             formControlName="description" name="description" id="_desc" ></textarea>
+            <p *ngIf="hasError('description')" class="text required">{{getError('description')}}</p>
         </div>
     </div>
 </div>
 <div class="actions" mat-dialog-actions align="end">
     <!-- buttons -->
     <button mat-raised-button [mat-dialog-close]="false" color="none">Back</button>
-    <button mat-raised-button [mat-dialog-close]="true" class="create-item">Add</button>
+    <button mat-raised-button [mat-dialog-close]="onSubmit()" class="create-item">Add</button>
 </div>

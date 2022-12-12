@@ -33,9 +33,6 @@ export class CreateSaleComponent implements OnInit {
     private db:DBService,
     private dialog:MatDialog,
   ) { 
-    const addItemRef = this.dialog.open(PopupAddItemComponent,{
-      width: "1100px"
-    });
 
   }
 
@@ -84,12 +81,12 @@ export class CreateSaleComponent implements OnInit {
 
   onAddItem():void{
     const addItemRef = this.dialog.open(PopupAddItemComponent,{
-      width: "1000px"
+      width: "1100px"
     });
 
 
     addItemRef.afterClosed().subscribe(data => {
-
+      console.log(data);
     })
   }
 
