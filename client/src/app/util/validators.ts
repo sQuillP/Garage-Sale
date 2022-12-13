@@ -13,7 +13,6 @@ export const validatePriceRanges = (control:AbstractControl):ValidationErrors|nu
 
 export const validateDate = (control:AbstractControl):ValidationErrors|null=> {
     if(new Date(control.value).toString().toLowerCase() === 'invalid date'){
-        console.log('invalid date error')
         return {invalidDateFormat:true};
     }
     return null;
@@ -89,7 +88,6 @@ export function _getError(formGroup:FormGroup):(str)=> string| void {
 export function _getItemFormError(formGroup:FormGroup):(str:string)=> string | void {
     return (inputName:string):string | void => {
         const error = Object.keys(formGroup.get(inputName).errors)[0];
-        console.log(error);
         if(error ==='required')
             return "This field is required"
         if(error === 'name')

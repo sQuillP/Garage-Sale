@@ -81,5 +81,8 @@
 <div class="actions" mat-dialog-actions align="end">
     <!-- buttons -->
     <button mat-raised-button [mat-dialog-close]="false" color="none">Back</button>
-    <button mat-raised-button [mat-dialog-close]="onSubmit()" class="create-item">Add</button>
+    <button 
+    [ngStyle]="{'cursor':gallery.length < 1 || !itemForm.valid ?'not-allowed':'pointer'}"
+    [disabled]="(gallery.length < 1 || !itemForm.valid)"
+    mat-raised-button [mat-dialog-close]="onSubmit()" class="create-item">Add</button>
 </div>

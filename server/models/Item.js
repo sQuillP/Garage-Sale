@@ -97,6 +97,7 @@ ItemSchema.pre('save', async function(next){
             )
         );
     }
+
     sale.gallery.push(this.gallery[0]);
     sale.itemCount+= 1;
 
@@ -104,14 +105,49 @@ ItemSchema.pre('save', async function(next){
         validateBeforeSave: true,
     });
 
-    //Assign some of the fields from parent object
-    this.terms = sale.terms_conditions;
-    this.location.coordinates = sale.location.coordinates;
-    this.expireAt = sale.expireAt;
-    this.start_date = sale.start_date;
-    this.end_date = sale.end_date;
+    updateItemFields(this,sale);
     next();
 });
+
+
+/* When multiple items are inserted into database. */
+ItemSchema.pre('insertMany',async function(next, items) {
+    const sale = await Sale.findById(docs[0]._saleId);
+    if(sale == null){
+        return next(
+            new ErrorResponse(
+                404,
+                `Sale ${this.saleId} does not exist`
+            )
+        );
+    }
+
+    for(const item of items){
+        sale.gallery.push(item.gallery[0])
+        sale.itemCount ++;
+        updateItemFields(item,sale);
+    }
+    await sale.save({
+        validateBeforeSave: true
+    });
+
+})
+
+
+  //Assign some of the fields from parent object
+    // this.terms = sale.terms_conditions;
+    // this.location.coordinates = sale.location.coordinates;
+    // this.expireAt = sale.expireAt;
+    // this.start_date = sale.start_date;
+    // this.end_date = sale.end_date;
+
+function updateItemFields(item, sale){
+    item.terms = sale.terms_conditions;
+    item.location.coordinates = sale.location.coordinates;
+    item.expireAt = sale.expireAt;
+    item.start_date = sale.start_date;
+    item.end_date = sale.end_date;
+}
 
 
 const ItemModel = mongoose.model('item',ItemSchema);

@@ -1,10 +1,8 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, map, mergeMap, Observable, of, tap } from "rxjs";
+import { mergeMap, Observable, tap } from "rxjs";
 import { Item, Sale } from "src/app/models/db.models";
-import { SaleParams } from "src/app/models/API.model";
 import { MapsService } from "./maps.service";
-import { AuthService } from "./auth.service";
 
 
 @Injectable({providedIn:"root"})
@@ -117,6 +115,38 @@ export class DBService {
     /* Return observable containing response of user's sales */
     getMySales():Observable<any> {
         return this.http.get<any>(`${this.URL}/sales/mysales`);
+    }
+
+
+
+    /* Create a new sale */
+    createSale(createdSale):Promise<boolean> {
+        return new Promise<boolean>((resolve,reject)=> {
+            this.http.post(`${this.URL}/sales`,createdSale)
+            .subscribe({
+                next:(data)=> {
+                    resolve(true);
+                },
+                error: (err:any)=> {
+                    reject(false);
+                }
+            });
+        });
+    }
+
+
+    addItemsToSale(item:any):Promise<boolean> {
+        return new Promise<boolean>((resolve,reject)=> {
+            this.http.post<any>(`${this.URL}/items`,item)
+            .subscribe({
+                next: (res)=> {
+                    resolve(true);
+                },
+                error: (err)=> {
+                    reject(false);
+                }
+            });
+        });
     }
 
 }

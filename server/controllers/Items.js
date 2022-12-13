@@ -101,7 +101,12 @@ exports.getItems = asyncHandler( async (req,res,next)=> {
  * @Scope: Private, must be signed in
  */
  exports.createItem = asyncHandler( async (req,res,next)=> {
-    const createdItem = await Item.create(req.body);
+    let createdItem = null;
+    if(Array.isArray(req.body)){
+        createdItem = await Item.insertMany(req.body);
+    }
+    else
+        createdItem = await Item.create(req.body);
 
     res.status(201).json({
         status: 201,

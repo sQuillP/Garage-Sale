@@ -7,7 +7,8 @@ import { PopupAddItemComponent } from '../popup-add-item/popup-add-item.componen
 import { PopupMenuComponent } from '../popup-menu/popup-menu.component';
 import { DBService } from '../Services/db.service';
 import { validateDate, _getFormArrayError } from '../util/validators';
-import {_getError} from "../util/validators"
+import {_getError} from "../util/validators";
+import { ObjectID } from 'bson';
 @Component({
   selector: 'app-create-sale',
   templateUrl: './create-sale.component.html',
@@ -25,6 +26,11 @@ export class CreateSaleComponent implements OnInit {
     gallery: new FormArray([new FormControl("",[Validators.required])])
   });
 
+
+  items:any[] = [];
+
+  docId:string = new ObjectID().toString();
+
   showError = _getError(this.saleForm);
   showFormArrayError = _getFormArrayError(this.saleForm);
 
@@ -32,6 +38,7 @@ export class CreateSaleComponent implements OnInit {
     private router:Router,
     private db:DBService,
     private dialog:MatDialog,
+    private _snackbar:MatSnackBar,
   ) { 
 
   }
@@ -63,7 +70,7 @@ export class CreateSaleComponent implements OnInit {
 
 
   //create a sale
-  onCreateSale():void{
+  async onCreateSale():Promise<boolean>{
     if(!this.saleForm.valid){
       console.log('sale form not valid');
       this.dialog.open(PopupMenuComponent,{
@@ -76,6 +83,15 @@ export class CreateSaleComponent implements OnInit {
       return;
     }
     const saleObj = {...this.saleForm.value};
+    try {
+      await this.db.createSale(saleObj);
+      await this.db.addItemsToSale(this.items);
+      //navigate out
+    } catch(error) {
+      this._snackbar.open("Unable to create sale","OK",{
+        duration: 2000
+      });
+    }
   }
 
 
@@ -84,10 +100,34 @@ export class CreateSaleComponent implements OnInit {
       width: "1100px"
     });
 
+    addItemRef.afterClosed().subscribe(createdItem => {
 
-    addItemRef.afterClosed().subscribe(data => {
-      console.log(data);
+      if(!createdItem) return;
+
+      this.items.push(createdItem);
     })
+  }
+
+  onEditItem(index:number):void{
+
+    const editItemRef = this.dialog.open(PopupAddItemComponent,{
+      width:"1100px",
+      data: {
+        item:this.items[index]
+      }
+    });
+
+    editItemRef.afterClosed().subscribe((data)=> {
+      if(!data) return;
+      const temp = [...this.items];
+      temp.splice(index,1,data);
+      this.items = temp;
+    });
+  }
+
+
+  onDeleteItem(index:number):void{
+    this.items.splice(index,1);
   }
 
   ngOnInit(): void {

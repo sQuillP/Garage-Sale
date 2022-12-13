@@ -146,6 +146,69 @@
 }
 
 
+.img{
+   height: 100%;
+   width: 100%;
+   object-fit: cover; 
+}
+
+.item-img-wrapper{
+    height: 75px;
+    width: 75px;
+    border-radius: 5px;
+    overflow: hidden;
+    /* border: 2px solid gray; */
+}
+
+.item-container{
+    background: var(--white-2);
+    position: relative;
+    margin: 10px 0;
+    padding: 5px;
+    cursor: pointer;
+    max-width: 543px;
+    transition: box-shadow 200ms ease;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+
+.options{
+    position: absolute;
+    color: gray;
+    cursor: pointer;
+    transition: transform 75ms linear;
+    top: 5px;
+    right: 15px;
+}
+
+.options:hover{
+    transform: scale(1.3);
+}
+
+.item-container:hover{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+}
+
+.item-text{
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.item-text > p:nth-child(1){
+    margin: 5px 0;
+}
+
+.item-price{
+    font-size: 1.5em;
+}
+
+.item-price>p:nth-child(2){
+    font-size: 0.5em;
+    margin-top: 5px;
+}
+
+
 /*Small screens and mobile*/
 @media screen and (max-width: 900px) {
     .input-cols-wrapper{flex-direction: column;}
@@ -166,5 +229,13 @@
     }
     .img-input{
         width: 100%;
+    }
+}
+
+
+
+@media  screen and (max-width: 510px) {
+    .item-img-wrapper{
+        display: none;
     }
 }

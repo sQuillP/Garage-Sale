@@ -122,6 +122,39 @@
         <div class="add-items flex center-xy col">
             <p class="intro">Add Items To Your Sale <span class="required">*</span></p>
             <p class="text">(At least one is required)</p>
+
+            <!-- List of items -->
+            <div class="itemList">
+                <!-- *ngFor -->
+                <div *ngFor="let item of items; let i = index;" class="item-container flex sp-between">
+                    <i 
+                    [matMenuTriggerFor]="menu"
+                    matTooltip="Options"
+                    matTooltipPosition="right"
+                    class="options fa-solid fa-ellipsis"></i>
+                    <mat-menu #menu="matMenu">
+                        <button 
+                        (click)="onEditItem(i)"
+                        mat-menu-item><mat-icon>edit</mat-icon> <span>Edit</span></button>
+                        <button 
+                        (click)="onDeleteItem(i)"
+                        mat-menu-item><mat-icon>delete</mat-icon> <span>Delete</span></button>
+                      </mat-menu>
+                    <div class="item-img-wrapper">
+                        <img [src]="item.gallery[0]" class="img" alt="">
+                    </div>
+                    <div class="item-text">
+                        <p class="text bold">{{item.name}}</p>
+                        <p class="text small">{{item.description}}</p>
+                    </div>
+                    <div class="item-price flex center-xy col">
+                        <p class="text thin">${{item.price}}</p>
+                        <p class="text thin">USD</p>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="add-items">
                 <button (click)="onAddItem()" class="img-btn"> <i class="fas fa-plus"></i> Add Item</button>
             </div>

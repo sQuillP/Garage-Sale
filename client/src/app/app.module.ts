@@ -37,12 +37,13 @@ import { LoadingComponent } from './loading/loading.component';
 import { SignupComponent } from './signup/signup.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
 import { PopupMenuComponent } from './popup-menu/popup-menu.component';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CreateSaleComponent } from './create-sale/create-sale.component';
 import { AuthGuardComponent } from './guards/auth.guard';
 import { AuthService } from './Services/auth.service';
 import { PopupAddItemComponent } from './popup-add-item/popup-add-item.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -93,6 +94,7 @@ import { PopupAddItemComponent } from './popup-add-item/popup-add-item.component
     MatRadioModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatMenuModule,
   ],
   providers: [
     {

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { validateImage, _getItemFormError } from '../util/validators';
-
 @Component({
   selector: 'app-popup-add-item',
   templateUrl: './popup-add-item.component.html',
@@ -29,7 +29,19 @@ export class PopupAddItemComponent implements OnInit {
    *  https://www.apimages.com/Images/Ap_Creative_Stock_Header.jpg
   */
 
-  constructor() { } 
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data:any,
+  ) { 
+    console.log(data);
+    if(!data) return;
+
+    this.gallery = data.item.gallery;
+    this.itemForm.patchValue({
+      name:data.item.name,
+      price: data.item.price,
+      description: data.item.description,
+    })
+  } 
 
  
   /* Add item to list of pictures */
@@ -78,13 +90,16 @@ export class PopupAddItemComponent implements OnInit {
 
   hasError(control:string):boolean  {
     const ctrlRef = this.itemForm.get(control);
-    console.log(control + " -> ",!ctrlRef.valid&&ctrlRef.touched);
     return !ctrlRef.valid&&ctrlRef.touched
   }
 
   onSubmit():any{
+    if(this.gallery.length === 0 || !this.itemForm.valid){
+      return;
+    }
     const dataSend = this.itemForm.value;
     dataSend.gallery = this.gallery as any;
+    dataSend['_id'] = null;
     return dataSend;
   }
 
