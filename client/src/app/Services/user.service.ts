@@ -11,16 +11,11 @@ export class UserService {
 
     currentUser$ = new BehaviorSubject<User>(null);
 
-    constructor(private http:HttpClient){}
+    debugMessages = [1,2,3,4,5,6,7]
+    constructor(private http:HttpClient){
 
+    }
 
-    // getMe(uid:string):void{
-    //     this.http.get(`${this.URL}/${uid}`)
-    //     .subscribe({
-    //         next: (res:any) => {console.log(res); this.currentUser$.next(res.data)},
-    //         error: (err) => console.error(err)
-    //     });
-    // }
 
     updateMyInfo(update:any):Promise<any> {
         return new Promise<boolean>((resolve, reject)=> {

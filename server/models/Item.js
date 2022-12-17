@@ -112,7 +112,7 @@ ItemSchema.pre('save', async function(next){
 
 /* When multiple items are inserted into database. */
 ItemSchema.pre('insertMany',async function(next, items) {
-    const sale = await Sale.findById(docs[0]._saleId);
+    const sale = await Sale.findById(items[0].saleId);
     if(sale == null){
         return next(
             new ErrorResponse(

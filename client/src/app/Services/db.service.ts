@@ -135,9 +135,9 @@ export class DBService {
     }
 
 
-    addItemsToSale(item:any):Promise<boolean> {
+    addItemsToSale(items:any[]):Promise<boolean> {
         return new Promise<boolean>((resolve,reject)=> {
-            this.http.post<any>(`${this.URL}/items`,item)
+            this.http.post<any>(`${this.URL}/items`,items)
             .subscribe({
                 next: (res)=> {
                     resolve(true);

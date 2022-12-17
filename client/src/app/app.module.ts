@@ -44,6 +44,7 @@ import { AuthGuardComponent } from './guards/auth.guard';
 import { AuthService } from './Services/auth.service';
 import { PopupAddItemComponent } from './popup-add-item/popup-add-item.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { MessengerComponent } from './messenger/messenger.component';
 
 
 
@@ -69,7 +70,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MyDashboardComponent,
     PopupMenuComponent,
     CreateSaleComponent,
-    PopupAddItemComponent
+    PopupAddItemComponent,
+    MessengerComponent
   ],
   imports: [
     BrowserModule,

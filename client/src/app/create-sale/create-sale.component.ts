@@ -9,6 +9,8 @@ import { DBService } from '../Services/db.service';
 import { validateDate, _getFormArrayError } from '../util/validators';
 import {_getError} from "../util/validators";
 import { ObjectID } from 'bson';
+import { MapsService } from '../Services/maps.service';
+import { UserService } from '../Services/user.service';
 @Component({
   selector: 'app-create-sale',
   templateUrl: './create-sale.component.html',
@@ -39,6 +41,8 @@ export class CreateSaleComponent implements OnInit {
     private db:DBService,
     private dialog:MatDialog,
     private _snackbar:MatSnackBar,
+    private mapService:MapsService,
+    private user:UserService
   ) { 
 
   }
@@ -82,11 +86,34 @@ export class CreateSaleComponent implements OnInit {
       })
       return;
     }
-    const saleObj = {...this.saleForm.value};
+    const saleObj:any = {...this.saleForm.value};
+    saleObj["_id"] = this.docId;
+    saleObj["userId"] = this.user.currentUser$.getValue()._id;
+    saleObj["location"] = {
+      type: "Point",
+      coordinates: []
+    };
+    
     try {
+
+      const {lat,lng} = await new Promise<{lat:number, lng:number}>((resolve,reject)=>{
+        this.mapService.geocode(saleObj.address)
+        .subscribe(data=> resolve(data))
+      });
+
+      saleObj.location.coordinates = [lng,lat];
+      console.log(saleObj);
       await this.db.createSale(saleObj);
-      await this.db.addItemsToSale(this.items);
-      //navigate out
+
+      const updatedItems = this.items.map(item => {
+        item.location.coordinates = [lng,lat];
+        item['saleId'] = this.docId;
+        item['highestBidder'] = null;
+        return item;
+      });
+      console.log(updatedItems);
+      await this.db.addItemsToSale(updatedItems);
+      this.router.navigate(['dashboard']);
     } catch(error) {
       this._snackbar.open("Unable to create sale","OK",{
         duration: 2000
@@ -103,7 +130,10 @@ export class CreateSaleComponent implements OnInit {
     addItemRef.afterClosed().subscribe(createdItem => {
 
       if(!createdItem) return;
-
+      createdItem["location"] = {
+        type:"Point",
+        coordinates: []
+      };
       this.items.push(createdItem);
     })
   }

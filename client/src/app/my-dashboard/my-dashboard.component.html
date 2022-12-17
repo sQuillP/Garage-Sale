@@ -144,6 +144,7 @@
                 <div *ngIf="mySales$ |async;" class="my-sale-wrapper">
                     <app-sale-listing
                     *ngFor="let sale of mySales$|async"
+                    (click)="onNavigate(['sale',sale._id])"
                     [sale]="sale"
                     ></app-sale-listing>
                 </div>

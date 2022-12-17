@@ -1,0 +1,74 @@
+<div class="main">
+    <div class="message-banner flex sp-between">
+        <div class="banner-left flex center-xy">
+            <div class="img-wrapper profile-img">
+                <img class="img" [src]="currentUser.profileImg" alt="">
+            </div>
+            <p class="text bold message-header">Messaging</p>
+        </div>
+        <div  class="banner-right flex center-xy">
+            <i 
+            [ngClass]="{'rotate':openMessages}"
+            (click)="onShowDirectMessages()" 
+            class="fa-solid fa-chevron-up"></i>
+        </div>
+    </div>
+
+    <div *ngIf="openMessages" class="users-messages">
+
+        <!-- ngFor -->
+        <div  class="message flex">
+            <div class="message-left">
+                <div class="img-wrapper dm-profile">
+                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                </div>
+            </div>
+            <div class="message-right">
+                <p class="text">Ricardo Suarez</p>
+                <p class="text thin">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                </p>
+            </div>
+        </div>
+        <div  class="message flex">
+            <div class="message-left">
+                <div class="img-wrapper dm-profile">
+                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                </div>
+            </div>
+            <div class="message-right">
+                <p class="text">Ricardo Suarez</p>
+                <p class="text thin">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                </p>
+            </div>
+        </div>
+        <div  class="message flex">
+            <div class="message-left">
+                <div class="img-wrapper dm-profile">
+                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                </div>
+            </div>
+            <div class="message-right">
+                <p class="text">Ricardo Suarez</p>
+                <p class="text thin">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                </p>
+            </div>
+        </div>
+        <div  class="message flex">
+            <div class="message-left">
+                <div class="img-wrapper dm-profile">
+                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                </div>
+            </div>
+            <div class="message-right">
+                <p class="text">Ricardo Suarez</p>
+                <p class="text thin">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                </p>
+            </div>
+        </div>
+       
+    </div>
+</div>
