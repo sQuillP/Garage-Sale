@@ -8,8 +8,11 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     overflow: hidden;
-    overflow-y: auto;
-    /* transform: translateY(); */
+    transition: 200ms ease;
+}
+
+.minimized{
+    margin-bottom: -500px
 }
 
 .message-banner {
@@ -21,20 +24,31 @@
 .message{
     box-sizing: border-box;
     padding: 7px 20px;
+    height: 80px;
+    border-bottom: 2px solid lightgray;
 }
 
-.banner-left >* {
-    margin-left: 20px;
-}
+.banner-left >* {margin-left: 20px;}
 
-.message-header{
-    font-size: 1.3em;
-}
+.message-header{font-size: 1.3em;}
 
-.fa-chevron-up{
+.message-right{margin-left: 10px;}
+
+.fa-chevron-up, .fa-plus{
+    font-size: 1.4em;
+    margin: 0px 10px;
     cursor: pointer;
 }
 
+.fa-chevron-up:hover, .fa-plus:hover{
+    transform: scale(1.05);
+}
+
+
+.users-messages{
+    height: 500px;
+    overflow-y: auto
+}
 
 .img-wrapper{
     object-fit: cover;

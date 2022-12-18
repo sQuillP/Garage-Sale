@@ -1,4 +1,6 @@
-<div class="main">
+<div 
+[ngClass]="{'minimized':!openMessages}"
+class="main">
     <div class="message-banner flex sp-between">
         <div class="banner-left flex center-xy">
             <div class="img-wrapper profile-img">
@@ -8,14 +10,19 @@
         </div>
         <div  class="banner-right flex center-xy">
             <i 
+            matTooltip="New Conversation"
+            class="fas fa-plus"></i>
+            <i 
+            [matTooltip]="openMessages?'Close Messages':'View Messages'"
             [ngClass]="{'rotate':openMessages}"
             (click)="onShowDirectMessages()" 
             class="fa-solid fa-chevron-up"></i>
         </div>
     </div>
 
-    <div *ngIf="openMessages" class="users-messages">
+    <div class="users-messages">
 
+        <!-- limit chat to 68 characters -->
         <!-- ngFor -->
         <div  class="message flex">
             <div class="message-left">
@@ -25,8 +32,8 @@
             </div>
             <div class="message-right">
                 <p class="text">Ricardo Suarez</p>
-                <p class="text thin">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                <p class="text thin small">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
                 </p>
             </div>
         </div>
@@ -39,7 +46,7 @@
             <div class="message-right">
                 <p class="text">Ricardo Suarez</p>
                 <p class="text thin">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
                 </p>
             </div>
         </div>
@@ -52,7 +59,7 @@
             <div class="message-right">
                 <p class="text">Ricardo Suarez</p>
                 <p class="text thin">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
                 </p>
             </div>
         </div>
@@ -65,7 +72,33 @@
             <div class="message-right">
                 <p class="text">Ricardo Suarez</p>
                 <p class="text thin">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, minus.
+                    Lorem ipsum dolor,s sit amet consectetur adipisicing elit. Explicabo
+                </p>
+            </div>
+        </div>
+        <div  class="message flex">
+            <div class="message-left">
+                <div class="img-wrapper dm-profile">
+                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                </div>
+            </div>
+            <div class="message-right">
+                <p class="text">Ricardo Suarez</p>
+                <p class="text thin small">
+                    Lorem ipsum dolor,s sit amet consectetur adipisicing elit. Explicabo
+                </p>
+            </div>
+        </div>
+        <div  class="message flex">
+            <div class="message-left">
+                <div class="img-wrapper dm-profile">
+                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                </div>
+            </div>
+            <div class="message-right">
+                <p class="text">Ricardo Suarez</p>
+                <p class="text thin">
+                    Lorem ipsum dolor,s sit amet consectetur adipisicing elit. Explicabo
                 </p>
             </div>
         </div>
