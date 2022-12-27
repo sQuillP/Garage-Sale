@@ -149,4 +149,14 @@ export class DBService {
         });
     }
 
+    
+
+    findUsers(name:string):any {
+
+    }
+
+    getUser(id:string):any {
+        
+    }
+
 }

@@ -5,7 +5,6 @@ import { User } from "../models/db.models";
 import { environment } from "src/environments/environment";
 import jwt_decode from 'jwt-decode';
 import { UserService } from "./user.service";
-import { Token } from "@angular/compiler";
 
 
 /**
@@ -31,12 +30,20 @@ export class AuthService {
         private user:UserService
     ) {
         const authToken = localStorage.getItem(environment.JWTStorageKey);
-        let decodedToken = null;
-        if(authToken !== 'null'){
+        let decodedToken:any = null;
+        console.log(authToken);
+        if(authToken !== 'null') {
+
             this.userToken$.next(authToken);
             try{
                 //decode jwt token
                 decodedToken = jwt_decode(localStorage.getItem(environment.JWTStorageKey));
+                console.log(decodedToken);
+                
+                if(new Date() > new Date(decodedToken.exp*1000)){
+                    this.logout();
+                    return;
+                }
                 this.user.currentUser$.next(decodedToken._doc);
             } catch(error) {
                 console.error("Unable to decode jwt");

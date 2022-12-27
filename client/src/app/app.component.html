@@ -1,4 +1,11 @@
 <app-navigation></app-navigation>
 <router-outlet></router-outlet>
-<app-messenger></app-messenger>
-<app-message-box></app-message-box>
+<app-messenger 
+*ngIf="isLoggedIn"
+(startMessage)="onOpenMessage($event)"></app-messenger>
+<app-message-box 
+*ngIf="isLoggedIn && openMessenger"  
+(close)="onClose()" 
+
+>
+</app-message-box> 

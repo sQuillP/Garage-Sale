@@ -10,6 +10,7 @@ class="main">
         </div>
         <div  class="banner-right flex center-xy">
             <i 
+            (click)="onStartNewMessage()"
             matTooltip="New Conversation"
             class="fas fa-plus"></i>
             <i 
@@ -24,84 +25,33 @@ class="main">
 
         <!-- limit chat to 68 characters -->
         <!-- ngFor -->
-        <div  class="message flex">
-            <div class="message-left">
-                <div class="img-wrapper dm-profile">
-                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+        <div *ngIf="!messages$.getValue(); else noMessages" class="wrapper">
+            <div *ngFor="let message of messages$ | async"  class="message flex">
+                <div class="message-left">
+                    <div class="img-wrapper dm-profile">
+                        <!-- https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg -->
+                        <img class="img"[src]="message.profileImg" alt="">
+                    </div>
+                </div>
+                <div class="message-right">
+                    <p class="text">{{message.fullName}}</p>
+                    <p class="text thin small">
+                        {{message.messages[message.messages.length].content.substring(0,50)}}
+                    </p>
                 </div>
             </div>
-            <div class="message-right">
-                <p class="text">Ricardo Suarez</p>
-                <p class="text thin small">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
-                </p>
-            </div>
         </div>
-        <div  class="message flex">
-            <div class="message-left">
-                <div class="img-wrapper dm-profile">
-                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
-                </div>
+        <ng-template #noMessages>
+            <div  class="no-messages flex center-xy col">
+                <i class="fa-solid fa-message"></i>
+                <p class="text no-message-header">You have no direct messages</p>
+                <button 
+                (click)="onStartNewMessage()"
+                matRipple
+                matRippleColor="rgba(0,0,0,0.05)"
+                class="start-message">Start Conversation</button>
             </div>
-            <div class="message-right">
-                <p class="text">Ricardo Suarez</p>
-                <p class="text thin">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
-                </p>
-            </div>
-        </div>
-        <div  class="message flex">
-            <div class="message-left">
-                <div class="img-wrapper dm-profile">
-                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
-                </div>
-            </div>
-            <div class="message-right">
-                <p class="text">Ricardo Suarez</p>
-                <p class="text thin">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
-                </p>
-            </div>
-        </div>
-        <div  class="message flex">
-            <div class="message-left">
-                <div class="img-wrapper dm-profile">
-                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
-                </div>
-            </div>
-            <div class="message-right">
-                <p class="text">Ricardo Suarez</p>
-                <p class="text thin">
-                    Lorem ipsum dolor,s sit amet consectetur adipisicing elit. Explicabo
-                </p>
-            </div>
-        </div>
-        <div  class="message flex">
-            <div class="message-left">
-                <div class="img-wrapper dm-profile">
-                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
-                </div>
-            </div>
-            <div class="message-right">
-                <p class="text">Ricardo Suarez</p>
-                <p class="text thin small">
-                    Lorem ipsum dolor,s sit amet consectetur adipisicing elit. Explicabo
-                </p>
-            </div>
-        </div>
-        <div  class="message flex">
-            <div class="message-left">
-                <div class="img-wrapper dm-profile">
-                    <img class="img" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
-                </div>
-            </div>
-            <div class="message-right">
-                <p class="text">Ricardo Suarez</p>
-                <p class="text thin">
-                    Lorem ipsum dolor,s sit amet consectetur adipisicing elit. Explicabo
-                </p>
-            </div>
-        </div>
-       
+        </ng-template>
+        
     </div>
 </div>

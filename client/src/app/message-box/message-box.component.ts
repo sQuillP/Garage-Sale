@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../models/db.models';
 import { UserService } from '../Services/user.service';
 
@@ -9,6 +9,11 @@ import { UserService } from '../Services/user.service';
 })
 export class MessageBoxComponent implements OnInit {
 
+  @Output() close = new EventEmitter<boolean>();
+  @Input() userData:any;
+
+  searchUser:string= '';
+
   constructor(
     private user:UserService
   ) { }
@@ -16,6 +21,11 @@ export class MessageBoxComponent implements OnInit {
   curUser:User = this.user.currentUser$.getValue();
 
   ngOnInit(): void {
+  }
+
+
+  onClose():void{
+    this.close.emit(true);
   }
 
 }

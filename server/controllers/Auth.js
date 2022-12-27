@@ -13,7 +13,9 @@ exports.login = asyncHandler(async (req,res,next)=> {
 
     const [email, password] = [req.body.email, req.body.password];
 
-    const fetchedUser = await User.findOne({email: email}).select("+password");
+    const fetchedUser = await User.findOne({email: email})
+    .select("+password")
+    .populate('conversations');
     
     if(fetchedUser == null){
         return next(

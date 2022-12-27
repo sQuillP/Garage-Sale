@@ -54,6 +54,6 @@ export interface User {
     password?:string,
     phone?:string,
     profileImg?:string,
-    conversations?:string[],
+    conversations?:any[],
     _id?:string
 }

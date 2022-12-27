@@ -32,7 +32,7 @@ exports.getUserById = asyncHandler(async (req,res,next)=> {
             )
         );
         
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.params.userId).populate('conversations');
     let status = 200;
     if(user == null)
         status= 404;

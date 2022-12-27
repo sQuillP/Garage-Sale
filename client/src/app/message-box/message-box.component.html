@@ -4,20 +4,26 @@
             Send a message
         </p>
         <i 
+        (click)="onClose()"
         matTooltip="Close"
         class="fa fa-x"></i>
 
     </div>
     <div class="message-box-send-to flex center-xy">
         <span style="margin-left: 10px" class="text thin bold">To: </span>
-        <input type="text" class="message-to" autocomplete="off">
+        <input
+        *ngIf="!userData"
+        [(ngModel)]="searchUser" type="text" class="message-to" autocomplete="off">
+        <div class="auto-complete-list">
+
+        </div>
     </div>
     <div class="messages">
 
         <div class="message">
 
-            <div class="message-other flex">
-                <div class="img-col flex center-xy">
+            <div *ngIf="true" class="message-other flex">
+                <div class="img-col flex center-x">
                     <div  class="img-wrapper">
                         <img class="img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80" alt="">
                     </div>
@@ -33,7 +39,44 @@
             </div>
 
 
-            <div class="message-user flex">
+            <div *ngIf="false" class="message-user flex">
+                <div class="content-col">
+                    <div class="user-info">
+                        <p class="text bold">
+                            Jackson Smith
+                        </p>
+                    </div>
+                    <p class="text thin">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nemo minima porro deserunt harum labore distinctio explicabo similique esse tempore?
+                    </p>
+                </div>
+                <div class="img-col">
+                    <div class="img-wrapper">
+                        <img class="img" [src]="curUser.profileImg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="message">
+
+            <div *ngIf="false" class="message-other flex">
+                <div class="img-col flex center-x">
+                    <div  class="img-wrapper">
+                        <img class="img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80" alt="">
+                    </div>
+                </div>
+                <div class="content-col">
+                    <div class="user-info">
+                        <p class="text bold">Mary Jenkins</p>
+                    </div>
+                    <p class="text thin">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nemo minima porro deserunt harum labore distinctio explicabo similique esse tempore?
+                    </p>
+                </div>
+            </div>
+
+
+            <div *ngIf="true" class="message-user flex">
                 <div class="content-col">
                     <div class="user-info">
                         <p class="text bold">

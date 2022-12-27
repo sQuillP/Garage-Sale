@@ -1,4 +1,5 @@
 .main{
+    z-index: 2;
     width: 400px;
     position: fixed;
     bottom: 0px;
@@ -81,3 +82,28 @@
 }
 
 
+.no-messages{
+    color: gray;
+    height: 50%;
+}
+
+.fa-message{ 
+    font-size: 2em; 
+    color: gray;
+    margin: 15px 0px;
+}
+
+.no-messages p{
+    font-size: 1.5em;
+}
+
+
+.start-message{
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    background: var(--white-3);
+    font-size: inherit;
+    margin-top: 20px;
+    cursor: pointer;
+}

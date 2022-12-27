@@ -46,6 +46,7 @@ import { PopupAddItemComponent } from './popup-add-item/popup-add-item.component
 import {MatMenuModule} from '@angular/material/menu';
 import { MessengerComponent } from './messenger/messenger.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
+import { SocketService } from './Services/socket.service';
 
 
 
@@ -108,6 +109,7 @@ import { MessageBoxComponent } from './message-box/message-box.component';
     },
     AuthGuardComponent,
     AuthService,
+    SocketService,
   ],
   bootstrap: [AppComponent]
 })
