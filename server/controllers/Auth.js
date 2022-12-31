@@ -15,7 +15,6 @@ exports.login = asyncHandler(async (req,res,next)=> {
 
     const fetchedUser = await User.findOne({email: email})
     .select("+password")
-    .populate('conversations');
     
     if(fetchedUser == null){
         return next(
@@ -58,8 +57,10 @@ exports.login = asyncHandler(async (req,res,next)=> {
  */
 exports.signup = asyncHandler( async(req,res,next)=> {
 
+    await hashPassword(req.body);//hash the incoming request password
+    
     //create a new user
-    const newUser = await User.create(req.body);
+    const newUser = await User.create(req.body);//create user
 
     //create a signed JWT for that user.
     const signedToken = signToken(newUser);
@@ -95,4 +96,11 @@ function signToken(userObj){
         audience: ["consumers"]
     });
 
+}
+
+
+async function hashPassword(user) {
+   const salt = await bcrypt.genSalt();
+   const hashedPassword = await bcrypt.hash(user.password,salt);
+   user.password = hashedPassword;
 }

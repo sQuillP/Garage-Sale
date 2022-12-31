@@ -7,6 +7,7 @@ const Chat = require("./models/Chat");
 const env = require("dotenv").config({path: "./environments/globals.env"});
 const connectDb = require("./environments/db");
 const fs = require("fs");
+const bcrypt = require('bcryptjs');
 
 const populate = async ()=> {
     const UserData = JSON.parse(
@@ -29,6 +30,7 @@ const populate = async ()=> {
             let uid = new mongoose.Types.ObjectId();
             user._id = uid;
             userIds.push(uid);
+            await hashPassword(user);
             await User.create(user);
         }
         //Populate sales
@@ -81,6 +83,15 @@ const cleanDb = async ()=> {
         console.log('unable to delete items in db.')
     }
 }
+
+
+
+async function hashPassword(user) {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(user.password,salt);
+    user.password = hashedPassword;
+ }
+
 if(process.argv[2] === '-d'){
     cleanDb();
 } else if(process.argv[2] == '-s'){

@@ -6,27 +6,20 @@ module.exports = function handleMessaging(io,userStore){
     io.on('connect',socket=> {
 
         //user joins their own socket.
-        socket.on('connect-user',(user)=> {
-            socket.join(user.email);
-            io.in(user.email).emit('hello-user',"hello from server");
+        socket.on('connect-user',(uid)=> {
+            socket.join(uid);
+            io.in(uid).emit('hello-user',"hello from server");
         });
 
 
         //parameters take in an email (room) and then the message (Chat db object)
-        socket.on('send-message',async (toEmail,message)=> {
-            socket.join(toEmail);
+        socket.on('send-message',async (uid,message)=> {
+            socket.join(uid);
             
-            await Chat.create(message);
-
-            const fromUser = await User.findById(message.from);
-            const toUser = await User.findById(message.to);
-            fromUser.conversations.push(message);
-            toUser.conversations.push(message);
-            await fromUser.save();
-            await toUser.save();
+            const savedMessage =  await Chat.create(message);//save the message
 
             //send the message to the user.
-            io.to(toEmail).emit('receive-message',message);
+            io.to(uid).emit('receive-message',message);//send the message to the user
 
         });
 

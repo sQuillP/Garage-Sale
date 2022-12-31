@@ -3,14 +3,14 @@
 class="main">
     <div class="message-banner flex sp-between">
         <div class="banner-left flex center-xy">
-            <div class="img-wrapper profile-img">
-                <img class="img" [src]="currentUser.profileImg" alt="">
+            <div *ngIf="currentUser$| async as user" class="img-wrapper profile-img">
+                <img class="img" [src]="user.profileImg" alt="">
             </div>
             <p class="text bold message-header">Messaging</p>
         </div>
         <div  class="banner-right flex center-xy">
             <i 
-            (click)="onStartNewMessage()"
+            (click)="onStartNewMessage(null)"
             matTooltip="New Conversation"
             class="fas fa-plus"></i>
             <i 
@@ -25,8 +25,12 @@ class="main">
 
         <!-- limit chat to 68 characters -->
         <!-- ngFor -->
-        <div *ngIf="!messages$.getValue(); else noMessages" class="wrapper">
-            <div *ngFor="let message of messages$ | async"  class="message flex">
+        <div *ngIf="!conversationsList$.getValue(); else noMessages" class="wrapper">
+            <div 
+            *ngFor="let conversation of conversations$ | async" 
+            class="message flex"
+            (click)="onStartNewMessage(conversation._id)"
+            >
                 <div class="message-left">
                     <div class="img-wrapper dm-profile">
                         <!-- https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg -->
@@ -34,9 +38,9 @@ class="main">
                     </div>
                 </div>
                 <div class="message-right">
-                    <p class="text">{{message.fullName}}</p>
+                    <p class="text">{{conversation.fullName}}</p>
                     <p class="text thin small">
-                        {{message.messages[message.messages.length].content.substring(0,50)}}
+                        {{conversation.messages[conversation.messages.length-1].content.substring(0,50)}}
                     </p>
                 </div>
             </div>

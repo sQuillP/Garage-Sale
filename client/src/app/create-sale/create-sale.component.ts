@@ -11,6 +11,7 @@ import {_getError} from "../util/validators";
 import { ObjectID } from 'bson';
 import { MapsService } from '../Services/maps.service';
 import { UserService } from '../Services/user.service';
+import { AuthService } from '../Services/auth.service';
 @Component({
   selector: 'app-create-sale',
   templateUrl: './create-sale.component.html',
@@ -42,7 +43,8 @@ export class CreateSaleComponent implements OnInit {
     private dialog:MatDialog,
     private _snackbar:MatSnackBar,
     private mapService:MapsService,
-    private user:UserService
+    private user:UserService,
+    private auth:AuthService
   ) { 
 
   }
@@ -88,7 +90,7 @@ export class CreateSaleComponent implements OnInit {
     }
     const saleObj:any = {...this.saleForm.value};
     saleObj["_id"] = this.docId;
-    saleObj["userId"] = this.user.currentUser$.getValue()._id;
+    saleObj["userId"] = this.auth.decodedToken$.getValue()._id//this.user.currentUser$.getValue()._id;
     saleObj["location"] = {
       type: "Point",
       coordinates: []

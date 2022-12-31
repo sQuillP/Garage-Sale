@@ -10,7 +10,7 @@ const {
 
 
 
-router.route("/")
+router.route("/:userId")
 .get(authenticate,getMessages);
 
 

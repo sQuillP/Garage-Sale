@@ -47,6 +47,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MessengerComponent } from './messenger/messenger.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { SocketService } from './Services/socket.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -100,6 +101,7 @@ import { SocketService } from './Services/socket.service';
     MatSnackBarModule,
     MatDialogModule,
     MatMenuModule,
+    MatProgressBarModule,
   ],
   providers: [
     {

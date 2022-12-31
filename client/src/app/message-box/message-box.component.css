@@ -3,7 +3,7 @@
     position: fixed;
     bottom: 0px;
     right: 800px;   
-    overflow: hidden;
+    /* overflow: hidden; */
     border-radius: 10px;
     background: white;
     width: 400px;
@@ -35,6 +35,11 @@
     font-size: 1.1em;
 }
 
+.message {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
 
 .messages{
     height: 400px;;
@@ -42,6 +47,20 @@
     padding: 10px;
 }
 
+.no-messages{
+    height: 400px;
+    padding: 10px;
+}
+
+.no-messages p{
+    text-align: center;
+}
+
+
+.fa-message {
+    margin: 20px 0px;
+    font-size: 2em;
+}
 
 .message-box-header{
     padding: 10px;
@@ -72,9 +91,15 @@
     object-fit: cover;
 }
 
+.input-wrap{
+    padding: 5px;
+    box-sizing: border-box;
+}
 
-
-.message-box-send-to{border-bottom: 2px solid lightgray}
+.message-box-send-to{
+    border-bottom: 2px solid lightgray;
+    position: relative;
+}
 .message-user{text-align: right;}
 .message{ border-bottom: 2px solid lightgray;}
 .message-send-container{
@@ -106,4 +131,37 @@
 
 .send-icon:hover{
     transform: rotate(-20deg);
+}
+
+
+.auto-complete-list{
+    position: absolute;
+    background: white;
+    left: 0px;
+    top: 33px;
+    width: 100%;
+    box-sizing: border-box;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.auto-complete-item{
+    top: 0px;
+    left: 0px;
+    padding: 5px;
+
+    background: white;
+    cursor: pointer;
+    transition: background 200ms linear;
+    border-bottom: 2px solid lightgray;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.auto-complete-item:hover{
+    background: var(--white-2);
+}
+
+.auto-complete-name{
+    font-size: 1.1em;
 }

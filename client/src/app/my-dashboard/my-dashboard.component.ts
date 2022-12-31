@@ -58,15 +58,18 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
     private auth:AuthService
   ) { 
     this.userInfo.disable();
-    const curUserRef:User = this.user.currentUser$.getValue();
 
-    this.userInfo.setValue({
-      fullName:curUserRef.fullName,
-      email: curUserRef.email,
-      password: "foobarbaz",
-      profileImg: curUserRef.profileImg,
-      phone: curUserRef.phone
-    }); 
+    this.user.currentUser$.subscribe((curUserRef)=> {
+      console.log(curUserRef)
+      if(!curUserRef) return;
+      this.userInfo.setValue({
+        fullName:curUserRef.fullName,
+        email: curUserRef.email,
+        password: "foobarbaz", //this field should be changed
+        profileImg: curUserRef.profileImg,
+        phone: curUserRef.phone
+      }); 
+    });
   }
 
 
@@ -122,7 +125,6 @@ export class MyDashboardComponent implements OnInit, OnDestroy {
     const updatedValue:string = this.userInfo.get(controlName).value;
     try {
       await this.user.updateMyInfo({[controlName]:updatedValue});
-      this.auth.refreshToken();
       this._snackbar.open("successfully saved",null,{
         duration:1000,
       });

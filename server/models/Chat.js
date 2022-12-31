@@ -13,7 +13,7 @@ const ChatSchema = new mongoose.Schema({
         required: [true, `Chat must have a receiver`]
     },
     content:{
-        type: String,
+        type: String, 
         default: ''
     }
 },{

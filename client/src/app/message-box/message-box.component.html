@@ -6,23 +6,42 @@
         <i 
         (click)="onClose()"
         matTooltip="Close"
-        class="fa fa-x"></i>
+        class="fa fa-x">
+        </i>
 
     </div>
-    <div class="message-box-send-to flex center-xy">
-        <span style="margin-left: 10px" class="text thin bold">To: </span>
-        <input
-        *ngIf="!userData"
-        [(ngModel)]="searchUser" type="text" class="message-to" autocomplete="off">
+    <div class="message-box-send-to flex col">
+        <div class="input-wrap flex center-y">
+            <span style="margin-left: 10px" class="text thin bold">To:&nbsp;&nbsp;</span>
+            <input
+            *ngIf="!(userData$ | async)"
+            [formControl]="searchUser"
+            type="text"
+            class="message-to" 
+            autocomplete="off"
+            >
+            <span *ngIf="(userData$ | async) as user" class="text bold"> {{user.fullName}} <small>({{user.email}})</small></span>
+        </div>
+
+        <mat-progress-bar *ngIf="querySearch" mode="indeterminate"></mat-progress-bar>
         <div class="auto-complete-list">
-
+            <div 
+            *ngFor="let user of (autoComplete$ | async)"
+            matRipple
+            matRippleColor="rgba(0,0,0,0.05)"
+            (click)="onSelectAutoComplete(user)"
+            class="auto-complete-item">
+                <p class="text auto-complete-name">{{user.fullName}}</p>
+                <p class="text small">{{user.email}}</p>
+            </div>
         </div>
     </div>
-    <div class="messages">
-
-        <div class="message">
-
-            <div *ngIf="true" class="message-other flex">
+    <div *ngIf="(conversation$ | async); else noMessages" class="messages">
+        <div
+        *ngFor="let message of (conversation$ | async)?.messages" 
+        class="message">
+        <!-- There may be another layer (maybe use message.senderId._id) -->
+            <div *ngIf="message.senderId !== curUser._id" class="message-other flex">
                 <div class="img-col flex center-x">
                     <div  class="img-wrapper">
                         <img class="img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80" alt="">
@@ -30,24 +49,25 @@
                 </div>
                 <div class="content-col">
                     <div class="user-info">
-                        <p class="text bold">Mary Jenkins</p>
+
+                        
+
+                        <!-- <p class="text bold">{{message.senderId}}</p> -->
                     </div>
                     <p class="text thin">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nemo minima porro deserunt harum labore distinctio explicabo similique esse tempore?
                     </p>
                 </div>
             </div>
-
-
-            <div *ngIf="false" class="message-user flex">
+            <div *ngIf="message.senderId === curUser._id" class="message-user flex">
                 <div class="content-col">
                     <div class="user-info">
                         <p class="text bold">
-                            Jackson Smith
+                            {{curUser.fullName}}
                         </p>
                     </div>
                     <p class="text thin">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nemo minima porro deserunt harum labore distinctio explicabo similique esse tempore?
+                        {{message.content}}
                     </p>
                 </div>
                 <div class="img-col">
@@ -57,49 +77,25 @@
                 </div>
             </div>
         </div>
-        <div class="message">
-
-            <div *ngIf="false" class="message-other flex">
-                <div class="img-col flex center-x">
-                    <div  class="img-wrapper">
-                        <img class="img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80" alt="">
-                    </div>
-                </div>
-                <div class="content-col">
-                    <div class="user-info">
-                        <p class="text bold">Mary Jenkins</p>
-                    </div>
-                    <p class="text thin">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nemo minima porro deserunt harum labore distinctio explicabo similique esse tempore?
-                    </p>
-                </div>
-            </div>
-
-
-            <div *ngIf="true" class="message-user flex">
-                <div class="content-col">
-                    <div class="user-info">
-                        <p class="text bold">
-                            Jackson Smith
-                        </p>
-                    </div>
-                    <p class="text thin">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nemo minima porro deserunt harum labore distinctio explicabo similique esse tempore?
-                    </p>
-                </div>
-                <div class="img-col">
-                    <div class="img-wrapper">
-                        <img class="img" [src]="curUser.profileImg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
     </div>
+    <ng-template #noMessages>
+        <div class="no-messages flex center-y col ">
+            <i class="fa-solid fa-message"></i>
+            <p class="text thin">There are currently no messages between you and person</p>
+        </div>
+    </ng-template>
+    <ng-template #noUser>
+        <div class="no-messages flex center-y col ">
+            <i class="fa-solid fa-message"></i>
+            <p class="text thin">Search a user to start messaging</p>
+        </div>
+    </ng-template>
     <div class="message-send-container">
-        <textarea class="typed-message"></textarea>
-        <mat-icon 
+        <textarea 
+        [formControl]="typedMessage"
+        placeholder="Start typing..." class="typed-message"></textarea>
+        <mat-icon
+        (click)="onSendMessage()"
         matTooltip="Send message"
         class="send-icon">send</mat-icon>
     </div>

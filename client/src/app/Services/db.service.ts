@@ -151,8 +151,13 @@ export class DBService {
 
     
 
-    findUsers(name:string):any {
-
+    findUsers(name:string):Observable<any> {
+        console.log(name)
+        return this.http.get<any>(`${this.URL}/users`, {
+            params: {
+                name: name
+            }
+        });
     }
 
     getUser(id:string):any {

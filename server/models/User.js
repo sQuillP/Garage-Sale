@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        unique: true,
+        unique: true, 
         required: [true,`User must have an email`],
         match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/gi,
         `Must provide a valid email`    
@@ -33,11 +33,11 @@ const UserSchema = new mongoose.Schema({
     profileImg:{
         type:String
     },
-    conversations:{
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'user',
-        default: []
-    }
+    // conversations:{
+    //     type: [mongoose.Schema.Types.ObjectId],
+    //     ref: 'user',
+    //     default: []
+    // }
 },{
     
 });
@@ -53,9 +53,9 @@ UserSchema.pre('deleteOne',{query: true, document: true}, async function(next){
 
 UserSchema.pre('save',async function(next) {
     console.log('in the pre save function ',this);
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(this.password,salt);
-    this.password = hashedPassword;
+    // const salt = await bcrypt.genSalt();
+    // const hashedPassword = await bcrypt.hash(this.password,salt);
+    // this.password = hashedPassword;
     next();
 });
 

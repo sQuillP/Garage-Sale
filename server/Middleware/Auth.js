@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 exports.authenticate = (req,res,next)=> {
 
+
     if(!req.headers.authorization){
         return next(
             new ErrorResponse(
@@ -34,9 +35,10 @@ exports.authenticate = (req,res,next)=> {
         return next(
             new ErrorResponse(
                 401,
-                `Invalid tokenn`
+                `Invalid token`
             )
         );
     }
+    console.log('moving to next route')
     next();
 };

@@ -7,11 +7,22 @@ const ErrorResponse = require("../utils/ErrorResponse");
  */
 
 
-/*
+/* 
 GET: api/v1/users
 */
 exports.getUsers = asyncHandler(async (req,res,next)=> {
-    const users = await User.find();
+
+    let users = null;
+    if(req.query.name){
+        users = await User.find({fullName:{
+            $regex: req.query.name,
+            $options: "$i"
+        }}).limit(10);
+    } else{
+        users = await User.find();
+    }
+
+
     let status = 200;
     res.status(status).json({
         status,
@@ -21,25 +32,27 @@ exports.getUsers = asyncHandler(async (req,res,next)=> {
 
 
 /*
+GET: api/v1/users/getMe
+*/
+exports.getMe = asyncHandler(async (req,res,next)=> {
+    console.log('in getme')
+    const user = await User.findById(req.user._id);
+
+    res.status(200).json({
+        success:true,
+        data: user
+    });
+});
+
+
+/*
 GET: api/v1/users/:userId
 */
-exports.getUserById = asyncHandler(async (req,res,next)=> {
-    if(req.user._id !== req.params.userId)
-        return next(
-            new ErrorResponse(
-                402,
-                `Users can only fetch their own credentials`,
-            )
-        );
-        
-    const user = await User.findById(req.params.userId).populate('conversations');
-    let status = 200;
-    if(user == null)
-        status= 404;
-
-    res.status(status).json({
-        status,
-        data: user
+exports.findUser = asyncHandler(async(req,res,next)=> {
+    const foundUser = await User.findById(req.params.userId);
+    res.status(200).json({
+        success: true,
+        data: foundUser
     });
 });
 

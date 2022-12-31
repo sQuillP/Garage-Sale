@@ -5,9 +5,10 @@ const {
 const {
     getUsers,
     createUser,
-    getUserById,
     deleteUser,
-    updateUser
+    updateUser,
+    findUser,
+    getMe
 } = require('../controllers/User');
 
 router
@@ -15,12 +16,20 @@ router
 .get(authenticate, getUsers)
 .post(createUser);
 
-router.route('/:userId')
-.get(authenticate, getUserById)
-.delete(deleteUser);
+router.route('/getme')
+.get(authenticate, getMe);
 
 router.route("/updateUser")
 .put(authenticate, updateUser);
+
+
+//important bug fix: Please make sure all hardcoded defined routes are first before
+//looking at params
+router.route('/:userId')
+.get(authenticate, findUser)
+.delete(deleteUser);
+
+
 
 
 
